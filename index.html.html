@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COL Inside Sales — Daily Scorecard</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#1a1a1a;color:#1a1a18;padding:2rem;font-size:14px;line-height:1.5}
+  .page{max-width:1200px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.35)}
+  .top-bar{background:#000;padding:1.25rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .brand-name{color:#fff;font-size:20px;font-weight:700;letter-spacing:.02em}
+  .brand-sub{color:#00AEEF;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  .scorecard-title{color:#fff;font-size:16px;font-weight:600;text-align:right}
+  .scorecard-sub{color:#888;font-size:12px;margin-top:2px;text-align:right}
+  .cyan-bar{height:4px;background:linear-gradient(90deg,#00AEEF,#0077aa)}
+  .body{padding:1.75rem 2rem}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1.5rem;padding:10px 14px;background:#f5f5f3;border-radius:8px;border-left:3px solid #00AEEF}
+  .leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#5f5e5a;font-weight:500}
+  .leg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+  .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:2rem}
+  .metric-card{background:#000;border-radius:8px;padding:.85rem 1rem;border-bottom:3px solid #00AEEF}
+  .metric-label{font-size:10px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+  .metric-val{font-size:22px;font-weight:700;color:#fff}
+  .metric-sub{font-size:10px;margin-top:3px;font-weight:600}
+  .section-label{font-size:11px;font-weight:700;color:#000;letter-spacing:.08em;text-transform:uppercase;margin:1.5rem 0 .6rem;padding-left:10px;border-left:3px solid #00AEEF}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead{background:#000}
+  thead th{font-size:10px;font-weight:700;color:#00AEEF;text-align:left;padding:9px 10px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
+  thead th.r{text-align:right}
+  tbody tr{border-bottom:1px solid #f0ede6;transition:background .1s}
+  tbody tr:last-child{border-bottom:none}
+  tbody tr:nth-child(even){background:#fafaf8}
+  tbody tr:hover{background:#e8f6fd}
+  td{padding:9px 10px;vertical-align:middle}
+  td.r{text-align:right}
+  .name-cell{display:flex;align-items:center;gap:10px}
+  .avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;border:2px solid #00AEEF;background:#000;color:#00AEEF}
+  .rep-name{font-weight:700;font-size:13px;color:#1a1a18}
+  .score-bar-wrap{display:flex;align-items:center;gap:8px;min-width:110px}
+  .score-bar-bg{flex:1;height:7px;background:#e8e6df;border-radius:4px;overflow:hidden}
+  .score-bar-fill{height:100%;border-radius:4px;background:#00AEEF}
+  .score-num{font-size:14px;font-weight:700;min-width:28px;text-align:right;color:#000}
+  .badge{display:inline-block;font-size:10px;padding:3px 8px;border-radius:6px;font-weight:700}
+  .badge-gold{background:#000;color:#FFD700;border:1px solid #FFD700}
+  .badge-silver{background:#000;color:#C0C0C0;border:1px solid #C0C0C0}
+  .badge-bronze{background:#000;color:#CD7F32;border:1px solid #CD7F32}
+  .tier-a{background:#000;color:#00AEEF;border:1px solid #00AEEF}
+  .tier-b{background:#EAF3DE;color:#3B6D11;font-weight:700}
+  .tier-c{background:#FAEEDA;color:#854F0B;font-weight:700}
+  .tier-d{background:#FCEBEB;color:#A32D2D;font-weight:700}
+  .addon-hit{background:#000;color:#00AEEF;font-size:11px;padding:3px 8px;border-radius:20px;font-weight:700;border:1px solid #00AEEF}
+  .addon-miss{background:#FCEBEB;color:#A32D2D;font-size:11px;padding:3px 8px;border-radius:20px;font-weight:700}
+  .addon-none{color:#b4b2a9}
+  .calls-ok{color:#3B6D11;font-weight:700}
+  .calls-low{color:#A32D2D;font-weight:700}
+  .calls-na{color:#b4b2a9}
+  .pill-met{background:#000;color:#00AEEF;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:700}
+  .pill-miss{background:#FCEBEB;color:#A32D2D;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:700}
+  .vs-goal-above{color:#3B6D11;font-weight:700}
+  .vs-goal-below{color:#A32D2D;font-weight:700}
+  .goal-bar-wrap{display:flex;align-items:center;gap:6px;min-width:100px}
+  .goal-bar-bg{flex:1;height:5px;background:#e8e6df;border-radius:3px;overflow:hidden}
+  .goal-bar-fill-good{height:100%;border-radius:3px;background:#3B6D11}
+  .goal-bar-fill-bad{height:100%;border-radius:3px;background:#E24B4A}
+  .addon-section{margin-top:2rem;padding:1.25rem;background:#fafaf8;border-radius:10px;border:1px solid #e8e6df}
+  .addon-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;flex-wrap:wrap}
+  .addon-title{font-size:14px;font-weight:700;color:#000}
+  .goal-pill{background:#000;color:#00AEEF;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700}
+  .missed-dollars{color:#A32D2D;font-weight:700}
+  .missed-spiff{color:#854F0B;font-weight:700}
+  .on-target{color:#b4b2a9}
+  .total-row{background:#000 !important}
+  .total-row td{border-top:2px solid #00AEEF !important;color:#fff;font-weight:700}
+  .total-row .missed-dollars{color:#ff6b6b}
+  .total-row .missed-spiff{color:#ffa94d}
+  .footer{background:#000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  .footer-left{font-size:11px;color:#555}
+  .footer-right{font-size:11px;color:#00AEEF;font-weight:600}
+  @media print{body{background:#fff;padding:0}.page{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top-bar">
+    <div>
+      <div class="brand-name">COL™ Collision Auto Parts</div>
+      <div class="brand-sub">1-833-7COL-AUTO · colauto.com</div>
+    </div>
+    <div>
+      <div class="scorecard-title">Inside Sales — Daily Scorecard</div>
+      <div class="scorecard-sub" id="subtitle"></div>
+    </div>
+  </div>
+  <div class="cyan-bar"></div>
+
+  <div class="body">
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#00AEEF"></div>Dollars sold (30 pts)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#3B6D11"></div>Margin % (25 pts)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Conversion rate (25 pts)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#854F0B"></div>UPT (15 pts)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#555"></div>Calls ≥80/day (5 pts)</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#e8e6df;border:1px solid #aaa"></div>Daily target: $5,300/day (reference only)</div>
+    </div>
+
+    <div id="summary-grid" class="summary-grid"></div>
+
+    <div class="section-label">Rankings</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Rep</th>
+          <th class="r">Score</th>
+          <th class="r">$ Sold</th>
+          <th class="r">vs Target</th>
+          <th class="r">% of Target</th>
+          <th class="r">Margin</th>
+          <th class="r">Conv.</th>
+          <th class="r">UPT</th>
+          <th class="r">Calls/Day</th>
+          <th class="r">Tier</th>
+          <th class="r">Add-On</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <div class="addon-section">
+      <div class="addon-header">
+        <span class="addon-title">Add-On Performance — Gloves, Towels &amp; Coupons</span>
+        <span class="goal-pill">Goal: 5% of orders · $14/unit · $1 spiff/unit</span>
+      </div>
+      <table style="font-size:12px">
+        <thead>
+          <tr>
+            <th>Rep</th>
+            <th class="r">Orders</th>
+            <th class="r">Gloves</th>
+            <th class="r">Towels</th>
+            <th class="r">Coupons</th>
+            <th class="r">Actual Units</th>
+            <th class="r">Add-On Rate</th>
+            <th class="r">Goal Units</th>
+            <th class="r">$ Missed</th>
+            <th class="r">Spiff Missed</th>
+          </tr>
+        </thead>
+        <tbody id="addon-tbody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">Exclusions: ApolonioA · 535staff@crashchampions.com · springstreetcollision@gmail.com · email addresses · Scoring: percentile-based · 100 pt max</div>
+    <div class="footer-right" id="run-date"></div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// UPDATE EACH WEEK
+// ============================================================
+const WEEK_LABEL   = 'Week 14 · In Progress';
+const DAYS         = 2;          // <-- change this each run
+const DAILY_TARGET = 5300;       // daily sales target per rep
+const AVG_PRICE    = 14;
+const SPIFF        = 1;
+const GOAL_RATE    = 0.05;
+const EXCLUDED     = ['ApolonioA','535staff@crashchampions.com','springstreetcollision@gmail.com'];
+
+const NAMES = {
+  'MatthewO':'Matthew Oleal','IsaacG':'Isaac Gonzales','ArturoS':'Arturo Serrano',
+  'LuisP':'Luis Pedraza','ChristianH':'Christian Henington','MarioGO':'Mario Gonzales',
+  'ZulemaA':'Zulema Anaya','FrankieL':'Frankie Lucero','PaulinaN':'Paulina Navarro',
+  'DavidO':'David Ontiveros','ManuelSe':'Manuel Serrano','OmarR':'Omar Reyes',
+  'CynthiaP':'Cynthia Puffelis','TerenceR':'Terence Rulon','KeinaJ':'Keina Johnson',
+  'JacquelineS':'Jacqueline Sanchez','JoseA':'Jose Nando','JoannaZ':'Joanna Zoreque',
+};
+
+const rawData = [
+  {name:'ArturoS',calls:176,daily:88,qty:165,dollars:14645,margin:55.0,conv:63.2,upt:1.66,gloves:1,towels:1,coupons:0},
+  {name:'ChristianH',calls:256,daily:128,qty:119,dollars:11710,margin:60.1,conv:59.9,upt:1.63,gloves:11,towels:0,coupons:0},
+  {name:'CynthiaP',calls:17,daily:9,qty:78,dollars:7050,margin:49.8,conv:76.7,upt:1.81,gloves:0,towels:0,coupons:0},
+  {name:'DavidO',calls:161,daily:81,qty:84,dollars:6091,margin:56.1,conv:50.7,upt:1.56,gloves:0,towels:0,coupons:0},
+  {name:'FrankieL',calls:121,daily:61,qty:50,dollars:6218,margin:58.8,conv:44.3,upt:1.38,gloves:1,towels:0,coupons:0},
+  {name:'IsaacG',calls:142,daily:71,qty:93,dollars:8063,margin:61.7,conv:30.0,upt:1.48,gloves:0,towels:0,coupons:0},
+  {name:'JacquelineS',calls:227,daily:114,qty:120,dollars:8709,margin:53.6,conv:53.8,upt:1.49,gloves:0,towels:0,coupons:0},
+  {name:'JoannaZ',calls:131,daily:66,qty:73,dollars:5147,margin:59.2,conv:56.3,upt:1.58,gloves:0,towels:0,coupons:0},
+  {name:'KeinaJ',calls:28,daily:14,qty:27,dollars:4184,margin:56.5,conv:56.7,upt:1.70,gloves:0,towels:0,coupons:1},
+  {name:'LuisP',calls:168,daily:84,qty:90,dollars:8328,margin:56.7,conv:58.1,upt:1.38,gloves:0,towels:0,coupons:0},
+  {name:'ManuelSe',calls:155,daily:78,qty:83,dollars:5448,margin:57.3,conv:47.9,upt:1.54,gloves:3,towels:1,coupons:0},
+  {name:'MarioGO',calls:176,daily:88,qty:119,dollars:9845,margin:55.3,conv:51.6,upt:1.32,gloves:0,towels:0,coupons:0},
+  {name:'MatthewO',calls:173,daily:87,qty:172,dollars:13655,margin:55.4,conv:70.3,upt:1.88,gloves:0,towels:0,coupons:0},
+  {name:'OmarR',calls:178,daily:89,qty:138,dollars:9716,margin:49.3,conv:48.7,upt:1.87,gloves:0,towels:0,coupons:1},
+  {name:'PaulinaN',calls:179,daily:90,qty:99,dollars:8281,margin:63.8,conv:57.2,upt:1.81,gloves:1,towels:1,coupons:0},
+  {name:'TerenceR',calls:0,daily:0,qty:38,dollars:4017,margin:60.2,conv:0,upt:2.86,gloves:0,towels:0,coupons:0},
+  {name:'ZulemaA',calls:185,daily:93,qty:272,dollars:22156,margin:60.6,conv:52.7,upt:1.57,gloves:0,towels:0,coupons:0},
+];
+// ============================================================
+
+const periodTarget = DAILY_TARGET * DAYS;
+
+document.getElementById('subtitle').textContent = WEEK_LABEL + ' · ' + DAYS + '-day period · Target: $' + periodTarget.toLocaleString() + '/rep';
+document.getElementById('run-date').textContent = 'Generated ' + new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+
+const active = rawData.filter(r =>
+  !EXCLUDED.includes(r.name) && !r.name.includes('@') && r.dollars > 0 && r.conv > 0
+);
+
+function pctScore(val, vals, max) {
+  const sorted = [...vals].sort((a,b)=>a-b);
+  return Math.round((sorted.filter(v=>v<=val).length / sorted.length) * max);
+}
+
+const dV=active.map(r=>r.dollars), mV=active.map(r=>r.margin);
+const cV=active.map(r=>r.conv), uV=active.map(r=>r.upt);
+
+const scored = active.map(r => {
+  const actualUnits = r.gloves+r.towels+r.coupons;
+  const goalUnits = Math.ceil(r.qty * GOAL_RATE);
+  const shortfall = Math.max(0, goalUnits - actualUnits);
+  const addOnRate = r.qty > 0 ? (actualUnits/r.qty)*100 : 0;
+  const total = pctScore(r.dollars,dV,30)+pctScore(r.margin,mV,25)+pctScore(r.conv,cV,25)+pctScore(r.upt,uV,15)+(r.daily>=80?5:0);
+  const vsTarget = r.dollars - periodTarget;
+  const pctOfTarget = Math.min((r.dollars / periodTarget) * 100, 150);
+  return {...r, total, actualUnits, goalUnits, shortfall, dollarsMissed:shortfall*AVG_PRICE, spiffMissed:shortfall*SPIFF, addOnRate, vsTarget, pctOfTarget};
+}).sort((a,b)=>b.total-a.total);
+
+const maxScore = Math.max(...scored.map(r=>r.total));
+
+function fullName(k){ return NAMES[k]||k; }
+function initials(k){ const n=fullName(k).split(' '); return (n[0][0]+(n[1]?n[1][0]:'')).toUpperCase(); }
+
+function tierBadge(score,max){
+  const p=score/max;
+  if(p>=.8)return['A','tier-a'];
+  if(p>=.6)return['B','tier-b'];
+  if(p>=.4)return['C','tier-c'];
+  return['D','tier-d'];
+}
+
+const tbody=document.getElementById('tbody');
+scored.forEach((r,i)=>{
+  const pct=Math.round((r.total/maxScore)*100);
+  const [tl,tc]=tierBadge(r.total,maxScore);
+  const rank=i===0?'<span class="badge badge-gold">🥇 1st</span>':i===1?'<span class="badge badge-silver">🥈 2nd</span>':i===2?'<span class="badge badge-bronze">🥉 3rd</span>':`<span style="color:#888;font-weight:700;font-size:13px">${i+1}</span>`;
+  const callsD=r.daily===0?'<span class="calls-na">—</span>':r.daily>=80?`<span class="calls-ok">${r.daily} <span class="pill-met">✓</span></span>`:`<span class="calls-low">${r.daily} <span class="pill-miss">miss</span></span>`;
+  const aoD=r.addOnRate===0?'<span class="addon-none">—</span>':r.addOnRate>=5?`<span class="addon-hit">${r.addOnRate.toFixed(1)}%</span>`:`<span class="addon-miss">${r.addOnRate.toFixed(1)}%</span>`;
+  const vsTargetD=r.vsTarget>=0
+    ?`<span class="vs-goal-above">+$${r.vsTarget.toLocaleString()}</span>`
+    :`<span class="vs-goal-below">-$${Math.abs(r.vsTarget).toLocaleString()}</span>`;
+  const barClass=r.pctOfTarget>=100?'goal-bar-fill-good':'goal-bar-fill-bad';
+  const pctOfTargetD=`<div class="goal-bar-wrap"><div class="goal-bar-bg"><div class="${barClass}" style="width:${Math.min(r.pctOfTarget,100).toFixed(0)}%"></div></div><span style="font-size:12px;font-weight:700;color:${r.pctOfTarget>=100?'#3B6D11':'#A32D2D'};min-width:38px;text-align:right">${r.pctOfTarget.toFixed(0)}%</span></div>`;
+
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td>${rank}</td>
+    <td><div class="name-cell"><div class="avatar">${initials(r.name)}</div><span class="rep-name">${fullName(r.name)}</span></div></td>
+    <td class="r"><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:${pct}%"></div></div><span class="score-num">${r.total}</span></div></td>
+    <td class="r">$${r.dollars.toLocaleString()}</td>
+    <td class="r">${vsTargetD}</td>
+    <td class="r">${pctOfTargetD}</td>
+    <td class="r">${r.margin.toFixed(1)}%</td>
+    <td class="r">${r.conv.toFixed(1)}%</td>
+    <td class="r">${r.upt.toFixed(2)}</td>
+    <td class="r">${callsD}</td>
+    <td class="r"><span class="badge ${tc}">${tl}</span></td>
+    <td class="r">${aoD}</td>`;
+  tbody.appendChild(tr);
+});
+
+const aoSorted=[...scored].sort((a,b)=>b.addOnRate-a.addOnRate);
+const aoTbody=document.getElementById('addon-tbody');
+let tA=0,tG=0,tDM=0,tSM=0,tO=0;
+
+aoSorted.forEach(r=>{
+  tA+=r.actualUnits; tG+=r.goalUnits; tDM+=r.dollarsMissed; tSM+=r.spiffMissed; tO+=r.qty;
+  const ok=r.shortfall===0;
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td style="font-weight:700">${fullName(r.name)}</td>
+    <td class="r">${r.qty}</td>
+    <td class="r">${r.gloves||'—'}</td>
+    <td class="r">${r.towels||'—'}</td>
+    <td class="r">${r.coupons||'—'}</td>
+    <td class="r">${r.actualUnits||'—'}</td>
+    <td class="r">${r.addOnRate>0?r.addOnRate.toFixed(1)+'%':'—'}</td>
+    <td class="r">${r.goalUnits}</td>
+    <td class="r">${ok?'<span class="on-target">—</span>':`<span class="missed-dollars">-$${r.dollarsMissed.toLocaleString()}</span>`}</td>
+    <td class="r">${ok?'<span class="on-target">—</span>':`<span class="missed-spiff">-$${r.spiffMissed.toLocaleString()}</span>`}</td>`;
+  aoTbody.appendChild(tr);
+});
+
+const totRow=document.createElement('tr');
+totRow.className='total-row';
+totRow.innerHTML=`<td>Team Total</td><td class="r">${tO}</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r">${tA}</td><td class="r">${((tA/tO)*100).toFixed(1)}%</td><td class="r">${tG}</td><td class="r"><span class="missed-dollars">-$${tDM.toLocaleString()}</span></td><td class="r"><span class="missed-spiff">-$${tSM.toLocaleString()}</span></td>`;
+aoTbody.appendChild(totRow);
+
+const totD=active.reduce((s,r)=>s+r.dollars,0);
+const teamTarget=periodTarget*active.length;
+const teamVsTarget=totD-teamTarget;
+const avgM=(active.reduce((s,r)=>s+r.margin,0)/active.length).toFixed(1);
+const avgC=(active.reduce((s,r)=>s+r.conv,0)/active.length).toFixed(1);
+const avgU=(active.reduce((s,r)=>s+r.upt,0)/active.length).toFixed(2);
+const metC=active.filter(r=>r.daily>=80).length;
+const taoR=((tA/tO)*100).toFixed(1);
+const aboveTarget=scored.filter(r=>r.vsTarget>=0).length;
+
+document.getElementById('summary-grid').innerHTML=`
+  <div class="metric-card"><div class="metric-label">Total $ Sold</div><div class="metric-val">$${totD.toLocaleString()}</div><div class="metric-sub" style="color:${teamVsTarget>=0?'#00AEEF':'#ff6b6b'}">${teamVsTarget>=0?'+':''}$${teamVsTarget.toLocaleString()} vs team target</div></div>
+  <div class="metric-card"><div class="metric-label">Reps Above Target</div><div class="metric-val" style="color:${aboveTarget>=active.length/2?'#00AEEF':'#ff6b6b'}">${aboveTarget} of ${active.length}</div><div class="metric-sub" style="color:#555">$${periodTarget.toLocaleString()} target/rep</div></div>
+  <div class="metric-card"><div class="metric-label">Avg Margin</div><div class="metric-val">${avgM}%</div></div>
+  <div class="metric-card"><div class="metric-label">Avg Conversion</div><div class="metric-val">${avgC}%</div></div>
+  <div class="metric-card"><div class="metric-label">Avg UPT</div><div class="metric-val">${avgU}</div></div>
+  <div class="metric-card"><div class="metric-label">Hit 80 Calls/Day</div><div class="metric-val">${metC} of ${active.length}</div></div>
+  <div class="metric-card"><div class="metric-label">Team Add-On Rate</div><div class="metric-val" style="color:${parseFloat(taoR)>=5?'#00AEEF':'#ff6b6b'}">${taoR}%</div></div>`;
+</script>
+</body>
+</html>
