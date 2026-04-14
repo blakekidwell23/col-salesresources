@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL Inside Sales — Weekly Scorecard</title>
+<title>COL Inside Sales — Daily Scorecard</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#1a1a1a;color:#1a1a18;padding:2rem;font-size:14px;line-height:1.5}
@@ -89,7 +89,7 @@
       <div class="brand-sub">1-833-7COL-AUTO &middot; colauto.com</div>
     </div>
     <div>
-      <div class="scorecard-title">Inside Sales &mdash; Weekly Scorecard</div>
+      <div class="scorecard-title">Inside Sales &mdash; Daily Scorecard</div>
       <div class="scorecard-sub" id="subtitle"></div>
     </div>
   </div>
@@ -103,7 +103,7 @@
       <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Conversion rate (25 pts)</div>
       <div class="leg-item"><div class="leg-dot" style="background:#854F0B"></div>UPT (15 pts)</div>
       <div class="leg-item"><div class="leg-dot" style="background:#555"></div>Calls &ge;80/day (5 pts)</div>
-      <div class="leg-item"><div class="leg-dot" style="background:#e8e6df;border:1px solid #aaa"></div>Daily target: $5,300/day</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#e8e6df;border:1px solid #aaa"></div>Daily target: $5,300/rep</div>
     </div>
 
     <div id="summary-grid" class="summary-grid"></div>
@@ -121,7 +121,7 @@
           <th class="r">Margin</th>
           <th class="r">Conv.</th>
           <th class="r">UPT</th>
-          <th class="r">Calls/Day</th>
+          <th class="r">Calls</th>
           <th class="r">Tier</th>
           <th class="r">Add-On</th>
         </tr>
@@ -156,15 +156,15 @@
   </div>
 
   <div class="footer">
-    <div class="footer-left">Exclusions: ApolonioA &middot; AndyL &middot; LuisP &middot; TerenceR &middot; Scoring: percentile-based &middot; 100 pt max</div>
+    <div class="footer-left">Exclusions: ApolonioA &middot; AndyL &middot; LuisP &middot; TerenceR &middot; zero-dollar/zero-conv reps &middot; Scoring: percentile-based &middot; 100 pt max</div>
     <div class="footer-right" id="run-date"></div>
   </div>
 
 </div>
 
 <script>
-const WEEK_LABEL   = 'Week of Apr 7\u201311, 2026';
-const DAYS         = 5;
+const WEEK_LABEL   = 'Monday, April 14, 2026';
+const DAYS         = 1;
 const DAILY_TARGET = 5300;
 const AVG_PRICE    = 14;
 const SPIFF        = 1;
@@ -176,45 +176,53 @@ const NAMES = {
   'FrankieL':'Frankie Lucero','PaulinaN':'Paulina Navarro','DavidO':'David Ontiveros',
   'ManuelSe':'Manuel Serrano','OmarR':'Omar Reyes','CynthiaP':'Cynthia Puffelis',
   'KeinaJ':'Keina Johnson','JacquelineS':'Jacqueline Sanchez','JoannaZ':'Joanna Zoreque',
+  'LuisP':'Luis Pedraza','IvanB':'Ivan B',
 };
 
 const rawData = [
-  {name:'ArturoS',    calls:536, daily:107, qty:482, dollars:37107, margin:58.03, conv:55.73, upt:1.64, gloves:2, towels:3, coupons:0},
-  {name:'ChristianH', calls:626, daily:125, qty:352, dollars:33376, margin:60.00, conv:67.46, upt:1.63, gloves:0, towels:2, coupons:0},
-  {name:'CynthiaP',   calls:36,  daily:7,   qty:158, dollars:11546, margin:51.79, conv:69.67, upt:2.00, gloves:4, towels:0, coupons:0},
-  {name:'DavidO',     calls:293, daily:59,  qty:246, dollars:18907, margin:58.08, conv:51.39, upt:1.70, gloves:4, towels:0, coupons:0},
-  {name:'FrankieL',   calls:363, daily:73,  qty:211, dollars:25976, margin:59.75, conv:60.27, upt:1.69, gloves:0, towels:0, coupons:0},
-  {name:'IsaacG',     calls:368, daily:74,  qty:311, dollars:31411, margin:57.86, conv:49.78, upt:1.47, gloves:0, towels:0, coupons:0},
-  {name:'JacquelineS',calls:438, daily:88,  qty:175, dollars:12655, margin:54.39, conv:52.69, upt:1.48, gloves:0, towels:0, coupons:2},
-  {name:'JoannaZ',    calls:434, daily:87,  qty:225, dollars:18516, margin:58.62, conv:55.23, upt:1.70, gloves:0, towels:0, coupons:0},
-  {name:'KeinaJ',     calls:165, daily:33,  qty:115, dollars:12799, margin:55.68, conv:60.15, upt:1.40, gloves:0, towels:2, coupons:0},
-  {name:'ManuelSe',   calls:422, daily:84,  qty:295, dollars:25578, margin:55.50, conv:53.54, upt:1.71, gloves:1, towels:0, coupons:0},
-  {name:'MarioGO',    calls:416, daily:83,  qty:340, dollars:29768, margin:59.64, conv:47.03, upt:1.36, gloves:0, towels:0, coupons:0},
-  {name:'MatthewO',   calls:488, daily:98,  qty:393, dollars:35799, margin:58.21, conv:71.86, upt:1.73, gloves:0, towels:0, coupons:0},
-  {name:'OmarR',      calls:475, daily:95,  qty:517, dollars:41492, margin:54.43, conv:57.54, upt:1.80, gloves:0, towels:1, coupons:4},
-  {name:'PaulinaN',   calls:415, daily:83,  qty:232, dollars:19363, margin:63.48, conv:53.16, upt:1.60, gloves:0, towels:0, coupons:0},
-  {name:'ZulemaA',    calls:404, daily:81,  qty:522, dollars:46350, margin:63.28, conv:48.80, upt:1.55, gloves:2, towels:0, coupons:0},
+  {name:'ArturoS',    calls:98,  qty:61,  dollars:3684,  margin:57.21, conv:58.18, upt:1.45, gloves:0,  towels:0, coupons:0},
+  {name:'ChristianH', calls:156, qty:70,  dollars:6961,  margin:62.43, conv:60.47, upt:1.50, gloves:10, towels:0, coupons:0},
+  {name:'CynthiaP',   calls:0,   qty:8,   dollars:654,   margin:51.78, conv:66.67, upt:2.50, gloves:0,  towels:0, coupons:0},
+  {name:'DavidO',     calls:40,  qty:9,   dollars:647,   margin:54.79, conv:61.11, upt:2.17, gloves:0,  towels:0, coupons:0},
+  {name:'FrankieL',   calls:86,  qty:43,  dollars:4416,  margin:64.93, conv:54.24, upt:1.63, gloves:0,  towels:0, coupons:0},
+  {name:'IsaacG',     calls:90,  qty:56,  dollars:5732,  margin:54.79, conv:41.82, upt:1.48, gloves:0,  towels:0, coupons:0},
+  {name:'IvanB',      calls:0,   qty:8,   dollars:363,   margin:44.13, conv:41.30, upt:2.25, gloves:0,  towels:0, coupons:0},
+  {name:'JacquelineS',calls:129, qty:51,  dollars:2929,  margin:59.54, conv:57.78, upt:1.59, gloves:0,  towels:0, coupons:1},
+  {name:'JoannaZ',    calls:87,  qty:31,  dollars:2241,  margin:61.41, conv:61.90, upt:1.52, gloves:0,  towels:0, coupons:0},
+  {name:'KeinaJ',     calls:42,  qty:27,  dollars:3631,  margin:46.48, conv:57.58, upt:1.73, gloves:0,  towels:1, coupons:0},
+  {name:'LuisP',      calls:117, qty:22,  dollars:1761,  margin:51.14, conv:58.46, upt:1.15, gloves:0,  towels:0, coupons:0},
+  {name:'ManuelSe',   calls:72,  qty:71,  dollars:5313,  margin:59.00, conv:59.18, upt:1.97, gloves:0,  towels:0, coupons:0},
+  {name:'MarioGO',    calls:95,  qty:46,  dollars:4636,  margin:55.68, conv:40.98, upt:1.26, gloves:0,  towels:0, coupons:0},
+  {name:'MatthewO',   calls:103, qty:104, dollars:8609,  margin:55.15, conv:65.56, upt:2.17, gloves:0,  towels:0, coupons:0},
+  {name:'OmarR',      calls:4,   qty:59,  dollars:4061,  margin:57.18, conv:75.00, upt:2.05, gloves:0,  towels:0, coupons:1},
+  {name:'PaulinaN',   calls:87,  qty:43,  dollars:3630,  margin:60.79, conv:58.23, upt:2.05, gloves:0,  towels:0, coupons:0},
+  {name:'TerenceR',   calls:0,   qty:0,   dollars:0,     margin:0,     conv:0,     upt:0,    gloves:0,  towels:0, coupons:0},
+  {name:'ZulemaA',    calls:0,   qty:88,  dollars:5735,  margin:65.22, conv:0,     upt:1.68, gloves:0,  towels:0, coupons:0},
 ];
+
+const EXCLUDED = ['ApolonioA','AndyL','LuisP','TerenceR'];
 
 const periodTarget = DAILY_TARGET * DAYS;
 
-document.getElementById('subtitle').textContent = WEEK_LABEL + ' \u00b7 ' + DAYS + '-day period \u00b7 Target: $' + periodTarget.toLocaleString() + '/rep';
+document.getElementById('subtitle').textContent = WEEK_LABEL + ' \u00b7 1-day \u00b7 Target: $' + periodTarget.toLocaleString() + '/rep';
 document.getElementById('run-date').textContent = 'Generated ' + new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+
+const active = rawData.filter(r => !EXCLUDED.includes(r.name) && r.dollars > 0 && r.conv > 0);
 
 function pctScore(val, vals, max) {
   const sorted = [...vals].sort((a,b)=>a-b);
   return Math.round((sorted.filter(v=>v<=val).length / sorted.length) * max);
 }
 
-const dV=rawData.map(r=>r.dollars), mV=rawData.map(r=>r.margin);
-const cV=rawData.map(r=>r.conv), uV=rawData.map(r=>r.upt);
+const dV=active.map(r=>r.dollars), mV=active.map(r=>r.margin);
+const cV=active.map(r=>r.conv), uV=active.map(r=>r.upt);
 
-const scored = rawData.map(r => {
+const scored = active.map(r => {
   const actualUnits = r.gloves+r.towels+r.coupons;
   const goalUnits = Math.ceil(r.qty * GOAL_RATE);
   const shortfall = Math.max(0, goalUnits - actualUnits);
   const addOnRate = r.qty > 0 ? (actualUnits/r.qty)*100 : 0;
-  const total = pctScore(r.dollars,dV,30)+pctScore(r.margin,mV,25)+pctScore(r.conv,cV,25)+pctScore(r.upt,uV,15)+(r.daily>=80?5:0);
+  const total = pctScore(r.dollars,dV,30)+pctScore(r.margin,mV,25)+pctScore(r.conv,cV,25)+pctScore(r.upt,uV,15)+(r.calls>=80?5:0);
   const vsTarget = r.dollars - periodTarget;
   const pctOfTarget = Math.min((r.dollars / periodTarget) * 100, 150);
   return {...r, total, actualUnits, goalUnits, shortfall, dollarsMissed:shortfall*AVG_PRICE, spiffMissed:shortfall*SPIFF, addOnRate, vsTarget, pctOfTarget};
@@ -238,7 +246,7 @@ scored.forEach((r,i)=>{
   const pct=Math.round((r.total/maxScore)*100);
   const [tl,tc]=tierBadge(r.total,maxScore);
   const rank=i===0?'<span class="badge badge-gold">\ud83e\udd47 1st</span>':i===1?'<span class="badge badge-silver">\ud83e\udd48 2nd</span>':i===2?'<span class="badge badge-bronze">\ud83e\udd49 3rd</span>':`<span style="color:#888;font-weight:700;font-size:13px">${i+1}</span>`;
-  const callsD=r.daily===0?'<span class="calls-na">&mdash;</span>':r.daily>=80?`<span class="calls-ok">${r.daily} <span class="pill-met">&#10003;</span></span>`:`<span class="calls-low">${r.daily} <span class="pill-miss">miss</span></span>`;
+  const callsD=r.calls===0?'<span class="calls-na">&mdash;</span>':r.calls>=80?`<span class="calls-ok">${r.calls} <span class="pill-met">&#10003;</span></span>`:`<span class="calls-low">${r.calls} <span class="pill-miss">miss</span></span>`;
   const aoD=r.addOnRate===0?'<span class="addon-none">&mdash;</span>':r.addOnRate>=5?`<span class="addon-hit">${r.addOnRate.toFixed(1)}%</span>`:`<span class="addon-miss">${r.addOnRate.toFixed(1)}%</span>`;
   const vsTargetD=r.vsTarget>=0
     ?`<span class="vs-goal-above">+$${r.vsTarget.toLocaleString()}</span>`
@@ -289,23 +297,23 @@ totRow.className='total-row';
 totRow.innerHTML=`<td>Team Total</td><td class="r">${tO}</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r">${tA}</td><td class="r">${tO>0?((tA/tO)*100).toFixed(1)+'%':'&mdash;'}</td><td class="r">${tG}</td><td class="r"><span class="missed-dollars">-$${tDM.toLocaleString()}</span></td><td class="r"><span class="missed-spiff">-$${tSM.toLocaleString()}</span></td>`;
 aoTbody.appendChild(totRow);
 
-const totD=rawData.reduce((s,r)=>s+r.dollars,0);
-const teamTarget=periodTarget*rawData.length;
+const totD=active.reduce((s,r)=>s+r.dollars,0);
+const teamTarget=periodTarget*active.length;
 const teamVsTarget=totD-teamTarget;
-const avgM=(rawData.reduce((s,r)=>s+r.margin,0)/rawData.length).toFixed(1);
-const avgC=(rawData.reduce((s,r)=>s+r.conv,0)/rawData.length).toFixed(1);
-const avgU=(rawData.reduce((s,r)=>s+r.upt,0)/rawData.length).toFixed(2);
-const metC=rawData.filter(r=>r.daily>=80).length;
+const avgM=(active.reduce((s,r)=>s+r.margin,0)/active.length).toFixed(1);
+const avgC=(active.reduce((s,r)=>s+r.conv,0)/active.length).toFixed(1);
+const avgU=(active.reduce((s,r)=>s+r.upt,0)/active.length).toFixed(2);
+const metC=active.filter(r=>r.calls>=80).length;
 const taoR=tO>0?((tA/tO)*100).toFixed(1):'0.0';
 const aboveTarget=scored.filter(r=>r.vsTarget>=0).length;
 
 document.getElementById('summary-grid').innerHTML=`
   <div class="metric-card"><div class="metric-label">Total $ Sold</div><div class="metric-val">$${totD.toLocaleString()}</div><div class="metric-sub" style="color:${teamVsTarget>=0?'#00AEEF':'#ff6b6b'}">${teamVsTarget>=0?'+':'-'}$${Math.abs(teamVsTarget).toLocaleString()} vs team target</div></div>
-  <div class="metric-card"><div class="metric-label">Reps Above Target</div><div class="metric-val" style="color:${aboveTarget>=rawData.length/2?'#00AEEF':'#ff6b6b'}">${aboveTarget} of ${rawData.length}</div><div class="metric-sub" style="color:#555">$${periodTarget.toLocaleString()} target/rep</div></div>
+  <div class="metric-card"><div class="metric-label">Reps Above Target</div><div class="metric-val" style="color:${aboveTarget>=active.length/2?'#00AEEF':'#ff6b6b'}">${aboveTarget} of ${active.length}</div><div class="metric-sub" style="color:#555">$${periodTarget.toLocaleString()} target/rep</div></div>
   <div class="metric-card"><div class="metric-label">Avg Margin</div><div class="metric-val">${avgM}%</div></div>
   <div class="metric-card"><div class="metric-label">Avg Conversion</div><div class="metric-val">${avgC}%</div></div>
   <div class="metric-card"><div class="metric-label">Avg UPT</div><div class="metric-val">${avgU}</div></div>
-  <div class="metric-card"><div class="metric-label">Calls &ge;80/day</div><div class="metric-val" style="color:#00AEEF">${metC} of ${rawData.length}</div></div>
+  <div class="metric-card"><div class="metric-label">Calls &ge;80</div><div class="metric-val" style="color:#00AEEF">${metC} of ${active.length}</div></div>
   <div class="metric-card"><div class="metric-label">Add-On Rate</div><div class="metric-val" style="color:${parseFloat(taoR)>=5?'#00AEEF':'#ff6b6b'}">${taoR}%</div><div class="metric-sub" style="color:#555">goal: 5.0%</div></div>`;
 </script>
 </body>
