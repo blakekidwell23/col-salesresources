@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL · Week 17 · CSR Dashboard (Daily · Mon 4/20)</title>
+<title>COL &middot; Week 17 &middot; CSR Dashboard (Mon 4/20 &ndash; Tue 4/21)</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -21,32 +21,6 @@
   .top-right{text-align:right}
   .scorecard-title{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
   .scorecard-sub{color:var(--cyan);font-family:'DM Mono',monospace;font-size:11px;margin-top:3px}
-  .queue-panel{background:#000;border-bottom:1px solid var(--border);padding:16px 28px}
-  .queue-panel-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text2);margin-bottom:12px}
-  .queue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-  .queue-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:12px 14px;position:relative;overflow:hidden}
-  .queue-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-  .queue-card.good::before{background:var(--green)}
-  .queue-card.warn::before{background:var(--amber)}
-  .queue-card.bad::before{background:var(--red)}
-  .queue-name{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--text);margin-bottom:8px}
-  .queue-id{font-family:'DM Mono',monospace;font-size:10px;color:var(--cyan);margin-right:6px}
-  .queue-stats{display:flex;gap:16px;margin-bottom:8px}
-  .queue-stat{display:flex;flex-direction:column;gap:1px}
-  .queue-stat-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;font-weight:600}
-  .queue-stat-val{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--text)}
-  .queue-bar-row{display:flex;align-items:center;gap:8px}
-  .queue-bar-bg{flex:1;height:5px;background:var(--border2);border-radius:3px;overflow:hidden}
-  .queue-bar-fill{height:100%;border-radius:3px}
-  .queue-bar-fill.good{background:var(--green)}
-  .queue-bar-fill.warn{background:var(--amber)}
-  .queue-bar-fill.bad{background:var(--red)}
-  .queue-svc-pct{font-family:'DM Mono',monospace;font-size:12px;font-weight:700;min-width:42px;text-align:right}
-  .queue-svc-pct.good{color:var(--green)}
-  .queue-svc-pct.warn{color:var(--amber)}
-  .queue-svc-pct.bad{color:var(--red)}
-  .queue-day-row{display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap;align-items:center}
-  .queue-day-tag{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);padding:1px 5px;border:1px solid var(--border2);border-radius:3px;white-space:nowrap;font-weight:600}
   .body{padding:24px 28px 48px}
   .legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface);border-radius:6px;border-left:3px solid var(--cyan)}
   .leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);font-weight:500}
@@ -111,7 +85,6 @@
   .total-row td{background:#000!important;border-top:2px solid var(--cyan)!important;color:#fff;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.04em}
   .total-row .missed-dollars{color:#ff7070}
   .total-row .missed-spiff{color:#ffb74d}
-  .callout{background:rgba(240,160,48,.12);border-left:4px solid var(--amber);padding:10px 14px;margin-bottom:18px;color:var(--amber);font-weight:700;font-size:12.5px;border-radius:4px}
   .footer{background:#000;padding:12px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border)}
   .footer-left{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.8}
   .footer-right{font-size:11px;color:var(--cyan);font-weight:600;font-family:'DM Mono',monospace}
@@ -122,23 +95,18 @@
 <div class="top-bar">
   <div class="brand">COL &middot; COLLISION AUTO PARTS</div>
   <div class="top-right">
-    <div class="scorecard-title">Inside Sales &mdash; Daily CSR Scorecard</div>
+    <div class="scorecard-title">Inside Sales &mdash; CSR Scorecard</div>
     <div class="scorecard-sub" id="subtitle"></div>
   </div>
 </div>
-<div class="queue-panel">
-  <div class="queue-panel-title">Call Queue Performance &mdash; Week 17 &middot; Daily (Mon Apr 20)</div>
-  <div class="queue-grid" id="queue-grid"></div>
-</div>
 <div class="body">
-  <div class="callout">! SoCal Sales ran at 73.2% service for the day &mdash; 153 missed calls (the weak spot). All other queues strong: NorCal 94.0%, Global 95.3%, MoWest 88.8%. Team overall 84.6% svc.</div>
   <div class="legend">
     <div class="leg-item"><div class="leg-dot" style="background:var(--cyan)"></div>Dollars sold (30 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Margin % (25 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:#0F9E6E"></div>Conversion rate (25 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>UPT (15 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--muted)"></div>Calls &ge;80/day (5 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Daily target: $5,300/rep</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 2 days = $10,600/rep</div>
   </div>
   <div id="summary-grid" class="summary-grid"></div>
   <div class="section-label">Rankings</div>
@@ -194,15 +162,15 @@
 </div>
 <div class="footer">
   <div class="footer-left">
-    Exclusions: ApolonioA &middot; AndyL &middot; TerenceR &middot; CynthiaP &middot; DylanB (outside / field sales or zero-activity) &middot; JacquelineS off phones today (0 calls, excluded from scoring)<br>
+    Exclusions: ApolonioA &middot; CynthiaP (outside sales) &middot; AndyL &middot; DylanB &middot; TerenceR (field / zero activity)<br>
     Scoring: percentile-based &middot; Dollars 30pt &middot; Margin 25pt &middot; Conv 25pt &middot; UPT 15pt &middot; Calls&ge;80/day 5pt &middot; Tier: A&ge;80% &middot; B&ge;60% &middot; C&ge;40% &middot; D&lt;40%<br>
-    Est. Missed Rev: rep's own conv rate &times; ASP &times; UPT applied to calls short of the 80-call daily threshold &middot; Daily snapshot: Mon Apr 20, 2026
+    Est. Missed Rev: rep's own conv rate &times; ASP &times; UPT applied to calls short of the 160-call threshold (80/day &times; 2 days) &middot; Snapshot: Mon Apr 20 &ndash; Tue Apr 21, 2026
   </div>
   <div class="footer-right" id="run-date"></div>
 </div>
 <script>
-const WEEK_LABEL='Week 17, 2026 \u00b7 Mon Apr 20';
-const DAYS=1, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
+const WEEK_LABEL='Week 17, 2026 \u00b7 Mon Apr 20 \u2013 Tue Apr 21';
+const DAYS=2, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
 
 const NAMES={
   MatthewO:'Matthew Oleal',IsaacG:'Isaac Gonzales',ArturoS:'Arturo Serrano',
@@ -215,69 +183,34 @@ const NAMES={
 };
 const EXCLUDED=['ApolonioA','AndyL','TerenceR','CynthiaP','DylanB'];
 
-const QUEUES=[
-  {id:'6190',name:'MoWest Sales',days:[{date:'4/20',recv:143,ans:127}]},
-  {id:'6650',name:'SoCal Sales',days:[{date:'4/20',recv:571,ans:418}]},
-  {id:'7100',name:'NorCal Sales',days:[{date:'4/20',recv:434,ans:408}]},
-  {id:'7800',name:'Global Overflow',days:[{date:'4/20',recv:169,ans:161}]},
-];
-
-function queueClass(p){return p>=85?'good':p>=70?'warn':'bad';}
-
-const queueGrid=document.getElementById('queue-grid');
-QUEUES.forEach(q=>{
-  const totalRecv=q.days.reduce((s,d)=>s+d.recv,0);
-  const totalAns=q.days.reduce((s,d)=>s+d.ans,0);
-  const totalUnans=totalRecv-totalAns;
-  const svcPct=(totalAns/totalRecv)*100;
-  const cls=queueClass(svcPct);
-  const card=document.createElement('div');
-  card.className=`queue-card ${cls}`;
-  card.innerHTML=`
-    <div class="queue-name"><span class="queue-id">${q.id}</span>${q.name}</div>
-    <div class="queue-day-row">
-      ${q.days.map(d=>`<span class="queue-day-tag">${d.date}: ${((d.ans/d.recv)*100).toFixed(0)}% svc</span>`).join('')}
-    </div>
-    <div class="queue-stats">
-      <div class="queue-stat"><span class="queue-stat-label">Received</span><span class="queue-stat-val">${totalRecv.toLocaleString()}</span></div>
-      <div class="queue-stat"><span class="queue-stat-label">Answered</span><span class="queue-stat-val">${totalAns.toLocaleString()}</span></div>
-      <div class="queue-stat"><span class="queue-stat-label">Missed</span><span class="queue-stat-val" style="color:var(--red)">${totalUnans.toLocaleString()}</span></div>
-    </div>
-    <div class="queue-bar-row">
-      <div class="queue-bar-bg"><div class="queue-bar-fill ${cls}" style="width:${Math.min(svcPct,100).toFixed(1)}%"></div></div>
-      <span class="queue-svc-pct ${cls}">${svcPct.toFixed(1)}%</span>
-    </div>`;
-  queueGrid.appendChild(card);
-});
-
 const rawData=[
-  {name:'AndyL',       loc:'Field',             calls:0,  qty:0,  dollars:0.00,    margin:0.00, conv:0.00, upt:0,    asp:0,      gloves:0, towels:0,coupons:0},
-  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,  qty:79, dollars:7200.12, margin:74.17,conv:100.00,upt:1.01, asp:91.14,  gloves:0, towels:0,coupons:0},
-  {name:'ArturoS',     loc:'San Diego',         calls:76, qty:64, dollars:3360.15, margin:56.00,conv:58.02,upt:1.64, asp:63.20,  gloves:0, towels:0,coupons:0},
-  {name:'ChristianH',  loc:'Eco',               calls:101,qty:31, dollars:3554.03, margin:49.18,conv:50.72,upt:1.21, asp:114.49, gloves:0, towels:0,coupons:0},
-  {name:'CynthiaP',    loc:'Outside Sales',     calls:29, qty:10, dollars:571.09,  margin:46.15,conv:68.42,upt:2.08, asp:64.03,  gloves:0, towels:0,coupons:0},
-  {name:'DavidO',      loc:'San Diego',         calls:72, qty:19, dollars:2213.13, margin:52.97,conv:54.72,upt:1.48, asp:104.58, gloves:0, towels:0,coupons:0},
-  {name:'DylanB',      loc:'Field',             calls:0,  qty:0,  dollars:0.00,    margin:0.00, conv:0.00, upt:0,    asp:0,      gloves:0, towels:0,coupons:0},
-  {name:'FrankieL',    loc:'Albuquerque',       calls:59, qty:52, dollars:5253.10, margin:61.16,conv:56.60,upt:1.77, asp:102.65, gloves:0, towels:0,coupons:0},
-  {name:'IsaacG',      loc:'Albuquerque',       calls:86, qty:56, dollars:5792.61, margin:58.18,conv:39.66,upt:1.68, asp:110.93, gloves:0, towels:0,coupons:0},
-  {name:'IvanB',       loc:'Santa Fe Springs',  calls:95, qty:68, dollars:5104.81, margin:56.80,conv:52.00,upt:1.48, asp:75.52,  gloves:0, towels:0,coupons:0},
-  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:0,  qty:14, dollars:921.00,  margin:52.73,conv:0.00, upt:1.27, asp:68.40,  gloves:0, towels:0,coupons:0},
-  {name:'JoannaZ',     loc:'San Diego',         calls:89, qty:23, dollars:1693.90, margin:64.27,conv:51.06,upt:1.56, asp:75.48,  gloves:0, towels:0,coupons:0},
-  {name:'KeinaJ',      loc:'Sacramento',        calls:24, qty:13, dollars:2541.91, margin:50.13,conv:65.22,upt:1.27, asp:204.24, gloves:0, towels:0,coupons:0},
-  {name:'LuisP',       loc:'Hayward',           calls:80, qty:54, dollars:4239.40, margin:58.17,conv:67.35,upt:1.45, asp:95.49,  gloves:0, towels:0,coupons:0},
-  {name:'ManuelSe',    loc:'Albuquerque',       calls:69, qty:32, dollars:1205.25, margin:56.31,conv:41.51,upt:2.12, asp:60.54,  gloves:0, towels:0,coupons:0},
-  {name:'MarioGO',     loc:'Hayward',           calls:92, qty:72, dollars:5363.56, margin:60.06,conv:52.63,upt:3.07, asp:74.84,  gloves:20,towels:0,coupons:0},
-  {name:'MatthewO',    loc:'Eco',               calls:96, qty:60, dollars:4823.02, margin:52.22,conv:69.74,upt:1.48, asp:77.26,  gloves:0, towels:0,coupons:0},
-  {name:'OmarR',       loc:'Santa Fe Springs',  calls:105,qty:92, dollars:6895.69, margin:58.04,conv:59.46,upt:2.71, asp:72.29,  gloves:0, towels:0,coupons:0},
-  {name:'PaulinaN',    loc:'Hayward',           calls:78, qty:29, dollars:3765.66, margin:63.01,conv:39.19,upt:1.55, asp:126.64, gloves:0, towels:0,coupons:0},
-  {name:'TerenceR',    loc:'Field',             calls:0,  qty:0,  dollars:0.00,    margin:0.00, conv:0.00, upt:0,    asp:0,      gloves:0, towels:0,coupons:0},
-  {name:'ZulemaA',     loc:'Hayward',           calls:88, qty:76, dollars:5476.66, margin:69.69,conv:45.07,upt:1.81, asp:70.47,  gloves:0, towels:0,coupons:0},
+  {name:'AndyL',       loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,      gloves:0, towels:0, coupons:0},
+  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,  qty:112, dollars:8819.72,  margin:71.02,conv:100.00,upt:1.04, asp:78.64,  gloves:0, towels:0, coupons:0},
+  {name:'ArturoS',     loc:'San Diego',         calls:117,qty:152, dollars:12595.70, margin:54.73,conv:64.54, upt:1.68, asp:84.08,  gloves:2, towels:0, coupons:0},
+  {name:'ChristianH',  loc:'Eco',               calls:217,qty:85,  dollars:8680.88,  margin:52.19,conv:57.25, upt:1.41, asp:101.86, gloves:0, towels:0, coupons:0},
+  {name:'CynthiaP',    loc:'Outside Sales',     calls:29, qty:64,  dollars:4906.74,  margin:51.09,conv:64.15, upt:2.52, asp:74.54,  gloves:0, towels:0, coupons:0},
+  {name:'DavidO',      loc:'San Diego',         calls:150,qty:74,  dollars:4480.13,  margin:55.68,conv:55.10, upt:1.64, asp:71.58,  gloves:0, towels:0, coupons:0},
+  {name:'DylanB',      loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,      gloves:0, towels:0, coupons:0},
+  {name:'FrankieL',    loc:'Albuquerque',       calls:126,qty:108, dollars:11523.21, margin:58.54,conv:64.21, upt:1.83, asp:109.12, gloves:0, towels:0, coupons:0},
+  {name:'IsaacG',      loc:'Albuquerque',       calls:163,qty:117, dollars:12788.60, margin:57.82,conv:42.06, upt:1.70, asp:112.45, gloves:0, towels:0, coupons:0},
+  {name:'IvanB',       loc:'Santa Fe Springs',  calls:184,qty:140, dollars:11665.53, margin:61.81,conv:50.54, upt:1.48, asp:83.59,  gloves:0, towels:0, coupons:0},
+  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:125,qty:39,  dollars:2945.57,  margin:51.63,conv:43.82, upt:1.38, asp:82.17,  gloves:0, towels:0, coupons:0},
+  {name:'JoannaZ',     loc:'San Diego',         calls:155,qty:59,  dollars:4440.85,  margin:56.76,conv:58.82, upt:1.50, asp:78.43,  gloves:0, towels:0, coupons:0},
+  {name:'KeinaJ',      loc:'Sacramento',        calls:52, qty:30,  dollars:2575.59,  margin:52.43,conv:62.50, upt:1.55, asp:122.64, gloves:6, towels:0, coupons:0},
+  {name:'LuisP',       loc:'Hayward',           calls:154,qty:142, dollars:10939.19, margin:60.07,conv:63.11, upt:1.55, asp:90.15,  gloves:0, towels:0, coupons:0},
+  {name:'ManuelSe',    loc:'Albuquerque',       calls:153,qty:79,  dollars:5218.86,  margin:60.11,conv:47.57, upt:1.65, asp:73.82,  gloves:0, towels:0, coupons:0},
+  {name:'MarioGO',     loc:'Hayward',           calls:186,qty:132, dollars:10964.92, margin:61.92,conv:54.05, upt:1.91, asp:90.45,  gloves:20,towels:0, coupons:0},
+  {name:'MatthewO',    loc:'Eco',               calls:197,qty:148, dollars:12263.48, margin:54.26,conv:68.18, upt:1.70, asp:81.10,  gloves:0, towels:0, coupons:0},
+  {name:'OmarR',       loc:'Santa Fe Springs',  calls:177,qty:187, dollars:14549.95, margin:59.78,conv:61.24, upt:2.13, asp:76.23,  gloves:0, towels:0, coupons:0},
+  {name:'PaulinaN',    loc:'Hayward',           calls:164,qty:84,  dollars:9390.66,  margin:61.54,conv:41.38, upt:1.70, asp:111.37, gloves:0, towels:0, coupons:0},
+  {name:'TerenceR',    loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,      gloves:0, towels:0, coupons:0},
+  {name:'ZulemaA',     loc:'Hayward',           calls:182,qty:180, dollars:15441.32, margin:63.07,conv:47.26, upt:1.51, asp:89.80,  gloves:0, towels:0, coupons:0},
 ];
 
 const periodTarget=DAILY_TARGET*DAYS;
 const callTarget=CALL_MIN*DAYS;
 
-document.getElementById('subtitle').textContent=WEEK_LABEL+' \u00b7 1 day \u00b7 Target: $'+periodTarget.toLocaleString()+'/rep';
+document.getElementById('subtitle').textContent=WEEK_LABEL+' \u00b7 2 days \u00b7 Target: $'+periodTarget.toLocaleString()+'/rep';
 document.getElementById('run-date').textContent='Generated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
 
 const active=rawData.filter(r=>!EXCLUDED.includes(r.name)&&r.dollars>0&&r.conv>0);
@@ -383,10 +316,6 @@ const avgU=(active.reduce((s,r)=>s+r.upt,0)/active.length).toFixed(2);
 const metCalls=active.filter(r=>r.calls>=callTarget).length;
 const taoR=tO>0?((tA/tO)*100).toFixed(1):'0.0';
 const aboveTarget=scored.filter(r=>r.vsTarget>=0).length;
-const allQRecv=QUEUES.reduce((s,q)=>s+q.days.reduce((ss,d)=>ss+d.recv,0),0);
-const allQAns=QUEUES.reduce((s,q)=>s+q.days.reduce((ss,d)=>ss+d.ans,0),0);
-const allQUnans=allQRecv-allQAns;
-const overallSvc=((allQAns/allQRecv)*100).toFixed(1);
 
 document.getElementById('summary-grid').innerHTML=`
   <div class="metric-card"><div class="metric-label">Total $ Sold</div><div class="metric-val">$${Math.round(totD).toLocaleString()}</div><div class="metric-sub" style="color:${teamVsTarget>=0?'var(--cyan)':'var(--red)'}">${teamVsTarget>=0?'+':'-'}$${Math.abs(Math.round(teamVsTarget)).toLocaleString()} vs team target</div></div>
@@ -394,10 +323,9 @@ document.getElementById('summary-grid').innerHTML=`
   <div class="metric-card"><div class="metric-label">Avg Margin</div><div class="metric-val">${avgM}%</div></div>
   <div class="metric-card"><div class="metric-label">Avg Conversion</div><div class="metric-val">${avgC}%</div></div>
   <div class="metric-card"><div class="metric-label">Avg UPT</div><div class="metric-val">${avgU}</div></div>
-  <div class="metric-card"><div class="metric-label">Calls &ge;${callTarget}/day</div><div class="metric-val" style="color:var(--cyan)">${metCalls} of ${active.length}</div></div>
+  <div class="metric-card"><div class="metric-label">Calls &ge;${callTarget} / 2d</div><div class="metric-val" style="color:var(--cyan)">${metCalls} of ${active.length}</div></div>
   <div class="metric-card"><div class="metric-label">Add-On Rate</div><div class="metric-val" style="color:${parseFloat(taoR)>=5?'var(--cyan)':'var(--red)'}">${taoR}%</div><div class="metric-sub" style="color:var(--muted)">goal: 5.0%</div></div>
-  <div class="metric-card"><div class="metric-label">Est. Rev Missed</div><div class="metric-val" style="color:var(--amber)">${fmt$(totalOppRev)}</div><div class="metric-sub" style="color:var(--muted)">call volume gap</div></div>
-  <div class="metric-card"><div class="metric-label">Queue Svc Rate</div><div class="metric-val" style="color:${parseFloat(overallSvc)>=85?'var(--green)':parseFloat(overallSvc)>=70?'var(--amber)':'var(--red)'}">${overallSvc}%</div><div class="metric-sub" style="color:var(--muted)">${allQUnans.toLocaleString()} calls missed</div></div>`;
+  <div class="metric-card"><div class="metric-label">Est. Rev Missed</div><div class="metric-val" style="color:var(--amber)">${fmt$(totalOppRev)}</div><div class="metric-sub" style="color:var(--muted)">call volume gap</div></div>`;
 </script>
 </body>
 </html>
