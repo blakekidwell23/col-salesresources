@@ -108,6 +108,25 @@
     <div class="leg-item"><div class="leg-dot" style="background:var(--muted)"></div>Calls &ge;80/day (5 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 3 days = $15,900/rep</div>
   </div>
+  <div class="section-label">Call Queue Performance &mdash; 3-Day Snapshot</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Queue</th>
+          <th class="r">Received</th>
+          <th class="r">Answered</th>
+          <th class="r">Unanswered</th>
+          <th class="r">Unans. %</th>
+          <th class="r">Service Rate</th>
+          <th class="r">Mon 4/20</th>
+          <th class="r">Tue 4/21</th>
+          <th class="r">Wed 4/22</th>
+        </tr>
+      </thead>
+      <tbody id="queue-tbody"></tbody>
+    </table>
+  </div>
   <div id="summary-grid" class="summary-grid"></div>
   <div class="section-label">Rankings</div>
   <div class="table-wrap">
@@ -171,6 +190,53 @@
 <script>
 const WEEK_LABEL='Week 17, 2026 \u00b7 Mon Apr 20 \u2013 Wed Apr 22';
 const DAYS=3, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
+
+const queueData=[
+  {name:'6190 MoWest Sales',        d1:{rec:143,ans:127,un:16},  d2:{rec:151,ans:133,un:18},  d3:{rec:118,ans:108,un:10}},
+  {name:'6650 SoCal Sales',         d1:{rec:571,ans:418,un:153}, d2:{rec:572,ans:408,un:164}, d3:{rec:570,ans:417,un:153}},
+  {name:'7100 NorCal Sales',        d1:{rec:434,ans:408,un:26},  d2:{rec:465,ans:423,un:42},  d3:{rec:467,ans:419,un:48}},
+  {name:'7800 Global Overflow',     d1:{rec:169,ans:161,un:8},   d2:{rec:203,ans:198,un:5},   d3:{rec:197,ans:190,un:7}},
+];
+function svcColor(r){if(r>=.93)return'var(--green)';if(r>=.85)return'var(--amber)';return'var(--red)';}
+function unsColor(r){if(r<=.07)return'var(--green)';if(r<=.15)return'var(--amber)';return'var(--red)';}
+(function renderQueues(){
+  const tb=document.getElementById('queue-tbody');
+  let tR=0,tA=0,tU=0;
+  queueData.forEach(q=>{
+    const rec=q.d1.rec+q.d2.rec+q.d3.rec;
+    const ans=q.d1.ans+q.d2.ans+q.d3.ans;
+    const un=q.d1.un+q.d2.un+q.d3.un;
+    tR+=rec;tA+=ans;tU+=un;
+    const svc=ans/rec, uns=un/rec;
+    const s1=q.d1.ans/q.d1.rec, s2=q.d2.ans/q.d2.rec, s3=q.d3.ans/q.d3.rec;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td style="font-weight:700;color:var(--text)">${q.name}</td>
+      <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${rec.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${ans.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${un.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(uns)}">${(uns*100).toFixed(1)}%</td>
+      <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(svc)}">${(svc*100).toFixed(1)}%</td>
+      <td class="r" style="font-family:'DM Mono',monospace;color:${svcColor(s1)}">${(s1*100).toFixed(1)}%</td>
+      <td class="r" style="font-family:'DM Mono',monospace;color:${svcColor(s2)}">${(s2*100).toFixed(1)}%</td>
+      <td class="r" style="font-family:'DM Mono',monospace;color:${svcColor(s3)}">${(s3*100).toFixed(1)}%</td>`;
+    tb.appendChild(tr);
+  });
+  const tot=document.createElement('tr');
+  tot.className='total-row';
+  const tSvc=tA/tR, tUns=tU/tR;
+  tot.innerHTML=`
+    <td>TOTAL</td>
+    <td class="r">${tR.toLocaleString()}</td>
+    <td class="r">${tA.toLocaleString()}</td>
+    <td class="r">${tU.toLocaleString()}</td>
+    <td class="r">${(tUns*100).toFixed(1)}%</td>
+    <td class="r">${(tSvc*100).toFixed(1)}%</td>
+    <td class="r">&mdash;</td>
+    <td class="r">&mdash;</td>
+    <td class="r">&mdash;</td>`;
+  tb.appendChild(tot);
+})();
 
 const NAMES={
   MatthewO:'Matthew Oleal',IsaacG:'Isaac Gonzales',ArturoS:'Arturo Serrano',
