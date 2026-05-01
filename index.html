@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL &middot; Week 18 &middot; CSR Dashboard (Mon 4/27 &ndash; Tue 4/28)</title>
+<title>COL &middot; Week 18 &middot; CSR Dashboard (Mon 4/27 &ndash; Thu 4/30)</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -106,9 +106,9 @@
     <div class="leg-item"><div class="leg-dot" style="background:#0F9E6E"></div>Conversion rate (25 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>UPT (15 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--muted)"></div>Calls &ge;80/day (5 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 5 days = $26,500/rep</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 4 days = $21,200/rep</div>
   </div>
-  <div class="section-label">Call Queue Performance &mdash; 5-Day Snapshot</div>
+  <div class="section-label">Call Queue Performance &mdash; 4-Day Snapshot</div>
   <div class="table-wrap">
     <table>
       <thead>
@@ -180,19 +180,19 @@
   <div class="footer-left">
     Exclusions: ApolonioA &middot; CynthiaP (outside sales) &middot; AndyL &middot; DylanB &middot; EricL &middot; TerenceR &middot; ManuelSe (field / zero activity)<br>
     Scoring: percentile-based &middot; Dollars 30pt &middot; Margin 25pt &middot; Conv 25pt &middot; UPT 15pt &middot; Calls&ge;80/day 5pt &middot; Tier: A&ge;80% &middot; B&ge;60% &middot; C&ge;40% &middot; D&lt;40%<br>
-    Est. Missed Rev: rep's own conv rate &times; ASP &times; UPT applied to calls short of the 400-call threshold (80/day &times; 5 days) &middot; Snapshot: Mon Apr 27 &ndash; Tue Apr 28, 2026
+    Est. Missed Rev: rep's own conv rate &times; ASP &times; UPT applied to calls short of the 320-call threshold (80/day &times; 4 days) &middot; Snapshot: Mon Apr 27 &ndash; Thu Apr 30, 2026
   </div>
   <div class="footer-right" id="run-date"></div>
 </div>
 <script>
-const WEEK_LABEL='Week 18, 2026 \u00b7 Mon Apr 27 \u2013 Wed Apr 29';
-const DAYS=3, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
+const WEEK_LABEL='Week 18, 2026 \u00b7 Mon Apr 27 \u2013 Thu Apr 30';
+const DAYS=4, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
 
 const queueData=[
-  {name:'Global Queue',       rec:830,  ans:763,  un:67 },
-  {name:'6190 MoWest Sales',  rec:402,  ans:361,  un:41 },
-  {name:'7100 NorCal Sales',  rec:1583, ans:1308, un:275},
-  {name:'6650 SoCal Sales',   rec:1682, ans:1112, un:570},
+  {name:'7800 Global Overflow',rec:1211, ans:1115, un:96 },
+  {name:'6190 MoWest Sales',  rec:522,  ans:471,  un:51 },
+  {name:'7100 NorCal Sales',  rec:2024, ans:1683, un:341},
+  {name:'6650 SoCal Sales',   rec:2218, ans:1327, un:891},
 ];
 function svcColor(r){if(r>=.93)return'var(--green)';if(r>=.85)return'var(--amber)';return'var(--red)';}
 function unsColor(r){if(r<=.07)return'var(--green)';if(r<=.15)return'var(--amber)';return'var(--red)';}
@@ -238,27 +238,27 @@ const EXCLUDED=['ApolonioA','AndyL','TerenceR','CynthiaP','DylanB','EricL','Manu
 
 const rawData=[
   {name:'AndyL',       loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,       gloves:0, towels:0, coupons:0},
-  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,  qty:133, dollars:6712.63,  margin:98.27,conv:99.30, upt:1.02, asp:1383.69, gloves:0, towels:0, coupons:0},
-  {name:'ArturoS',     loc:'San Diego',         calls:152,qty:158, dollars:11113.42, margin:59.83,conv:61.98, upt:1.44, asp:74.46,   gloves:0, towels:0, coupons:0},
-  {name:'ChristianH',  loc:'Eco',               calls:325,qty:178, dollars:20530.93, margin:57.46,conv:59.69, upt:1.74, asp:118.99,  gloves:12,towels:0, coupons:0},
-  {name:'CynthiaP',    loc:'Outside Sales',     calls:19, qty:157, dollars:10551.11, margin:51.73,conv:68.99, upt:2.26, asp:67.42,   gloves:0, towels:0, coupons:0},
-  {name:'DavidO',      loc:'San Diego',         calls:216,qty:152, dollars:10900.72, margin:55.81,conv:50.29, upt:2.03, asp:74.68,   gloves:0, towels:0, coupons:0},
+  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,  qty:169, dollars:8575.67,  margin:97.73,conv:99.43, upt:1.02, asp:1075.06, gloves:0, towels:0, coupons:0},
+  {name:'ArturoS',     loc:'San Diego',         calls:235,qty:212, dollars:14340.46, margin:60.73,conv:62.24, upt:1.44, asp:68.92,   gloves:1, towels:0, coupons:0},
+  {name:'ChristianH',  loc:'Eco',               calls:476,qty:197, dollars:21960.72, margin:58.58,conv:61.72, upt:1.69, asp:116.52,  gloves:12,towels:0, coupons:0},
+  {name:'CynthiaP',    loc:'Outside Sales',     calls:38, qty:194, dollars:12521.89, margin:51.90,conv:70.35, upt:2.23, asp:65.35,   gloves:0, towels:0, coupons:0},
+  {name:'DavidO',      loc:'San Diego',         calls:313,qty:225, dollars:14847.45, margin:56.05,conv:49.35, upt:2.20, asp:67.77,   gloves:0, towels:0, coupons:0},
   {name:'DylanB',      loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,       gloves:0, towels:0, coupons:0},
-  {name:'EricL',       loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,       gloves:0, towels:0, coupons:0},
-  {name:'FrankieL',    loc:'Albuquerque',       calls:239,qty:136, dollars:16524.28, margin:61.57,conv:49.10, upt:1.55, asp:118.20,  gloves:0, towels:0, coupons:0},
-  {name:'IsaacG',      loc:'Albuquerque',       calls:291,qty:236, dollars:22318.45, margin:58.72,conv:49.49, upt:1.79, asp:102.40,  gloves:0, towels:2, coupons:0},
-  {name:'IvanB',       loc:'Santa Fe Springs',  calls:331,qty:210, dollars:18644.47, margin:59.88,conv:51.74, upt:1.60, asp:91.69,   gloves:0, towels:0, coupons:0},
-  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:281,qty:77,  dollars:5432.13,  margin:50.90,conv:51.38, upt:1.73, asp:77.19,   gloves:2, towels:1, coupons:0},
-  {name:'JoannaZ',     loc:'San Diego',         calls:219,qty:132, dollars:10322.98, margin:58.58,conv:61.11, upt:1.58, asp:81.92,   gloves:0, towels:0, coupons:0},
-  {name:'KeinaJ',      loc:'Sacramento',        calls:55, qty:14,  dollars:979.41,   margin:58.89,conv:66.00, upt:1.53, asp:101.38,  gloves:0, towels:0, coupons:0},
-  {name:'LuisP',       loc:'Hayward',           calls:361,qty:275, dollars:25825.80, margin:61.14,conv:65.45, upt:1.58, asp:97.21,   gloves:0, towels:0, coupons:0},
-  {name:'ManuelSe',    loc:'Albuquerque',       calls:54, qty:24,  dollars:1564.54,  margin:59.84,conv:34.69, upt:2.06, asp:71.70,   gloves:0, towels:0, coupons:0},
-  {name:'MarioGO',     loc:'Hayward',           calls:266,qty:112, dollars:11025.90, margin:54.42,conv:47.37, upt:1.35, asp:114.55,  gloves:0, towels:0, coupons:0},
-  {name:'MatthewO',    loc:'Eco',               calls:418,qty:333, dollars:31490.13, margin:56.97,conv:63.06, upt:2.00, asp:93.99,   gloves:6, towels:0, coupons:0},
-  {name:'OmarR',       loc:'Santa Fe Springs',  calls:203,qty:206, dollars:13991.88, margin:51.59,conv:53.11, upt:1.68, asp:67.43,   gloves:0, towels:0, coupons:3},
-  {name:'PaulinaN',    loc:'Hayward',           calls:207,qty:133, dollars:15288.62, margin:60.00,conv:59.35, upt:1.84, asp:108.49,  gloves:1, towels:0, coupons:0},
+  {name:'EricL',       loc:'Field',             calls:0,  qty:-1,  dollars:-18.43,   margin:0.00, conv:0.00,  upt:0,    asp:0,       gloves:0, towels:0, coupons:0},
+  {name:'FrankieL',    loc:'Albuquerque',       calls:293,qty:161, dollars:18984.24, margin:61.66,conv:47.72, upt:1.58, asp:115.97,  gloves:0, towels:0, coupons:0},
+  {name:'IsaacG',      loc:'Albuquerque',       calls:359,qty:276, dollars:26544.67, margin:59.71,conv:50.43, upt:1.75, asp:103.87,  gloves:0, towels:2, coupons:0},
+  {name:'IvanB',       loc:'Santa Fe Springs',  calls:331,qty:263, dollars:23035.49, margin:60.36,conv:52.02, upt:1.63, asp:96.26,   gloves:0, towels:0, coupons:0},
+  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:281,qty:105, dollars:8730.02,  margin:52.83,conv:51.38, upt:1.68, asp:82.74,   gloves:2, towels:1, coupons:0},
+  {name:'JoannaZ',     loc:'San Diego',         calls:309,qty:192, dollars:14638.02, margin:58.14,conv:58.47, upt:1.64, asp:80.00,   gloves:0, towels:0, coupons:0},
+  {name:'KeinaJ',      loc:'Sacramento',        calls:61, qty:46,  dollars:3522.76,  margin:57.64,conv:63.16, upt:2.00, asp:89.33,   gloves:0, towels:0, coupons:0},
+  {name:'LuisP',       loc:'Hayward',           calls:466,qty:334, dollars:33668.27, margin:60.41,conv:62.38, upt:1.60, asp:106.03,  gloves:0, towels:0, coupons:0},
+  {name:'ManuelSe',    loc:'Albuquerque',       calls:110,qty:60,  dollars:4810.35,  margin:57.98,conv:40.66, upt:1.82, asp:76.86,   gloves:0, towels:0, coupons:0},
+  {name:'MarioGO',     loc:'Hayward',           calls:354,qty:150, dollars:13893.59, margin:55.11,conv:46.50, upt:1.38, asp:109.39,  gloves:0, towels:0, coupons:0},
+  {name:'MatthewO',    loc:'Eco',               calls:531,qty:435, dollars:44194.79, margin:57.23,conv:62.69, upt:1.88, asp:101.61,  gloves:6, towels:0, coupons:0},
+  {name:'OmarR',       loc:'Santa Fe Springs',  calls:235,qty:224, dollars:14910.46, margin:52.77,conv:52.68, upt:1.73, asp:66.39,   gloves:0, towels:0, coupons:3},
+  {name:'PaulinaN',    loc:'Hayward',           calls:306,qty:172, dollars:18963.77, margin:62.19,conv:56.22, upt:1.72, asp:108.14,  gloves:1, towels:0, coupons:0},
   {name:'TerenceR',    loc:'Field',             calls:0,  qty:0,   dollars:0.00,     margin:0.00, conv:0.00,  upt:0,    asp:0,       gloves:0, towels:0, coupons:0},
-  {name:'ZulemaA',     loc:'Hayward',           calls:270,qty:400, dollars:34252.39, margin:61.93,conv:45.70, upt:1.67, asp:90.22,   gloves:0, towels:0, coupons:0},
+  {name:'ZulemaA',     loc:'Hayward',           calls:358,qty:464, dollars:37997.96, margin:62.99,conv:46.26, upt:1.66, asp:88.66,   gloves:0, towels:0, coupons:0},
 ];
 
 const periodTarget=DAILY_TARGET*DAYS;
