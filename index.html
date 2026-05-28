@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL &middot; Week 21 &middot; CSR Dashboard (Mon-Wed 5/18-5/20)</title>
+<title>COL &middot; Week 22 &middot; CSR Dashboard (Tue-Wed 5/26-5/27)</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -85,31 +85,11 @@
   .total-row td{background:#000!important;border-top:2px solid var(--cyan)!important;color:#fff;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.04em}
   .total-row .missed-dollars{color:#ff7070}
   .total-row .missed-spiff{color:#ffb74d}
+  .day-label{font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;background:#000;border-bottom:1px solid var(--border2);border-top:1px solid var(--border)}
+  .day-label:first-child{border-top:none}
   .footer{background:#000;padding:12px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-top:1px solid var(--border)}
   .footer-left{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.8}
   .footer-right{font-size:11px;color:var(--cyan);font-weight:600;font-family:'DM Mono',monospace}
-  .mtd-section{margin-bottom:28px}
-  .mtd-region{display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:stretch;margin-bottom:12px}
-  .mtd-region-label{display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;letter-spacing:.08em;color:var(--text);background:#000;border-radius:6px;border-left:3px solid var(--cyan);padding:0 8px;text-align:center}
-  .mtd-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px}
-  .mtd-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px 14px}
-  .mtd-card.total{background:#000;border-color:var(--cyan)}
-  .mtd-card-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:8px}
-  .mtd-loc{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;color:var(--text)}
-  .mtd-card.total .mtd-loc{color:var(--cyan)}
-  .mtd-pct{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;line-height:1}
-  .mtd-bar-bg{height:5px;background:var(--border2);border-radius:3px;overflow:hidden;margin-bottom:10px}
-  .mtd-bar-fill{height:100%;border-radius:3px}
-  .mtd-row{display:flex;justify-content:space-between;font-size:11px;line-height:1.6;font-family:'DM Mono',monospace}
-  .mtd-row .lbl{color:var(--text2);font-weight:500}
-  .mtd-row .val{color:var(--text);font-weight:700}
-  .mtd-divider{height:1px;background:var(--border);margin:6px 0}
-  .mtd-grand{background:linear-gradient(135deg,#000 0%,#0d1a22 100%);border:2px solid var(--cyan);border-radius:6px;padding:14px 18px;display:grid;grid-template-columns:auto 1fr auto auto auto auto;gap:18px;align-items:center;margin-top:6px}
-  .mtd-grand-label{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:.08em;color:var(--cyan)}
-  .mtd-grand-stat{display:flex;flex-direction:column;gap:2px;font-family:'DM Mono',monospace}
-  .mtd-grand-stat .lbl{font-size:9px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
-  .mtd-grand-stat .val{font-size:15px;color:#fff;font-weight:700}
-  .mtd-grand-pct{font-family:'DM Mono',monospace;font-weight:800;font-size:32px;line-height:1}
   @media print{body{background:#fff;color:#000}.top-bar,.footer{background:#000}}
 </style>
 </head>
@@ -128,12 +108,29 @@
     <div class="leg-item"><div class="leg-dot" style="background:#0F9E6E"></div>Conversion rate (25 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>UPT (15 pts)</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--muted)"></div>Calls &ge;80/day (5 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 3 days = $15,900/rep</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 2 days = $10,600/rep</div>
   </div>
-  <div class="section-label">Call Queue Performance &mdash; 3-Day Snapshot</div>
-  <div style="font-size:11px;color:var(--text2);margin:-4px 0 12px 13px;line-height:1.5;font-style:italic">
-    Calls route first to the regional queues (MoWest, NorCal, SoCal). Calls unanswered after 45 seconds overflow to the Global Overflow Queue (7800), which catches and answers most of them. The <span style="color:var(--cyan);font-weight:700;font-style:normal">NET INBOUND</span> row shows true net performance &mdash; abandoned only after both queues failed to pick up.
+  <div class="section-label">Call Queue Performance &mdash; 2-Day Snapshot (Tue 5/26 &ndash; Wed 5/27, Mon Holiday)</div>
+  <div style="font-size:11px;color:var(--text2);margin:-4px 0 8px 13px;line-height:1.5;font-style:italic">
+    Calls route first to regional queues (MoWest, NorCal, SoCal). Unanswered calls overflow after ~45 sec to the Global Overflow Queue (7800). The <span style="color:var(--cyan);font-weight:700;font-style:normal">NET INBOUND</span> row reflects true abandonment after both tiers. NorCal improved significantly from 65.6% &rarr; 85.0% service rate on Day 2.
   </div>
+  <div style="font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px 5px 13px;margin-bottom:4px">Per-Day Breakdown</div>
+  <div class="table-wrap" style="margin-bottom:14px">
+    <table style="font-size:12px">
+      <thead>
+        <tr>
+          <th>Date / Queue</th>
+          <th class="r">Received</th>
+          <th class="r">Answered</th>
+          <th class="r">Abandoned</th>
+          <th class="r">Aband. %</th>
+          <th class="r">Service Rate</th>
+        </tr>
+      </thead>
+      <tbody id="queue-daily-tbody"></tbody>
+    </table>
+  </div>
+  <div style="font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px 5px 13px;margin-bottom:4px">2-Day Combined</div>
   <div class="table-wrap">
     <table>
       <thead>
@@ -150,11 +147,6 @@
     </table>
   </div>
   <div id="summary-grid" class="summary-grid"></div>
-  <div class="section-label">Month-to-Date Sales to Plan &mdash; May 2026</div>
-  <div style="font-size:11px;color:var(--text2);margin:-4px 0 12px 13px;line-height:1.5;font-style:italic">
-    Location-level performance against May monthly plan. Daily Target = plan &divide; selling days. Daily Actual = most recent day's sales. Highlights whether each location is pacing on, ahead of, or behind plan.
-  </div>
-  <div class="mtd-section" id="mtd-section"></div>
   <div class="section-label">Rankings</div>
   <div class="table-wrap">
     <table>
@@ -209,30 +201,87 @@
 </div>
 <div class="footer">
   <div class="footer-left">
-    Exclusions: ApolonioA &middot; CynthiaP &middot; JoseA (outside sales) &middot; DylanB &middot; AndyL &middot; TerenceR (field / zero call activity)<br>Watch list: ManuelSe (53.1% discount rate, back on phones) &middot; DavidO (97 calls but net-negative dollars from returns &mdash; included with caveat)<br>
-    Scoring: percentile-based &middot; Dollars 30pt &middot; Margin 25pt &middot; Conv 25pt &middot; UPT 15pt &middot; Calls&ge;80/day 5pt &middot; Tier: A&ge;80% &middot; B&ge;60% &middot; C&ge;40% &middot; D&lt;40%<br>
-    Est. Missed Rev: rep's own conv rate &times; ASP &times; UPT applied to calls short of the 80-call threshold (80/day &times; 4 days) &middot; Snapshot: Mon-Wed May 18-20, 2026 (Day 3 of 5)
+    Exclusions: ApolonioA &middot; CynthiaP &middot; JoseA (outside sales) &middot; DylanB &middot; AndyL &middot; TerenceR (field / zero call activity)<br>
+    Watch list: ManuelSe (74.5% discount rate &mdash; escalating from Day 1&apos;s 65.2%, needs immediate review) &middot; ChristianH (36 calls over 2 days, well below 160-call threshold)<br>
+    Add-on standouts: MarioGO (12 gloves) &middot; ArturoS (7 towels) &middot; FrankieL (3 gloves) &middot; KeinaJ (1 glove) &middot; DavidO (1 towel)<br>
+    Scoring: percentile-based &middot; Dollars 30pt &middot; Margin 25pt &middot; Conv 25pt &middot; UPT 15pt &middot; Calls&ge;160/2d 5pt &middot; Tier: A&ge;80% &middot; B&ge;60% &middot; C&ge;40% &middot; D&lt;40%<br>
+    Est. Missed Rev: rep&apos;s conv rate &times; ASP &times; UPT applied to calls short of the 160-call threshold (80/day &times; 2 days) &middot; Snapshot: Tue-Wed May 26-27, 2026 (Day 2 of 4 &mdash; Mon 5/25 Memorial Day holiday)
   </div>
   <div class="footer-right" id="run-date"></div>
 </div>
 <script>
-const WEEK_LABEL='Week 21, 2026 \u00b7 Mon-Wed May 18-20 (Day 3 of 5)';
-const DAYS=3, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
+const WEEK_LABEL='Week 22, 2026 · Tue–Wed May 26–27 (Day 2 of 4, Mon holiday)';
+const DAYS=2, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
 
-const queueDataTotal=[
-  {name:'6190 MoWest Sales', rec:358,  ans:313,  un:45,  type:'regional'},
-  {name:'7100 NorCal Sales', rec:1329, ans:1263, un:66,  type:'regional'},
-  {name:'6650 SoCal Sales',  rec:1378, ans:1178, un:200, type:'regional'},
-  {name:'7800 Global Overflow Queue', rec:273, ans:260, un:13, type:'overflow'},
+// Per-day queue data
+const queueByDay=[
+  {date:'Tue May 26',queues:[
+    {name:'6190 MoWest Sales', rec:132,  ans:114, un:18,  type:'regional'},
+    {name:'6650 SoCal Sales',  rec:527,  ans:391, un:136, type:'regional'},
+    {name:'7100 NorCal Sales', rec:532,  ans:349, un:183, type:'regional'},
+    {name:'7800 Global Overflow', rec:311, ans:295, un:16, type:'overflow'},
+  ]},
+  {date:'Wed May 27',queues:[
+    {name:'6190 MoWest Sales', rec:117,  ans:109, un:8,   type:'regional'},
+    {name:'6650 SoCal Sales',  rec:457,  ans:401, un:56,  type:'regional'},
+    {name:'7100 NorCal Sales', rec:472,  ans:401, un:71,  type:'regional'},
+    {name:'7800 Global Overflow', rec:136, ans:133, un:3,  type:'overflow'},
+  ]},
 ];
+
+// 2-day combined totals
+const queueDataTotal=[
+  {name:'6190 MoWest Sales', rec:249,  ans:223, un:26,  type:'regional'},
+  {name:'7100 NorCal Sales', rec:1004, ans:750, un:254, type:'regional'},
+  {name:'6650 SoCal Sales',  rec:984,  ans:792, un:192, type:'regional'},
+  {name:'7800 Global Overflow Queue', rec:447, ans:428, un:19, type:'overflow'},
+];
+
 function svcColor(r){if(r>=.93)return'var(--green)';if(r>=.85)return'var(--amber)';return'var(--red)';}
 function unsColor(r){if(r<=.07)return'var(--green)';if(r<=.15)return'var(--amber)';return'var(--red)';}
+
+// Render per-day breakdown table
+(function(){
+  const tb=document.getElementById('queue-daily-tbody');
+  queueByDay.forEach(day=>{
+    // Day header row
+    const hdr=document.createElement('tr');
+    hdr.innerHTML=`<td colspan="6" style="padding:6px 10px;background:#0a0a0a;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border2)">${day.date}</td>`;
+    tb.appendChild(hdr);
+    // Regional queues
+    day.queues.filter(q=>q.type==='regional').forEach(q=>{
+      const svc=q.ans/q.rec, uns=q.un/q.rec;
+      const tr=document.createElement('tr');
+      tr.innerHTML=`
+        <td style="padding-left:22px;color:var(--text2);font-weight:500;font-size:12px">${q.name}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-size:12px">${q.rec.toLocaleString()}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-size:12px">${q.ans.toLocaleString()}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-size:12px">${q.un.toLocaleString()}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;font-size:12px;color:${unsColor(uns)}">${(uns*100).toFixed(1)}%</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;font-size:12px;color:${svcColor(svc)}">${(svc*100).toFixed(1)}%</td>`;
+      tb.appendChild(tr);
+    });
+    // Overflow row
+    const ov=day.queues.find(q=>q.type==='overflow');
+    if(ov){
+      const tr=document.createElement('tr');
+      tr.innerHTML=`
+        <td style="padding-left:22px;color:var(--cyan);font-weight:600;font-size:12px">${ov.name} <span style="font-size:9px;color:var(--muted);font-weight:400">(overflow)</span></td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text2)">${ov.rec.toLocaleString()}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text2)">${ov.ans.toLocaleString()}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text2)">${ov.un.toLocaleString()}</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;font-size:12px;color:${unsColor(ov.un/ov.rec)}">${((ov.un/ov.rec)*100).toFixed(1)}%</td>
+        <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;font-size:12px;color:${svcColor(ov.ans/ov.rec)}">${((ov.ans/ov.rec)*100).toFixed(1)}%</td>`;
+      tb.appendChild(tr);
+    }
+  });
+})();
+
+// Render combined queue table
 function renderQueueTable(tbodyId, queueData){
   const tb=document.getElementById(tbodyId);
   const regional=queueData.filter(q=>q.type==='regional');
   const overflow=queueData.filter(q=>q.type==='overflow')[0];
-
-  // Regional rows
   let rR=0,rA=0,rU=0;
   regional.forEach(q=>{
     rR+=q.rec;rA+=q.ans;rU+=q.un;
@@ -240,15 +289,13 @@ function renderQueueTable(tbodyId, queueData){
     const tr=document.createElement('tr');
     tr.innerHTML=`
       <td style="font-weight:700;color:var(--text)">${q.name}</td>
-      <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.rec.toLocaleString()}</td>
-      <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.ans.toLocaleString()}</td>
-      <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.un.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace">${q.rec.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace">${q.ans.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace">${q.un.toLocaleString()}</td>
       <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(uns)}">${(uns*100).toFixed(1)}%</td>
       <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(svc)}">${(svc*100).toFixed(1)}%</td>`;
     tb.appendChild(tr);
   });
-
-  // Regional subtotal (1st-touch performance)
   const sub=document.createElement('tr');
   sub.style.background='#0d0d0d';
   sub.style.borderTop='1px dashed var(--border2)';
@@ -261,25 +308,20 @@ function renderQueueTable(tbodyId, queueData){
     <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(subUns)}">${(subUns*100).toFixed(1)}%</td>
     <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(subSvc)}">${(subSvc*100).toFixed(1)}%</td>`;
   tb.appendChild(sub);
-
-  // Overflow row (recovery)
   const q=overflow;
-  const recovered=q.ans, dropped=rU-q.rec, recoveryPct=q.ans/rU;
   const ovr=document.createElement('tr');
   ovr.style.background='rgba(0,174,239,0.03)';
   ovr.innerHTML=`
     <td style="font-weight:700;color:var(--cyan)">${q.name} <span style="font-size:9px;color:var(--text2);font-weight:500;font-family:'DM Mono',monospace;letter-spacing:.04em;text-transform:uppercase;margin-left:4px">(overflow recovery)</span></td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)" title="Calls received from regional overflow">${q.rec.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.rec.toLocaleString()}</td>
     <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.ans.toLocaleString()}</td>
     <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.un.toLocaleString()}</td>
     <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(q.un/q.rec)}">${((q.un/q.rec)*100).toFixed(1)}%</td>
     <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(q.ans/q.rec)}">${((q.ans/q.rec)*100).toFixed(1)}%</td>`;
   tb.appendChild(ovr);
-
-  // Net inbound row (true performance)
-  const inbound=rR;                 // unique calls into the system
-  const netAns=rA+q.ans;            // answered at any tier
-  const netAband=inbound-netAns;    // truly lost (incl. dropped before reaching overflow)
+  const inbound=rR;
+  const netAns=rA+q.ans;
+  const netAband=inbound-netAns;
   const netSvc=netAns/inbound, netUns=netAband/inbound;
   const tot=document.createElement('tr');
   tot.className='total-row';
@@ -294,69 +336,6 @@ function renderQueueTable(tbodyId, queueData){
 }
 renderQueueTable('queue-tbody', queueDataTotal);
 
-const mtdData={
-  regions:[
-    {name:'NorCal', locs:[
-      {name:'Hayward',     plan:805127, actual:714891,  dailyTarget:64864, dailyActual:63535, pct:89.0},
-      {name:'Sacramento',  plan:186888, actual:178951,  dailyTarget:15166, dailyActual:17275, pct:96.0},
-      {name:'Eco',         plan:124177, actual:98187,   dailyTarget:9731,  dailyActual:7387,  pct:79.0},
-      {name:'Fresno',      plan:114925, actual:100110,  dailyTarget:9483,  dailyActual:10401, pct:87.0},
-    ], total:{name:'NorCal', plan:1231117, actual:1092139, dailyTarget:99244, dailyActual:98597, pct:88.7}},
-    {name:'SoCal', locs:[
-      {name:'Santa Fe Springs', plan:459317, actual:474458, dailyTarget:35468, dailyActual:52866, pct:103.0},
-      {name:'San Diego',        plan:338304, actual:267981, dailyTarget:30306, dailyActual:25805, pct:79.0},
-    ], total:{name:'SoCal', plan:797621, actual:742439, dailyTarget:65774, dailyActual:78672, pct:93.0}},
-    {name:'ABQ', locs:[
-      {name:'Albuquerque', plan:249882, actual:186592, dailyTarget:20116, dailyActual:18294, pct:75.0},
-    ], total:{name:'ABQ', plan:249882, actual:186592, dailyTarget:20116, dailyActual:18294, pct:75.0}},
-  ],
-  grand:{plan:2278619, actual:2021170, dailyTarget:185135, dailyActual:195563, pct:89.0},
-};
-function planColor(p){if(p>=100)return'var(--green)';if(p>=95)return'var(--cyan)';if(p>=85)return'var(--amber)';return'var(--red)';}
-function mtdFmt(n){return'$'+Math.round(n).toLocaleString();}
-function mtdDelta(actual,target){
-  const d=actual-target;
-  if(Math.abs(d)<1)return'<span style="color:var(--muted)">&mdash;</span>';
-  const c=d>=0?'var(--green)':'var(--red)';
-  const s=d>=0?'+':'-';
-  return `<span style="color:${c};font-weight:700">${s}${mtdFmt(Math.abs(d))}</span>`;
-}
-function renderMtdCard(loc,isTotal){
-  const col=planColor(loc.pct);
-  const barW=Math.min(loc.pct,100).toFixed(0);
-  const pctTxt=loc.pct%1===0?loc.pct.toFixed(0):loc.pct.toFixed(1);
-  return `<div class="mtd-card${isTotal?' total':''}">
-    <div class="mtd-card-head">
-      <div class="mtd-loc">${loc.name}${isTotal?' Total':''}</div>
-      <div class="mtd-pct" style="color:${col}">${pctTxt}%</div>
-    </div>
-    <div class="mtd-bar-bg"><div class="mtd-bar-fill" style="width:${barW}%;background:${col}"></div></div>
-    <div class="mtd-row"><span class="lbl">MTD Actual</span><span class="val">${mtdFmt(loc.actual)}</span></div>
-    <div class="mtd-row"><span class="lbl">Plan</span><span class="val">${mtdFmt(loc.plan)}</span></div>
-    <div class="mtd-divider"></div>
-    <div class="mtd-row"><span class="lbl">Daily Target</span><span class="val">${mtdFmt(loc.dailyTarget)}</span></div>
-    <div class="mtd-row"><span class="lbl">Daily Actual</span><span class="val">${mtdFmt(loc.dailyActual)}</span></div>
-    <div class="mtd-row"><span class="lbl">Day vs Tgt</span>${mtdDelta(loc.dailyActual,loc.dailyTarget)}</div>
-  </div>`;
-}
-const mtdEl=document.getElementById('mtd-section');
-mtdData.regions.forEach(r=>{
-  const cards=r.locs.map(l=>renderMtdCard(l,false)).join('')+renderMtdCard(r.total,true);
-  mtdEl.insertAdjacentHTML('beforeend',`<div class="mtd-region"><div class="mtd-region-label">${r.name}</div><div class="mtd-cards">${cards}</div></div>`);
-});
-const mtdG=mtdData.grand;
-const mtdGCol=planColor(mtdG.pct);
-const mtdGDelta=mtdG.dailyActual-mtdG.dailyTarget;
-mtdEl.insertAdjacentHTML('beforeend',`<div class="mtd-grand">
-  <div class="mtd-grand-label">ALL LOCATIONS</div>
-  <div class="mtd-grand-stat"><div class="lbl">Plan</div><div class="val">${mtdFmt(mtdG.plan)}</div></div>
-  <div class="mtd-grand-stat"><div class="lbl">MTD Actual</div><div class="val">${mtdFmt(mtdG.actual)}</div></div>
-  <div class="mtd-grand-stat"><div class="lbl">Daily Tgt</div><div class="val">${mtdFmt(mtdG.dailyTarget)}</div></div>
-  <div class="mtd-grand-stat"><div class="lbl">Daily Actual</div><div class="val" style="color:${mtdGDelta>=0?'var(--green)':'var(--red)'}">${mtdFmt(mtdG.dailyActual)}</div></div>
-  <div class="mtd-grand-pct" style="color:${mtdGCol}">${mtdG.pct.toFixed(0)}%</div>
-</div>`);
-
-
 const NAMES={
   MatthewO:'Matthew Oleal',IsaacG:'Isaac Gonzales',ArturoS:'Arturo Serrano',
   ChristianH:'Christian Henington',MarioGO:'Mario Gonzales',ZulemaA:'Zulema Anaya',
@@ -364,39 +343,39 @@ const NAMES={
   ManuelSe:'Manuel Serrano',OmarR:'Omar Reyes',CynthiaP:'Cynthia Puffelis',
   KeinaJ:'Keina Johnson',JacquelineS:'Jacqueline Sanchez',JoannaZ:'Joanna Zoreque',
   LuisP:'Luis Pedraza',IvanB:'Ivan B',ApolonioA:'Apolonio A',AndyL:'Andy L',JoseA:'Jose A',
-  TerenceR:'Terence R',DylanB:'Dylan B',EricL:'Eric L'
+  TerenceR:'Terence R',DylanB:'Dylan B'
 };
 const EXCLUDED=['ApolonioA','TerenceR','CynthiaP','DylanB','JoseA','AndyL'];
 
 const rawData=[
-  {name:'AndyL',       loc:'Field',             calls:0,  qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
-  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,  qty:122, dollars:7075.44,   margin:51.08, conv:99.17,  upt:1.02, asp:57.66,  disc:3191.33, discPct:52.14, gloves:0, towels:0, coupons:0},
-  {name:'ArturoS',     loc:'San Diego',         calls:160,qty:278, dollars:19593.93,  margin:55.45, conv:61.36,  upt:1.77, asp:67.72,  disc:5105.01, discPct:31.87, gloves:4, towels:7, coupons:0},
-  {name:'ChristianH',  loc:'Eco',               calls:281,qty:99,  dollars:11275.94,  margin:58.90, conv:62.26,  upt:1.47, asp:109.18, disc:844.00,  discPct:8.04,  gloves:1, towels:0, coupons:0},
-  {name:'CynthiaP',    loc:'Outside Sales',     calls:68, qty:165, dollars:10723.15,  margin:52.06, conv:68.66,  upt:2.33, asp:68.46,  disc:2455.89, discPct:25.31, gloves:2, towels:0, coupons:1},
-  {name:'DavidO',      loc:'San Diego',         calls:97, qty:-5,  dollars:-595.30,   margin:60.01, conv:30.99,  upt:1.33, asp:84.04,  disc:70.20,   discPct:48.55, gloves:0, towels:0, coupons:0},
-  {name:'DylanB',      loc:'Field',             calls:0,  qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
-  {name:'FrankieL',    loc:'Albuquerque',       calls:204,qty:153, dollars:15647.77,  margin:63.57, conv:51.06,  upt:1.90, asp:102.92, disc:2344.25, discPct:20.33, gloves:1, towels:0, coupons:0},
-  {name:'IsaacG',      loc:'Albuquerque',       calls:193,qty:118, dollars:11983.99,  margin:57.84, conv:48.03,  upt:1.52, asp:106.38, disc:3755.53, discPct:43.07, gloves:0, towels:0, coupons:0},
-  {name:'IvanB',       loc:'Santa Fe Springs',  calls:249,qty:200, dollars:16919.65,  margin:59.19, conv:43.88,  upt:1.47, asp:89.40,  disc:592.01,  discPct:10.55, gloves:1, towels:0, coupons:0},
-  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:332,qty:132, dollars:9726.59,   margin:52.44, conv:48.62,  upt:1.66, asp:79.07,  disc:1688.26, discPct:14.96, gloves:1, towels:0, coupons:1},
-  {name:'JoannaZ',     loc:'San Diego',         calls:187,qty:100, dollars:7700.98,   margin:56.06, conv:51.82,  upt:1.71, asp:77.18,  disc:1336.49, discPct:19.60, gloves:2, towels:0, coupons:0},
-  {name:'JoseA',       loc:'Outside Sales',     calls:0,  qty:0,   dollars:-10.88,    margin:0,     conv:0,      upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
-  {name:'KeinaJ',      loc:'Sacramento',        calls:56, qty:27,  dollars:1986.23,   margin:56.98, conv:61.11,  upt:1.63, asp:74.35,  disc:129.40,  discPct:5.75,  gloves:0, towels:0, coupons:0},
-  {name:'LuisP',       loc:'Hayward',           calls:275,qty:161, dollars:13586.88,  margin:59.34, conv:59.59,  upt:1.82, asp:95.22,  disc:1159.68, discPct:8.72,  gloves:1, towels:1, coupons:0},
-  {name:'ManuelSe',    loc:'Albuquerque',       calls:122,qty:89,  dollars:6058.05,   margin:55.43, conv:47.37,  upt:2.03, asp:68.73,  disc:2437.51, discPct:53.14, gloves:0, towels:0, coupons:0},
-  {name:'MarioGO',     loc:'Hayward',           calls:208,qty:145, dollars:11750.32,  margin:61.74, conv:46.09,  upt:1.24, asp:88.20,  disc:246.46,  discPct:5.39,  gloves:0, towels:-1,coupons:0},
-  {name:'MatthewO',    loc:'Eco',               calls:295,qty:255, dollars:21954.69,  margin:56.71, conv:61.95,  upt:1.71, asp:86.28,  disc:782.85,  discPct:6.44,  gloves:0, towels:0, coupons:0},
-  {name:'OmarR',       loc:'Santa Fe Springs',  calls:300,qty:250, dollars:19854.81,  margin:61.09, conv:48.80,  upt:1.53, asp:79.28,  disc:2203.86, discPct:20.04, gloves:0, towels:0, coupons:1},
-  {name:'PaulinaN',    loc:'Hayward',           calls:235,qty:136, dollars:12851.63,  margin:63.06, conv:53.04,  upt:1.63, asp:94.16,  disc:155.64,  discPct:1.81,  gloves:3, towels:3, coupons:0},
-  {name:'TerenceR',    loc:'Field',             calls:0,  qty:2,   dollars:239.35,    margin:52.82, conv:0,      upt:1.25, asp:78.80,  disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
-  {name:'ZulemaA',     loc:'Hayward',           calls:218,qty:236, dollars:20415.47,  margin:58.73, conv:53.23, upt:1.51, asp:93.34,   disc:1145.99, discPct:10.95, gloves:1, towels:1, coupons:0},
+  {name:'AndyL',       loc:'Field',             calls:0,   qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,       disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
+  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,   qty:61,  dollars:3671.75,   margin:55.05, conv:97.14,  upt:1.05, asp:58.62,   disc:2607.42, discPct:69.50, gloves:0, towels:0, coupons:0},
+  {name:'ArturoS',     loc:'San Diego',         calls:183, qty:153, dollars:10087.95,  margin:55.37, conv:57.77,  upt:1.75, asp:73.96,   disc:2103.43, discPct:18.47, gloves:0, towels:7, coupons:0},
+  {name:'ChristianH',  loc:'Eco',               calls:36,  qty:49,  dollars:3495.91,   margin:59.93, conv:70.83,  upt:1.6,  asp:92.73,   disc:82.68,   discPct:5.27,  gloves:0, towels:0, coupons:0},
+  {name:'CynthiaP',    loc:'Outside Sales',     calls:0,   qty:100, dollars:5107.07,   margin:50.63, conv:81.63,  upt:4.21, asp:58.87,   disc:1389.24, discPct:27.12, gloves:0, towels:0, coupons:0},
+  {name:'DavidO',      loc:'San Diego',         calls:194, qty:84,  dollars:7364.25,   margin:54.97, conv:41.07,  upt:1.67, asp:83.31,   disc:601.39,  discPct:8.90,  gloves:0, towels:1, coupons:0},
+  {name:'DylanB',      loc:'Field',             calls:0,   qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,       disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
+  {name:'FrankieL',    loc:'Albuquerque',       calls:141, qty:105, dollars:11607.74,  margin:68.63, conv:55.88,  upt:1.85, asp:109.77,  disc:2005.39, discPct:19.40, gloves:3, towels:0, coupons:0},
+  {name:'IsaacG',      loc:'Albuquerque',       calls:132, qty:122, dollars:12280.43,  margin:60.46, conv:50.00,  upt:1.51, asp:120.93,  disc:3118.11, discPct:42.73, gloves:0, towels:0, coupons:0},
+  {name:'IvanB',       loc:'Santa Fe Springs',  calls:236, qty:200, dollars:16085.46,  margin:60.93, conv:58.39,  upt:1.68, asp:79.39,   disc:1151.42, discPct:15.69, gloves:0, towels:0, coupons:0},
+  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:226, qty:90,  dollars:7131.48,   margin:50.32, conv:45.78,  upt:1.57, asp:77,      disc:1143.46, discPct:24.64, gloves:0, towels:0, coupons:2},
+  {name:'JoannaZ',     loc:'San Diego',         calls:68,  qty:59,  dollars:3158.35,   margin:54.55, conv:36.96,  upt:2.83, asp:51.74,   disc:146.38,  discPct:17.34, gloves:0, towels:0, coupons:0},
+  {name:'JoseA',       loc:'Outside Sales',     calls:0,   qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,       disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
+  {name:'KeinaJ',      loc:'Sacramento',        calls:108, qty:63,  dollars:6252.42,   margin:57.96, conv:60.64,  upt:1.7,  asp:98.28,   disc:178.00,  discPct:3.21,  gloves:1, towels:0, coupons:0},
+  {name:'LuisP',       loc:'Hayward',           calls:123, qty:51,  dollars:6441.74,   margin:63.70, conv:71.19,  upt:1.44, asp:131.12,  disc:85.60,   discPct:3.75,  gloves:0, towels:0, coupons:0},
+  {name:'ManuelSe',    loc:'Albuquerque',       calls:131, qty:127, dollars:10198.96,  margin:56.65, conv:49.04,  upt:1.98, asp:76.57,   disc:4976.45, discPct:74.50, gloves:0, towels:0, coupons:0},
+  {name:'MarioGO',     loc:'Hayward',           calls:161, qty:108, dollars:10333.19,  margin:55.11, conv:50.56,  upt:1.68, asp:101.59,  disc:220.79,  discPct:5.55,  gloves:12,towels:0, coupons:0},
+  {name:'MatthewO',    loc:'Eco',               calls:333, qty:243, dollars:22151.01,  margin:57.49, conv:66.24,  upt:1.64, asp:94.5,    disc:1246.77, discPct:8.97,  gloves:1, towels:0, coupons:0},
+  {name:'OmarR',       loc:'Santa Fe Springs',  calls:233, qty:147, dollars:12289.24,  margin:46.80, conv:46.89,  upt:1.34, asp:91.46,   disc:682.98,  discPct:9.63,  gloves:0, towels:0, coupons:0},
+  {name:'PaulinaN',    loc:'Hayward',           calls:117, qty:97,  dollars:10343.98,  margin:65.44, conv:53.96,  upt:1.75, asp:102.61,  disc:53.00,   discPct:0.62,  gloves:0, towels:0, coupons:0},
+  {name:'TerenceR',    loc:'Field',             calls:0,   qty:14,  dollars:627.52,    margin:72.32, conv:0,      upt:2.29, asp:48.11,   disc:0,       discPct:0,     gloves:0, towels:0, coupons:0},
+  {name:'ZulemaA',     loc:'Hayward',           calls:67,  qty:57,  dollars:3089.76,   margin:60.80, conv:56.86,  upt:1.2,  asp:81.76,   disc:11.57,   discPct:4.97,  gloves:0, towels:0, coupons:0},
 ];
 
 const periodTarget=DAILY_TARGET*DAYS;
 const callTarget=CALL_MIN*DAYS;
 
-document.getElementById('subtitle').textContent=WEEK_LABEL+' \u00b7 '+DAYS+' days \u00b7 Target: $'+periodTarget.toLocaleString()+'/rep';
+document.getElementById('subtitle').textContent=WEEK_LABEL+' · '+DAYS+' days · Target: $'+periodTarget.toLocaleString()+'/rep';
 document.getElementById('run-date').textContent='Generated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
 
 const active=rawData.filter(r=>!EXCLUDED.includes(r.name)&&r.calls>0&&r.conv>0);
@@ -448,6 +427,7 @@ scored.forEach((r,i)=>{
   const mCol=r.margin>=60?'var(--green)':r.margin>=52?'var(--text)':'var(--red)';
   const cCol=r.conv>=60?'var(--green)':r.conv>=50?'var(--text)':'var(--red)';
   const missedD=r.estMissedRev>0?`<span class="opp-val">${fmt$(r.estMissedRev)}</span>`:'<span class="opp-zero">&mdash;</span>';
+  const discDisplay=r.discPct<=0?'<span class="calls-na">&mdash;</span>':`<span style="font-family:\'DM Mono\',monospace;font-weight:700;color:${r.discPct<=10?'var(--green)':r.discPct<=20?'var(--text)':r.discPct<=30?'var(--amber)':'var(--red)'}">${r.discPct.toFixed(1)}%</span>`;
   const tr=document.createElement('tr');
   tr.innerHTML=`
     <td>${rank}</td>
@@ -460,7 +440,7 @@ scored.forEach((r,i)=>{
     <td class="r" style="color:${mCol};font-weight:700;font-family:'DM Mono',monospace">${r.margin.toFixed(1)}%</td>
     <td class="r" style="color:${cCol};font-weight:700;font-family:'DM Mono',monospace">${r.conv.toFixed(1)}%</td>
     <td class="r" style="color:var(--text);font-weight:700;font-family:'DM Mono',monospace">${r.upt.toFixed(2)}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${r.discPct<=10?'var(--green)':r.discPct<=20?'var(--text)':r.discPct<=30?'var(--amber)':'var(--red)'}">${r.discPct>0?r.discPct.toFixed(1)+'%':'<span class=\"calls-na\">&mdash;</span>'}</td>
+    <td class="r">${discDisplay}</td>
     <td class="r">${callsD}</td>
     <td class="r">${missedD}</td>
     <td class="r"><span class="badge ${tc}">${tl}</span></td>
