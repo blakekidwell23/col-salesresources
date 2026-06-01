@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COL &middot; Week 23 &middot; CSR Dashboard (Mon-Fri 5/25-5/29)</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f0f0f;--surface:#161616;--card:#1c1c1c;--card2:#191919;--border:#272727;--border2:#2f2f2f;
+    --cyan:#00AEEF;--cyan-dim:rgba(0,174,239,.10);--cyan-glow:rgba(0,174,239,.22);
+    --text:#efefef;--text2:#d0d0d0;--muted:#888888;
+    --green:#4caf7d;--green-bg:rgba(76,175,90,.12);
+    --red:#e05252;--red-bg:rgba(224,82,82,.12);
+    --amber:#f0a030;--amber-bg:rgba(240,160,48,.10);--gold:#FFD700;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
+  .top-bar{background:#000;padding:0 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:3px solid var(--cyan);min-height:80px}
+  .brand{color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;letter-spacing:.08em}
+  .top-right{text-align:right}
+  .scorecard-title{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .scorecard-sub{color:var(--cyan);font-family:'DM Mono',monospace;font-size:11px;margin-top:3px}
+  .body{padding:24px 28px 48px}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface);border-radius:6px;border-left:3px solid var(--cyan)}
+  .leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);font-weight:500}
+  .leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+  .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:28px}
+  .metric-card{background:#000;border-radius:6px;padding:14px 16px;border-bottom:3px solid var(--cyan)}
+  .metric-label{font-size:10px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+  .metric-val{font-size:22px;font-weight:700;color:#fff;font-family:'Barlow Condensed',sans-serif;line-height:1.1}
+  .metric-sub{font-size:10px;margin-top:4px;font-weight:600}
+  .section-label{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.12em;text-transform:uppercase;margin:24px 0 10px;padding-left:10px;border-left:3px solid var(--cyan)}
+  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:6px;margin-bottom:28px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  thead{background:#000}
+  thead th{font-size:10px;font-weight:700;color:var(--cyan);text-align:left;padding:10px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border)}
+  thead th.r{text-align:right}
+  tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+  tbody tr:last-child{border-bottom:none}
+  tbody tr:nth-child(even){background:var(--card2)}
+  tbody tr:hover{background:rgba(0,174,239,.05)}
+  td{padding:9px 10px;vertical-align:middle;color:var(--text);font-weight:600}
+  td.r{text-align:right}
+  td.dim{color:var(--text2);font-weight:400}
+  .name-cell{display:flex;align-items:center;gap:9px}
+  .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;border:1.5px solid var(--cyan);background:#000;color:var(--cyan);font-family:'Barlow Condensed',sans-serif;letter-spacing:.03em}
+  .rep-name{font-weight:700;font-size:13px;color:var(--text)}
+  .rep-location{font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;margin-top:1px;font-weight:500}
+  .score-bar-wrap{display:flex;align-items:center;gap:7px;min-width:100px}
+  .score-bar-bg{flex:1;height:6px;background:var(--border2);border-radius:3px;overflow:hidden}
+  .score-bar-fill{height:100%;border-radius:3px;background:var(--cyan)}
+  .score-num{font-size:13px;font-weight:700;min-width:26px;text-align:right;color:#fff;font-family:'DM Mono',monospace}
+  .badge{display:inline-block;font-size:10px;padding:3px 8px;border-radius:4px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em}
+  .badge-gold{background:#000;color:var(--gold);border:1px solid var(--gold)}
+  .badge-silver{background:#000;color:#C0C0C0;border:1px solid #C0C0C0}
+  .badge-bronze{background:#000;color:#CD7F32;border:1px solid #CD7F32}
+  .tier-a{background:#000;color:var(--cyan);border:1px solid var(--cyan)}
+  .tier-b{background:var(--green-bg);color:#6ed69a;border:1px solid rgba(76,175,90,.3)}
+  .tier-c{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(240,160,48,.3)}
+  .tier-d{background:var(--red-bg);color:var(--red);border:1px solid rgba(224,82,82,.3)}
+  .calls-ok{color:var(--green);font-weight:700}
+  .calls-low{color:var(--red);font-weight:700}
+  .calls-na{color:var(--muted)}
+  .pill-met{background:#000;color:var(--cyan);font-size:9px;padding:1px 6px;border-radius:20px;font-weight:700;border:1px solid var(--cyan);margin-left:3px}
+  .pill-miss{background:var(--red-bg);color:var(--red);font-size:9px;padding:1px 6px;border-radius:20px;font-weight:700;border:1px solid rgba(224,82,82,.4);margin-left:3px}
+  .vs-above{color:var(--green);font-weight:700}
+  .vs-below{color:var(--red);font-weight:700}
+  .goal-bar-wrap{display:flex;align-items:center;gap:6px;min-width:90px}
+  .goal-bar-bg{flex:1;height:5px;background:var(--border2);border-radius:3px;overflow:hidden}
+  .goal-bar-good{height:100%;border-radius:3px;background:var(--green)}
+  .goal-bar-bad{height:100%;border-radius:3px;background:var(--red)}
+  .total-row{background:#0a0a0a!important;border-top:2px solid var(--cyan)!important}
+  .total-row td{color:#fff;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.04em}
+  .addon-section{background:var(--surface);border-radius:6px;border:1px solid var(--border);padding:16px;margin-bottom:28px}
+  .addon-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+  .addon-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.10em}
+  .goal-pill{font-size:10px;color:var(--cyan);font-family:'DM Mono',monospace;background:var(--cyan-dim);padding:3px 10px;border-radius:20px;border:1px solid var(--cyan-glow)}
+  .addon-hit{color:var(--green);font-weight:700;font-family:'DM Mono',monospace}
+  .addon-miss{color:var(--red);font-weight:700;font-family:'DM Mono',monospace}
+  .addon-none{color:var(--muted)}
+  .on-target{color:var(--green);font-weight:700}
+  .missed-dollars{color:var(--red);font-weight:700;font-family:'DM Mono',monospace}
+  .missed-spiff{color:var(--amber);font-weight:700;font-family:'DM Mono',monospace}
+  .opp-val{color:var(--amber);font-weight:700;font-family:'DM Mono',monospace}
+  .opp-zero{color:var(--muted)}
+  .footer{background:#000;border-top:1px solid var(--border);padding:16px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .footer-left{font-size:10.5px;color:var(--muted);line-height:1.7;font-family:'DM Mono',monospace}
+  .footer-right{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div class="brand">COL INSIDE SALES</div>
+  <div class="top-right">
+    <div class="scorecard-title">CSR Performance Dashboard &mdash; Week 23</div>
+    <div class="scorecard-sub" id="subtitle"></div>
+    <div class="scorecard-sub" id="run-date" style="color:var(--muted);margin-top:2px"></div>
+  </div>
+</div>
+<div class="body">
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--cyan)"></div>Dollars sold (30 pts)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Margin % (25 pts)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#0F9E6E"></div>Conversion rate (25 pts)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>UPT (15 pts)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--muted)"></div>Calls &ge;80/day (5 pts)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 4 days = $21,200/rep</div>
+  </div>
+
+  <!-- CALL QUEUE SUMMARY -->
+  <div class="section-label">Call Queue Performance &mdash; 4-Day Summary (Tue 5/26 &ndash; Fri 5/29, Mon 5/25 Memorial Day)</div>
+  <div style="font-size:11px;color:var(--text2);margin:-4px 0 8px 13px;line-height:1.5;font-style:italic">
+    Calls route first to regional queues (MoWest, NorCal, SoCal). Unanswered calls overflow after ~45 sec to the Global Overflow Queue (7800). The <span style="color:var(--cyan);font-weight:700;font-style:normal">NET INBOUND</span> row reflects true abandonment after both tiers. NorCal trend: 65.6% &rarr; 85.0% &rarr; 90.7% &rarr; 89.9%. SoCal trend: 74.2% &rarr; 87.7% &rarr; 84.9% &rarr; 82.7%. MoWest consistently strong all four days.
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Queue</th>
+          <th class="r">Received</th>
+          <th class="r">Answered</th>
+          <th class="r">Abandoned</th>
+          <th class="r">Aband. %</th>
+          <th class="r">Service Rate</th>
+        </tr>
+      </thead>
+      <tbody id="queue-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- PERFORMANCE TO PLAN -->
+  <div class="section-label">Performance to Plan</div>
+  <div id="summary-grid" class="summary-grid"></div>
+
+  <!-- RANKINGS TABLE -->
+  <div class="section-label">Rankings</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Rep</th>
+          <th>Region</th>
+          <th class="r">Score</th>
+          <th class="r">$ Sold</th>
+          <th class="r">vs Target</th>
+          <th class="r">% of Target</th>
+          <th class="r">Margin</th>
+          <th class="r">Conv.</th>
+          <th class="r">UPT</th>
+          <th class="r">Disc %</th>
+          <th class="r">Calls</th>
+          <th class="r">Est. Missed Rev.</th>
+          <th class="r">Tier</th>
+          <th class="r">Add-On</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- ADD-ON PERFORMANCE -->
+  <div class="addon-section">
+    <div class="addon-header">
+      <span class="addon-title">Add-On Performance &mdash; Gloves, Towels &amp; Coupons</span>
+      <span class="goal-pill">Goal: 5% of orders &middot; $14/unit avg &middot; $1 spiff/unit</span>
+    </div>
+    <div class="table-wrap" style="margin-bottom:0;border:none">
+      <table style="font-size:12px">
+        <thead>
+          <tr>
+            <th>Rep</th>
+            <th>Region</th>
+            <th class="r">Orders</th>
+            <th class="r">Gloves</th>
+            <th class="r">Towels</th>
+            <th class="r">Coupons</th>
+            <th class="r">Actual Units</th>
+            <th class="r">Add-On Rate</th>
+            <th class="r">Goal Units</th>
+            <th class="r">$ Missed</th>
+            <th class="r">Spiff Missed</th>
+          </tr>
+        </thead>
+        <tbody id="addon-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<div class="footer">
+  <div class="footer-left">
+    Exclusions: ApolonioA &middot; CynthiaP &middot; JoseA (outside sales) &middot; DylanB &middot; AndyL &middot; TerenceR (field / zero or minimal call activity)<br>
+    Watch list: ManuelSe (66.6% discount rate &mdash; persistent issue, needs immediate review) &middot; IsaacG (36.9% discount rate) &middot; ChristianH (75 calls over 4 days, well below 320-call threshold)<br>
+    Add-on standouts: MarioGO (12 gloves) &middot; ArturoS (9 towels) &middot; FrankieL (3 gloves) &middot; JacquelineS (4 coupons) &middot; KeinaJ (1 glove) &middot; ManuelSe (1 glove &plus; 1 towel) &middot; ZulemaA (1 coupon) &middot; CynthiaP (2 coupons)<br>
+    Scoring: percentile-based &middot; Dollars 30pt &middot; Margin 25pt &middot; Conv 25pt &middot; UPT 15pt &middot; Calls&ge;320/4d 5pt &middot; Tier: A&ge;80% &middot; B&ge;60% &middot; C&ge;40% &middot; D&lt;40%<br>
+    Est. Missed Rev: rep&apos;s conv rate &times; ASP &times; UPT applied to calls short of the 320-call threshold (80/day &times; 4 days) &middot; Snapshot: Mon&ndash;Fri May 25&ndash;29, 2026 (4 working days &mdash; Mon 5/25 Memorial Day holiday)
+  </div>
+  <div class="footer-right" id="run-date2"></div>
+</div>
+<script>
+const WEEK_LABEL='Week 23, 2026 · Mon–Fri May 25–29 (4 working days, Mon holiday)';
+const DAYS=4, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
+
+// 4-day combined totals (5/26 + 5/27 + 5/28 + 5/29, Mon 5/25 holiday)
+const queueDataTotal=[
+  {name:'6190 MoWest Sales',        rec:484,  ans:446, un:38,  type:'regional'},
+  {name:'7100 NorCal Sales',         rec:1810, ans:1478,un:332, type:'regional'},
+  {name:'6650 SoCal Sales',         rec:1833, ans:1504,un:329, type:'regional'},
+  {name:'7800 Global Overflow Queue',rec:659,  ans:631, un:28,  type:'overflow'},
+];
+
+function svcColor(r){if(r>=.93)return'var(--green)';if(r>=.85)return'var(--amber)';return'var(--red)';}
+function unsColor(r){if(r<=.07)return'var(--green)';if(r<=.15)return'var(--amber)';return'var(--red)';}
+
+function renderQueueTable(tbodyId, queueData){
+  const tb=document.getElementById(tbodyId);
+  const regional=queueData.filter(q=>q.type==='regional');
+  const overflow=queueData.filter(q=>q.type==='overflow')[0];
+  let rR=0,rA=0,rU=0;
+  regional.forEach(q=>{
+    rR+=q.rec;rA+=q.ans;rU+=q.un;
+    const svc=q.ans/q.rec, uns=q.un/q.rec;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
+      <td style="font-weight:700;color:var(--text)">${q.name}</td>
+      <td class="r" style="font-family:'DM Mono',monospace">${q.rec.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace">${q.ans.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace">${q.un.toLocaleString()}</td>
+      <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(uns)}">${(uns*100).toFixed(1)}%</td>
+      <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(svc)}">${(svc*100).toFixed(1)}%</td>`;
+    tb.appendChild(tr);
+  });
+  const sub=document.createElement('tr');
+  sub.style.background='#0d0d0d';
+  sub.style.borderTop='1px dashed var(--border2)';
+  const subSvc=rA/rR, subUns=rU/rR;
+  sub.innerHTML=`
+    <td style="font-weight:700;color:var(--text2);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em">Regional 1st-Touch</td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text2);font-weight:700">${rR.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text2);font-weight:700">${rA.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text2);font-weight:700">${rU.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(subUns)}">${(subUns*100).toFixed(1)}%</td>
+    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(subSvc)}">${(subSvc*100).toFixed(1)}%</td>`;
+  tb.appendChild(sub);
+  const q=overflow;
+  const ovr=document.createElement('tr');
+  ovr.style.background='rgba(0,174,239,0.03)';
+  ovr.innerHTML=`
+    <td style="font-weight:700;color:var(--cyan)">${q.name} <span style="font-size:9px;color:var(--text2);font-weight:500;font-family:'DM Mono',monospace;letter-spacing:.04em;text-transform:uppercase;margin-left:4px">(overflow recovery)</span></td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.rec.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.ans.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.un.toLocaleString()}</td>
+    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(q.un/q.rec)}">${((q.un/q.rec)*100).toFixed(1)}%</td>
+    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(q.ans/q.rec)}">${((q.ans/q.rec)*100).toFixed(1)}%</td>`;
+  tb.appendChild(ovr);
+  const inbound=rR;
+  const netAns=rA+q.ans;
+  const netAband=inbound-netAns;
+  const netSvc=netAns/inbound, netUns=netAband/inbound;
+  const tot=document.createElement('tr');
+  tot.className='total-row';
+  tot.innerHTML=`
+    <td>NET INBOUND <span style="font-size:9px;color:var(--text2);font-weight:500;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-left:4px">(true performance)</span></td>
+    <td class="r">${inbound.toLocaleString()}</td>
+    <td class="r">${netAns.toLocaleString()}</td>
+    <td class="r">${netAband.toLocaleString()}</td>
+    <td class="r">${(netUns*100).toFixed(1)}%</td>
+    <td class="r">${(netSvc*100).toFixed(1)}%</td>`;
+  tb.appendChild(tot);
+}
+renderQueueTable('queue-tbody', queueDataTotal);
+
+const NAMES={
+  MatthewO:'Matthew Oleal',IsaacG:'Isaac Gonzales',ArturoS:'Arturo Serrano',
+  ChristianH:'Christian Henington',MarioGO:'Mario Gonzales',ZulemaA:'Zulema Anaya',
+  FrankieL:'Frankie Lucero',PaulinaN:'Paulina Navarro',DavidO:'David Ontiveros',
+  ManuelSe:'Manuel Serrano',OmarR:'Omar Reyes',CynthiaP:'Cynthia Puffelis',
+  KeinaJ:'Keina Johnson',JacquelineS:'Jacqueline Sanchez',JoannaZ:'Joanna Zoreque',
+  LuisP:'Luis Pedraza',IvanB:'Ivan B',ApolonioA:'Apolonio A',AndyL:'Andy L',JoseA:'Jose A',
+  TerenceR:'Terence R',DylanB:'Dylan B'
+};
+const EXCLUDED=['ApolonioA','TerenceR','CynthiaP','DylanB','JoseA','AndyL'];
+
+const rawData=[
+  {name:'ArturoS',     loc:'San Diego',         calls:321, qty:277, dollars:18311.30, margin:54.69, conv:57.22, upt:1.70, asp:72.82,  disc:4528.43, discPct:20.88, gloves:0,  towels:9, coupons:0},
+  {name:'ChristianH',  loc:'Eco',               calls:75,  qty:47,  dollars:2683.94,  margin:61.16, conv:67.44, upt:1.90, asp:107.73, disc:207.72,  discPct:5.72,  gloves:0,  towels:0, coupons:0},
+  {name:'CynthiaP',    loc:'Outside Sales',     calls:21,  qty:219, dollars:12572.67, margin:48.19, conv:78.18, upt:3.49, asp:62.41,  disc:3665.95, discPct:25.88, gloves:0,  towels:0, coupons:2},
+  {name:'DavidO',      loc:'San Diego',         calls:316, qty:151, dollars:12078.68, margin:56.67, conv:44.12, upt:1.63, asp:79.46,  disc:1339.80, discPct:10.14, gloves:0,  towels:1, coupons:0},
+  {name:'FrankieL',    loc:'Albuquerque',       calls:244, qty:172, dollars:20024.30, margin:65.95, conv:58.14, upt:1.74, asp:117.81, disc:3595.44, discPct:18.33, gloves:3,  towels:0, coupons:0},
+  {name:'IsaacG',      loc:'Albuquerque',       calls:253, qty:216, dollars:21641.40, margin:56.45, conv:47.25, upt:1.54, asp:121.47, disc:5470.27, discPct:36.87, gloves:0,  towels:0, coupons:0},
+  {name:'IvanB',       loc:'Santa Fe Springs',  calls:430, qty:329, dollars:26686.24, margin:59.78, conv:56.77, upt:1.56, asp:85.14,  disc:2243.74, discPct:13.78, gloves:0,  towels:0, coupons:0},
+  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:304, qty:186, dollars:12965.94, margin:51.65, conv:50.87, upt:1.65, asp:77.15,  disc:2372.30, discPct:17.99, gloves:0,  towels:0, coupons:4},
+  {name:'JoannaZ',     loc:'San Diego',         calls:194, qty:104, dollars:6407.01,  margin:53.70, conv:41.54, upt:2.10, asp:60.82,  disc:454.02,  discPct:12.24, gloves:0,  towels:0, coupons:0},
+  {name:'KeinaJ',      loc:'Sacramento',        calls:205, qty:126, dollars:13693.33, margin:58.78, conv:62.28, upt:1.54, asp:107.64, disc:1278.97, discPct:9.13,  gloves:1,  towels:0, coupons:0},
+  {name:'LuisP',       loc:'Hayward',           calls:359, qty:250, dollars:24664.91, margin:62.62, conv:69.26, upt:1.66, asp:102.87, disc:1816.19, discPct:8.72,  gloves:0,  towels:0, coupons:0},
+  {name:'ManuelSe',    loc:'Albuquerque',       calls:258, qty:219, dollars:17354.45, margin:57.44, conv:52.02, upt:1.78, asp:78.31,  disc:8657.11, discPct:66.58, gloves:1,  towels:1, coupons:0},
+  {name:'MarioGO',     loc:'Hayward',           calls:304, qty:180, dollars:15328.53, margin:58.90, conv:52.15, upt:1.54, asp:109.54, disc:270.23,  discPct:2.75,  gloves:12, towels:0, coupons:0},
+  {name:'MatthewO',    loc:'Eco',               calls:563, qty:462, dollars:39134.23, margin:58.08, conv:68.35, upt:1.66, asp:88.48,  disc:3267.76, discPct:10.26, gloves:1,  towels:0, coupons:0},
+  {name:'OmarR',       loc:'Santa Fe Springs',  calls:382, qty:312, dollars:26260.83, margin:51.19, conv:46.80, upt:1.54, asp:85.46,  disc:1505.59, discPct:9.07,  gloves:0,  towels:0, coupons:0},
+  {name:'PaulinaN',    loc:'Hayward',           calls:190, qty:179, dollars:17196.66, margin:64.73, conv:55.67, upt:1.72, asp:102.99, disc:966.72,  discPct:5.05,  gloves:0,  towels:0, coupons:0},
+  {name:'TerenceR',    loc:'Field',             calls:32,  qty:29,  dollars:1492.88,  margin:65.21, conv:56.00, upt:2.13, asp:52.87,  disc:80.87,   discPct:8.77,  gloves:0,  towels:0, coupons:0},
+  {name:'ZulemaA',     loc:'Hayward',           calls:159, qty:216, dollars:18968.77, margin:53.36, conv:54.63, upt:1.49, asp:108.11, disc:1126.40, discPct:12.07, gloves:0,  towels:0, coupons:1},
+  {name:'AndyL',       loc:'Field',             calls:0,   qty:0,   dollars:0,        margin:0,     conv:0,     upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
+  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,   qty:0,   dollars:0,        margin:0,     conv:0,     upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
+  {name:'DylanB',      loc:'Field',             calls:0,   qty:0,   dollars:0,        margin:0,     conv:0,     upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
+  {name:'JoseA',       loc:'Outside Sales',     calls:0,   qty:0,   dollars:0,        margin:0,     conv:0,     upt:0,    asp:0,      disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
+];
+
+const periodTarget=DAILY_TARGET*DAYS;
+const callTarget=CALL_MIN*DAYS;
+
+document.getElementById('subtitle').textContent=WEEK_LABEL+' · Target: $'+periodTarget.toLocaleString()+'/rep';
+document.getElementById('run-date').textContent='Generated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+document.getElementById('run-date2').textContent='Generated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+
+const active=rawData.filter(r=>!EXCLUDED.includes(r.name)&&r.calls>0&&r.conv>0);
+const teamAvgConv=active.reduce((s,r)=>s+r.conv,0)/active.length/100;
+const teamAvgASP=active.reduce((s,r)=>s+r.asp,0)/active.length;
+const teamAvgUPT=active.reduce((s,r)=>s+r.upt,0)/active.length;
+
+function pctScore(val,vals,max){const s=[...vals].sort((a,b)=>a-b);return Math.round((s.filter(v=>v<=val).length/s.length)*max);}
+const dV=active.map(r=>r.dollars),mV=active.map(r=>r.margin),cV=active.map(r=>r.conv),uV=active.map(r=>r.upt);
+
+const scored=active.map(r=>{
+  const actualUnits=r.gloves+r.towels+r.coupons;
+  const goalUnits=Math.ceil(r.qty*GOAL_RATE);
+  const shortfall=Math.max(0,goalUnits-actualUnits);
+  const addOnRate=r.qty>0?(actualUnits/r.qty)*100:0;
+  const total=pctScore(r.dollars,dV,30)+pctScore(r.margin,mV,25)+pctScore(r.conv,cV,25)+pctScore(r.upt,uV,15)+(r.calls>=callTarget?5:0);
+  const vsTarget=r.dollars-periodTarget;
+  const pctOfTarget=Math.min((r.dollars/periodTarget)*100,150);
+  let estMissedRev=0;
+  if(r.calls<callTarget){
+    const callsShort=callTarget-r.calls;
+    const repConv=r.conv>0?r.conv/100:teamAvgConv;
+    const repASP=r.asp>0?r.asp:teamAvgASP;
+    const repUPT=r.upt>0?r.upt:teamAvgUPT;
+    estMissedRev=Math.round(callsShort*repConv)*repASP*repUPT;
+  }
+  return{...r,total,actualUnits,goalUnits,shortfall,dollarsMissed:shortfall*AVG_PRICE,spiffMissed:shortfall*SPIFF,addOnRate,vsTarget,pctOfTarget,estMissedRev};
+}).sort((a,b)=>b.total-a.total);
+
+const maxScore=Math.max(...scored.map(r=>r.total));
+const totalOppRev=scored.reduce((s,r)=>s+r.estMissedRev,0);
+
+function fullName(k){return NAMES[k]||k;}
+function initials(k){const n=fullName(k).trim().split(/\s+/);return(n[0][0]+(n[1]?n[1][0]:'')).toUpperCase();}
+function tierBadge(score,max){const p=score/max;if(p>=.80)return['A','tier-a'];if(p>=.60)return['B','tier-b'];if(p>=.40)return['C','tier-c'];return['D','tier-d'];}
+function fmt$(n){return'$'+Math.round(n).toLocaleString();}
+
+const tbody=document.getElementById('tbody');
+scored.forEach((r,i)=>{
+  const pct=Math.round((r.total/maxScore)*100);
+  const[tl,tc]=tierBadge(r.total,maxScore);
+  const rank=i===0?'<span class="badge badge-gold">1st</span>':i===1?'<span class="badge badge-silver">2nd</span>':i===2?'<span class="badge badge-bronze">3rd</span>':`<span style="color:var(--text2);font-weight:700;font-size:13px">${i+1}</span>`;
+  const callsD=r.calls===0?'<span class="calls-na">&mdash;</span>':r.calls>=callTarget?`<span class="calls-ok">${r.calls}<span class="pill-met">&#10003;</span></span>`:`<span class="calls-low">${r.calls}<span class="pill-miss">miss</span></span>`;
+  const aoD=r.addOnRate===0?'<span class="addon-none">&mdash;</span>':r.addOnRate>=5?`<span class="addon-hit">${r.addOnRate.toFixed(1)}%</span>`:`<span class="addon-miss">${r.addOnRate.toFixed(1)}%</span>`;
+  const vsTargetD=r.vsTarget>=0?`<span class="vs-above">+${fmt$(r.vsTarget)}</span>`:`<span class="vs-below">-${fmt$(Math.abs(r.vsTarget))}</span>`;
+  const barClass=r.pctOfTarget>=100?'goal-bar-good':'goal-bar-bad';
+  const pctColor=r.pctOfTarget>=100?'var(--green)':'var(--red)';
+  const pctD=`<div class="goal-bar-wrap"><div class="goal-bar-bg"><div class="${barClass}" style="width:${Math.min(r.pctOfTarget,100).toFixed(0)}%"></div></div><span style="font-size:11px;font-weight:700;color:${pctColor};min-width:38px;text-align:right;font-family:'DM Mono',monospace">${r.pctOfTarget.toFixed(0)}%</span></div>`;
+  const mCol=r.margin>=60?'var(--green)':r.margin>=52?'var(--text)':'var(--red)';
+  const cCol=r.conv>=60?'var(--green)':r.conv>=50?'var(--text)':'var(--red)';
+  const missedD=r.estMissedRev>0?`<span class="opp-val">${fmt$(r.estMissedRev)}</span>`:'<span class="opp-zero">&mdash;</span>';
+  const discDisplay=r.discPct<=0?'<span class="calls-na">&mdash;</span>':`<span style="font-family:'DM Mono',monospace;font-weight:700;color:${r.discPct<=10?'var(--green)':r.discPct<=20?'var(--text)':r.discPct<=30?'var(--amber)':'var(--red)'}">${r.discPct.toFixed(1)}%</span>`;
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td>${rank}</td>
+    <td><div class="name-cell"><div class="avatar">${initials(r.name)}</div><div><div class="rep-name">${fullName(r.name)}</div><div class="rep-location">${r.loc}</div></div></div></td>
+    <td class="dim" style="font-size:11px;font-family:'DM Mono',monospace;white-space:nowrap">${r.loc}</td>
+    <td class="r"><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:${pct}%"></div></div><span class="score-num">${r.total}</span></div></td>
+    <td class="r" style="color:#fff;font-weight:700;font-family:'DM Mono',monospace">${fmt$(r.dollars)}</td>
+    <td class="r">${vsTargetD}</td>
+    <td class="r">${pctD}</td>
+    <td class="r" style="color:${mCol};font-weight:700;font-family:'DM Mono',monospace">${r.margin.toFixed(1)}%</td>
+    <td class="r" style="color:${cCol};font-weight:700;font-family:'DM Mono',monospace">${r.conv.toFixed(1)}%</td>
+    <td class="r" style="color:var(--text);font-weight:700;font-family:'DM Mono',monospace">${r.upt.toFixed(2)}</td>
+    <td class="r">${discDisplay}</td>
+    <td class="r">${callsD}</td>
+    <td class="r">${missedD}</td>
+    <td class="r"><span class="badge ${tc}">${tl}</span></td>
+    <td class="r">${aoD}</td>`;
+  tbody.appendChild(tr);
+});
+
+const aoSorted=[...scored].sort((a,b)=>b.addOnRate-a.addOnRate);
+const aoTbody=document.getElementById('addon-tbody');
+let tA=0,tG=0,tDM=0,tSM=0,tO=0;
+aoSorted.forEach(r=>{
+  tA+=r.actualUnits;tG+=r.goalUnits;tDM+=r.dollarsMissed;tSM+=r.spiffMissed;tO+=r.qty;
+  const ok=r.shortfall===0;
+  const tr=document.createElement('tr');
+  tr.innerHTML=`
+    <td style="font-weight:700;color:var(--text)">${fullName(r.name)}</td>
+    <td style="font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;font-weight:500">${r.loc}</td>
+    <td class="r" style="font-family:'DM Mono',monospace">${r.qty}</td>
+    <td class="r" style="font-family:'DM Mono',monospace">${r.gloves||'<span class="addon-none">&mdash;</span>'}</td>
+    <td class="r" style="font-family:'DM Mono',monospace">${r.towels||'<span class="addon-none">&mdash;</span>'}</td>
+    <td class="r" style="font-family:'DM Mono',monospace">${r.coupons||'<span class="addon-none">&mdash;</span>'}</td>
+    <td class="r" style="font-family:'DM Mono',monospace">${r.actualUnits||'<span class="addon-none">&mdash;</span>'}</td>
+    <td class="r">${r.addOnRate>0?`<span class="${r.addOnRate>=5?'addon-hit':'addon-miss'}">${r.addOnRate.toFixed(1)}%</span>`:'<span class="addon-none">&mdash;</span>'}</td>
+    <td class="r" style="font-family:'DM Mono',monospace">${r.goalUnits}</td>
+    <td class="r">${ok?'<span class="on-target">&mdash;</span>':`<span class="missed-dollars">-$${r.dollarsMissed.toLocaleString()}</span>`}</td>
+    <td class="r">${ok?'<span class="on-target">&mdash;</span>':`<span class="missed-spiff">-$${r.spiffMissed.toLocaleString()}</span>`}</td>`;
+  aoTbody.appendChild(tr);
+});
+const totRow=document.createElement('tr');
+totRow.className='total-row';
+totRow.innerHTML=`<td>Team Total</td><td></td><td class="r">${tO}</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r">${tA}</td><td class="r">${tO>0?((tA/tO)*100).toFixed(1)+'%':'&mdash;'}</td><td class="r">${tG}</td><td class="r"><span class="missed-dollars">-$${tDM.toLocaleString()}</span></td><td class="r"><span class="missed-spiff">-$${tSM.toLocaleString()}</span></td>`;
+aoTbody.appendChild(totRow);
+
+const totD=active.reduce((s,r)=>s+r.dollars,0);
+const teamTarget=periodTarget*active.length;
+const teamVsTarget=totD-teamTarget;
+const avgM=(active.reduce((s,r)=>s+r.margin,0)/active.length).toFixed(1);
+const avgC=(active.reduce((s,r)=>s+r.conv,0)/active.length).toFixed(1);
+const avgU=(active.reduce((s,r)=>s+r.upt,0)/active.length).toFixed(2);
+const metCalls=active.filter(r=>r.calls>=callTarget).length;
+const taoR=tO>0?((tA/tO)*100).toFixed(1):'0.0';
+const aboveTarget=scored.filter(r=>r.vsTarget>=0).length;
+
+document.getElementById('summary-grid').innerHTML=`
+  <div class="metric-card"><div class="metric-label">Total $ Sold</div><div class="metric-val">$${Math.round(totD).toLocaleString()}</div><div class="metric-sub" style="color:${teamVsTarget>=0?'var(--cyan)':'var(--red)'}">${teamVsTarget>=0?'+':'-'}$${Math.abs(Math.round(teamVsTarget)).toLocaleString()} vs team target</div></div>
+  <div class="metric-card"><div class="metric-label">Reps Above Target</div><div class="metric-val" style="color:${aboveTarget>=active.length/2?'var(--cyan)':'var(--red)'}">${aboveTarget} of ${active.length}</div><div class="metric-sub" style="color:var(--muted)">$${periodTarget.toLocaleString()} target/rep</div></div>
+  <div class="metric-card"><div class="metric-label">Avg Margin</div><div class="metric-val">${avgM}%</div></div>
+  <div class="metric-card"><div class="metric-label">Avg Conversion</div><div class="metric-val">${avgC}%</div></div>
+  <div class="metric-card"><div class="metric-label">Avg UPT</div><div class="metric-val">${avgU}</div></div>
+  <div class="metric-card"><div class="metric-label">Calls &ge;${callTarget} / ${DAYS}d</div><div class="metric-val" style="color:var(--cyan)">${metCalls} of ${active.length}</div></div>
+  <div class="metric-card"><div class="metric-label">Add-On Rate</div><div class="metric-val" style="color:${parseFloat(taoR)>=5?'var(--cyan)':'var(--red)'}">${taoR}%</div><div class="metric-sub" style="color:var(--muted)">goal: 5.0%</div></div>
+  <div class="metric-card"><div class="metric-label">Est. Rev Missed</div><div class="metric-val" style="color:var(--amber)">${fmt$(totalOppRev)}</div><div class="metric-sub" style="color:var(--muted)">call volume gap</div></div>`;
+</script>
+</body>
+</html>
