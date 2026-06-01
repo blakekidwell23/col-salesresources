@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bounty — Sales Team Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f5f5; color: #222; }
+
+  .header {
+    background: linear-gradient(135deg, #1a3a1a 0%, #2d5a2d 50%, #1a3a1a 100%);
+    color: #fff;
+    padding: 32px 40px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .header h1 { font-size: 2.4rem; font-weight: 900; letter-spacing: 3px; text-shadow: 1px 2px 6px rgba(0,0,0,0.4); }
+  .header .tagline { font-size: 1rem; opacity: 0.85; margin-top: 4px; font-style: italic; }
+  .header .sub { font-size: 0.8rem; opacity: 0.7; margin-top: 2px; }
+  .header .prize-stack { display: flex; gap: 10px; }
+  .prize-chip {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 8px;
+    padding: 8px 14px;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .prize-chip span { display: block; font-size: 1.3rem; font-weight: 900; color: #FFD700; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 28px 24px; }
+
+  .intro-box {
+    background: #fff;
+    border-left: 6px solid #2d5a2d;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .intro-box strong { color: #2d5a2d; }
+
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+
+  /* Prize cards */
+  .prizes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 8px; }
+  .prize-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    text-align: center;
+    border-top: 5px solid;
+  }
+  .prize-card.gold { border-color: #FFD700; }
+  .prize-card.silver { border-color: #C0C0C0; }
+  .prize-card.bronze { border-color: #CD7F32; }
+  .prize-card.spiff { border-color: #2d5a2d; }
+  .prize-card .place { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+  .prize-card .amount { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+  .gold .amount { color: #B8860B; }
+  .silver .amount { color: #909090; }
+  .bronze .amount { color: #A0522D; }
+  .spiff .amount { font-size: 1.6rem; color: #2d5a2d; }
+  .prize-card .desc { font-size: 0.78rem; color: #666; margin-top: 8px; line-height: 1.4; }
+
+  /* Activity bar */
+  .activity-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 8px;
+  }
+  .activity-box h3 { font-size: 0.95rem; font-weight: 700; color: #2d5a2d; margin-bottom: 14px; }
+  .activity-row { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .activity-label { font-size: 0.82rem; color: #555; width: 140px; flex-shrink: 0; }
+  .activity-bar-bg { flex: 1; height: 18px; background: #eee; border-radius: 9px; overflow: hidden; }
+  .activity-bar-fill { height: 100%; border-radius: 9px; background: #2d5a2d; }
+  .activity-val { font-size: 0.82rem; font-weight: 700; color: #333; width: 80px; text-align: right; }
+
+  /* Info grid */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .info-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .info-card h3 { font-size: 0.95rem; font-weight: 700; color: #2d5a2d; margin-bottom: 10px; }
+  .info-card ul { list-style: none; padding: 0; }
+  .info-card ul li {
+    font-size: 0.87rem;
+    color: #444;
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.5;
+    display: flex;
+    gap: 8px;
+  }
+  .info-card ul li:last-child { border-bottom: none; }
+  .info-card ul li::before { content: "›"; color: #2d5a2d; font-weight: 700; flex-shrink: 0; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .step {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+  .step .num {
+    width: 30px; height: 30px; background: #2d5a2d; color: #fff;
+    border-radius: 50%; font-weight: 800; font-size: 0.95rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 8px;
+  }
+  .step p { font-size: 0.8rem; color: #444; line-height: 1.5; }
+
+  /* Outcome codes */
+  .codes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .code-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .code-tag {
+    background: #1a3a1a;
+    color: #FFD700;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 3px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .code-card .code-desc { font-size: 0.8rem; color: #444; line-height: 1.4; }
+
+  /* FAQ */
+  .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .faq-item { background: #fff; border-radius: 10px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .faq-item .q { font-size: 0.85rem; font-weight: 700; color: #333; margin-bottom: 6px; }
+  .faq-item .a { font-size: 0.83rem; color: #555; line-height: 1.5; }
+
+  .footer {
+    background: #1a3a1a;
+    color: #aaa;
+    text-align: center;
+    padding: 14px;
+    font-size: 0.78rem;
+    margin-top: 32px;
+  }
+  .footer strong { color: #FFD700; }
+  .highlight { color: #2d5a2d; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="sub">COLLISION AUTO PARTS — INSIDE SALES CONTEST</div>
+    <h1>🏹 THE BOUNTY</h1>
+    <div class="tagline">You Reap What You Sow</div>
+    <div class="sub">May 2026 – December 31, 2026 &nbsp;·&nbsp; 18 Reps &nbsp;·&nbsp; 4,500 Dormant Accounts</div>
+  </div>
+  <div class="prize-stack">
+    <div class="prize-chip"><span>$2,500</span>1st Place</div>
+    <div class="prize-chip"><span>$1,000</span>2nd Place</div>
+    <div class="prize-chip"><span>$500</span>3rd Place</div>
+    <div class="prize-chip"><span>$20</span>Per Convert</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="intro-box">
+    <strong>What is The Bounty?</strong> You've been assigned <strong>250 dormant customers</strong> — shops that haven't ordered in 2026 and haven't gotten a quote in 180+ days. Your job is to call them, wake them up, and win them back. The rep who generates the most revenue from their list — while hitting the call activity minimum — wins the top prize. <strong>Every conversion also pays you a $20 spiff on the spot.</strong>
+  </div>
+
+  <div class="section-title">The Prize Structure</div>
+  <div class="prizes">
+    <div class="prize-card gold">
+      <div class="place">🥇 1st Place</div>
+      <div class="amount">$2,500</div>
+      <div class="desc">Most total bounty revenue generated. Must hit activity minimum to qualify.</div>
+    </div>
+    <div class="prize-card silver">
+      <div class="place">🥈 2nd Place</div>
+      <div class="amount">$1,000</div>
+      <div class="desc">Second most bounty revenue. Must hit activity minimum to qualify.</div>
+    </div>
+    <div class="prize-card bronze">
+      <div class="place">🥉 3rd Place</div>
+      <div class="amount">$500</div>
+      <div class="desc">Third most bounty revenue. Must hit activity minimum to qualify.</div>
+    </div>
+    <div class="prize-card spiff">
+      <div class="place">⚡ Per Conversion</div>
+      <div class="amount">$20 + $5</div>
+      <div class="desc"><strong>$20</strong> when a bounty account places their first 2026 order after your first logged call. <strong>$5 for every order after that</strong> through Dec 31.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Activity Requirement</div>
+  <div class="activity-box">
+    <h3>📞 You must log 1,280 calls by Dec 31 to qualify for year-end prizes (80% of target)</h3>
+    <div class="activity-row">
+      <div class="activity-label">Daily target</div>
+      <div class="activity-bar-bg"><div class="activity-bar-fill" style="width:40%"></div></div>
+      <div class="activity-val">~10 calls/day</div>
+    </div>
+    <div class="activity-row">
+      <div class="activity-label">Weekly target</div>
+      <div class="activity-bar-bg"><div class="activity-bar-fill" style="width:65%"></div></div>
+      <div class="activity-val">50 calls/week</div>
+    </div>
+    <div class="activity-row">
+      <div class="activity-label">Full program total</div>
+      <div class="activity-bar-bg"><div class="activity-bar-fill" style="width:100%"></div></div>
+      <div class="activity-val">1,600 calls</div>
+    </div>
+    <div class="activity-row">
+      <div class="activity-label">Minimum to qualify</div>
+      <div class="activity-bar-bg"><div class="activity-bar-fill" style="width:80%; background:#e67e22;"></div></div>
+      <div class="activity-val" style="color:#e67e22;">1,280 calls (80%)</div>
+    </div>
+  </div>
+
+  <div class="section-title">How It Works — Step by Step</div>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <p>Open the <strong>Bounty List</strong> tab. Filter to your name to see your 250 accounts.</p>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <p>Pick an account. Start with <strong>Tier 1 & 2</strong> — they have the most recent buying history.</p>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <p>Call the customer. Log it in <strong>HubSpot</strong>. Every logged call counts toward your activity total.</p>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <p>When they order, log it with outcome code <strong>ORDERED</strong> and the order # to trigger your <strong>$20 spiff</strong>.</p>
+    </div>
+    <div class="step">
+      <div class="num">5</div>
+      <p>Check the <strong>Leaderboard</strong> tab anytime to see your rank, call count, and revenue.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Your Account Tiers (Priority Order)</div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🔥 Tier 1 & 2 — Call First</h3>
+      <ul>
+        <li><strong>Tier 1:</strong> Had 2025 sales OR Anchor/Driver buying status — most likely to reactivate fast</li>
+        <li><strong>Tier 2:</strong> Had 2024 sales OR Explorer/Last Call status — still warm, good potential</li>
+        <li>These are your best shots at a quick conversion and a fast $20</li>
+        <li>Every rep has the same mix — the playing field is level</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>❄️ Tier 3, 4 & 5 — Work Through These</h3>
+      <ul>
+        <li><strong>Tier 3:</strong> Had 2023 sales OR max annual spend ≥ $5K — worth a call</li>
+        <li><strong>Tier 4:</strong> Some history but pre-2023 — longer shot but still counts</li>
+        <li><strong>Tier 5:</strong> No buying history — cold starts, but every call counts toward your activity minimum</li>
+        <li>Don't skip these — they still count toward 1,280</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Outcome Codes — Use These in HubSpot</div>
+  <div class="codes">
+    <div class="code-card"><div class="code-tag">LVM</div><div class="code-desc">Left a voicemail. Counts as a call.</div></div>
+    <div class="code-card"><div class="code-tag">NA</div><div class="code-desc">No answer, no voicemail. Counts as a call.</div></div>
+    <div class="code-card"><div class="code-tag">SPOKE</div><div class="code-desc">Had a real conversation. Add notes on what they said.</div></div>
+    <div class="code-card"><div class="code-tag">QUOTED</div><div class="code-desc">Sent a quote. They haven't ordered yet.</div></div>
+    <div class="code-card"><div class="code-tag">ORDERED</div><div class="code-desc">They ordered! Fill in Order # to get your $20 spiff.</div></div>
+    <div class="code-card"><div class="code-tag">CB</div><div class="code-desc">Call back later. Note the date/time in comments.</div></div>
+    <div class="code-card"><div class="code-tag">NOTINT</div><div class="code-desc">Not interested. Capture why in notes.</div></div>
+    <div class="code-card"><div class="code-tag">CLOSED</div><div class="code-desc">Out of business / no longer collision repair.</div></div>
+    <div class="code-card"><div class="code-tag">BAD#</div><div class="code-desc">Disconnected or wrong number. Flag for cleanup.</div></div>
+  </div>
+
+  <div class="section-title">The Rules</div>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="q">What counts as a "call"?</div>
+      <div class="a">Any logged entry in HubSpot. LVM, NA, SPOKE — they all count. No log entry = no credit. Don't backfill after the fact.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">How do I earn the $20 spiff?</div>
+      <div class="a">Your HubSpot call log entry must exist <em>before</em> the customer's invoice date. Log the call first, then they order — that's your $20. After that, $5 for every additional order they place through Dec 31.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">What if someone else takes an inbound from my account?</div>
+      <div class="a">That's normal customer service — serve them well. But it doesn't earn you the spiff and it doesn't earn the other rep the spiff either. The bounty list is locked by assignment.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">Do converted accounts stay on my list?</div>
+      <div class="a">Yes. Once a customer converts, they stay assigned to you for the rest of 2026. All their revenue counts toward your leaderboard total — so the earlier you convert them, the more revenue you accumulate.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">What if I'm out sick or on PTO?</div>
+      <div class="a">PTO and sick days are pro-rated out of your activity minimum. Let your manager know and they'll adjust your target accordingly.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">Is the list fair? Did someone get easier accounts?</div>
+      <div class="a">Yes — every rep has the same tier mix within their region. Accounts were snake-drafted by quality score to make sure no one got stacked with all cold leads. Check the Fairness Audit tab if you're curious.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>THE BOUNTY</strong> — Inside Sales Outbound Contest &nbsp;·&nbsp; Collision Auto Parts &nbsp;·&nbsp; May – December 2026 &nbsp;·&nbsp; Questions? See Blake.
+</div>
+
+</body>
+</html>

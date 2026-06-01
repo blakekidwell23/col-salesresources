@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Gold — Sales Team Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f5f5; color: #222; }
+
+  .header {
+    background: linear-gradient(135deg, #B8860B 0%, #DAA520 50%, #B8860B 100%);
+    color: #fff;
+    padding: 32px 40px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .header h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: 2px; text-shadow: 1px 1px 4px rgba(0,0,0,0.3); }
+  .header .sub { font-size: 1rem; opacity: 0.9; margin-top: 4px; }
+  .header .badge {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.6);
+    border-radius: 8px;
+    padding: 8px 18px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .header .badge span { display: block; font-size: 1.5rem; font-weight: 800; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 28px 24px; }
+
+  .intro-box {
+    background: #fff;
+    border-left: 6px solid #DAA520;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .intro-box strong { color: #B8860B; }
+
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+
+  /* Tier cards */
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 8px; }
+  .tier-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-top: 5px solid;
+    text-align: center;
+  }
+  .tier-card.og1 { border-color: #F0C040; }
+  .tier-card.og2 { border-color: #DAA520; }
+  .tier-card.og3 { border-color: #B8860B; }
+  .tier-card .tier-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+  .tier-card .tier-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 12px; color: #333; }
+  .tier-card .discount-off-sale { font-size: 2rem; font-weight: 900; line-height: 1; }
+  .og1 .discount-off-sale { color: #C8980A; }
+  .og2 .discount-off-sale { color: #B8860B; }
+  .og3 .discount-off-sale { color: #8B6508; }
+  .tier-card .discount-label { font-size: 0.75rem; color: #777; margin-bottom: 10px; }
+  .tier-card .off-list { font-size: 0.85rem; font-weight: 600; color: #444; background: #f9f3e0; border-radius: 4px; padding: 4px 8px; display: inline-block; margin-bottom: 12px; }
+  .tier-card .age { font-size: 0.82rem; color: #555; border-top: 1px solid #eee; padding-top: 10px; margin-top: 4px; line-height: 1.5; }
+
+  /* Info grid */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .info-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .info-card h3 { font-size: 0.95rem; font-weight: 700; color: #B8860B; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .info-card ul { list-style: none; padding: 0; }
+  .info-card ul li {
+    font-size: 0.88rem;
+    color: #444;
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.5;
+    display: flex;
+    gap: 8px;
+  }
+  .info-card ul li:last-child { border-bottom: none; }
+  .info-card ul li::before { content: "›"; color: #DAA520; font-weight: 700; flex-shrink: 0; }
+
+  /* How to sell box */
+  .sell-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .step {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    text-align: center;
+  }
+  .step .num {
+    width: 32px; height: 32px; background: #B8860B; color: #fff;
+    border-radius: 50%; font-weight: 800; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+  }
+  .step p { font-size: 0.83rem; color: #444; line-height: 1.5; }
+
+  /* FAQ */
+  .faq { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .faq-item { background: #fff; border-radius: 10px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .faq-item .q { font-size: 0.85rem; font-weight: 700; color: #333; margin-bottom: 6px; }
+  .faq-item .a { font-size: 0.83rem; color: #555; line-height: 1.5; }
+
+  .footer {
+    background: #333;
+    color: #aaa;
+    text-align: center;
+    padding: 14px;
+    font-size: 0.78rem;
+    margin-top: 32px;
+  }
+  .footer strong { color: #DAA520; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="sub">COLLISION AUTO PARTS — SALES TEAM GUIDE</div>
+    <h1>🏅 OLD GOLD</h1>
+    <div class="sub">Slow-Moving Inventory Hot Buy Program &nbsp;·&nbsp; Effective May 2026</div>
+  </div>
+  <div class="badge">
+    <span>$3M+</span>
+    Cash recovery goal
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="intro-box">
+    <strong>What is Old Gold?</strong> It's our program to move aged, slow-selling inventory — fast. Parts that have been sitting too long are automatically marked with a tiered discount (OG1, OG2, or OG3) so you can offer customers a genuine deal. You'll see a <strong style="color:#B8860B;">gold badge</strong> on these parts right in the search results. The more it's aged, the deeper the discount.
+  </div>
+
+  <div class="section-title">The Three Discount Tiers</div>
+  <div class="tiers">
+    <div class="tier-card og1">
+      <div class="tier-label">Tier 1</div>
+      <div class="tier-name">OG1 — Slow</div>
+      <div class="discount-off-sale">20% off</div>
+      <div class="discount-label">your sale price</div>
+      <div class="off-list">~52% off list</div>
+      <div class="age">9–12 months of supply on hand<br><em>(or 180–359 days, no sales history)</em></div>
+    </div>
+    <div class="tier-card og2">
+      <div class="tier-label">Tier 2</div>
+      <div class="tier-name">OG2 — Slower</div>
+      <div class="discount-off-sale">30% off</div>
+      <div class="discount-label">your sale price</div>
+      <div class="off-list">~58% off list</div>
+      <div class="age">12–18 months of supply on hand<br><em>(or 360–540 days, no sales history)</em></div>
+    </div>
+    <div class="tier-card og3">
+      <div class="tier-label">Tier 3</div>
+      <div class="tier-name">OG3 — Aggressive</div>
+      <div class="discount-off-sale">35% off</div>
+      <div class="discount-label">your sale price</div>
+      <div class="off-list">~61% off list</div>
+      <div class="age">18+ months of supply on hand<br><em>(or 541+ days, no sales history)</em></div>
+    </div>
+  </div>
+
+  <div class="section-title">How to Sell It</div>
+  <div class="sell-steps">
+    <div class="step">
+      <div class="num">1</div>
+      <p>Search for a part in Tri-Cloud as normal. Look for the <strong>gold badge</strong> on the product row.</p>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <p>Click the <strong>Old Gold button</strong> to expand deal details — see original price vs. OG price side by side.</p>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <p>Tell the customer: <em>"This part qualifies for our Old Gold program — you save X% today."</em></p>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <p>Click <strong>Add to Quote</strong> to apply the OG price. That's it — pricing is automatic.</p>
+    </div>
+  </div>
+
+  <div class="section-title">What You Need to Know</div>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>✅ What's Eligible</h3>
+      <ul>
+        <li>D and F category parts only (A, B, C are clean)</li>
+        <li>Parts priced $15 or more at list</li>
+        <li>Any customer tier — everyone sees OG pricing</li>
+        <li>Tiers are recalculated daily — pricing is always current</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🚫 What's NOT Eligible</h3>
+      <ul>
+        <li>New items (added within 360 days — no history yet)</li>
+        <li>Damaged/imperfect parts (that's the separate Hot Buy program)</li>
+        <li>Parts flagged for vendor return</li>
+        <li>Parts under $15 list price</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>💰 Pricing Rules</h3>
+      <ul>
+        <li>Discounts are off your sale price, not list price</li>
+        <li>You cannot manually override OG pricing</li>
+        <li>Manager can override only for: price match or damage discount</li>
+        <li>Exchange pricing is built in — no separate calculation needed</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🔄 Returns & Exchanges</h3>
+      <ul>
+        <li>Standard COL return policy applies — no special restrictions</li>
+        <li>Returns are processed at the OG price paid</li>
+        <li>Standard restocking fees apply as normal</li>
+        <li>Old Gold badge appears on invoice so customers see the discount clearly</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Common Questions</div>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="q">How do I know a part is Old Gold?</div>
+      <div class="a">You'll see a gold/amber badge directly on the part row in search results. You can also browse the dedicated Hot Buy section to find OG inventory proactively.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">Is Old Gold different from Hot Buy?</div>
+      <div class="a">Yes — they are two separate programs with separate buttons. <strong>Old Gold (gold badge)</strong> = slow-moving aged stock. <strong>Hot Buy (HB)</strong> = damaged/imperfect parts. Don't mix them up.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">What do I tell the customer?</div>
+      <div class="a">Keep it simple: <em>"This part is part of our Old Gold program — it's aged stock we're moving out, so you get a [X]% discount off your regular price today."</em> No need to explain tiers.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">What if the customer wants to pay regular price?</div>
+      <div class="a">Old Gold pricing is offered as an incentive — customers can purchase at the OG price. If they have specific concerns, escalate to your manager.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">Can I negotiate on top of an OG price?</div>
+      <div class="a">No. OG pricing is fixed. The only exceptions are manager-authorized price matches or damage discounts, which require manager authentication.</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">Why does a part disappear from Old Gold?</div>
+      <div class="a">Once stock drops to normal replenishment levels, the part automatically exits the program. It means it sold through — great news!</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>OLD GOLD</strong> — Slow Moving Hot Buy Program &nbsp;·&nbsp; Collision Auto Parts &nbsp;·&nbsp; v2.4 · May 2026 &nbsp;·&nbsp; Internal Sales Team Reference
+</div>
+
+</body>
+</html>
