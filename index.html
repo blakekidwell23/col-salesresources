@@ -3,433 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL &middot; Week 22 &middot; CSR Dashboard (Tue-Thu 5/26-5/28)</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<title>COL — Collision Auto Parts | Sales Resource Hub</title>
 <style>
-  :root {
-    --bg:#0f0f0f;--surface:#161616;--card:#1c1c1c;--card2:#191919;--border:#272727;--border2:#2f2f2f;
-    --cyan:#00AEEF;--cyan-dim:rgba(0,174,239,.10);--cyan-glow:rgba(0,174,239,.22);
-    --text:#efefef;--text2:#d0d0d0;--muted:#888888;
-    --green:#4caf7d;--green-bg:rgba(76,175,90,.12);
-    --red:#e05252;--red-bg:rgba(224,82,82,.12);
-    --amber:#f0a030;--amber-bg:rgba(240,160,48,.10);--gold:#FFD700;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f4; color: #222; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .header {
+    background: #00AEEF;
+    padding: 44px 40px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5}
-  .top-bar{background:#000;padding:0 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-bottom:3px solid var(--cyan);min-height:80px}
-  .brand{color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;letter-spacing:.08em}
-  .top-right{text-align:right}
-  .scorecard-title{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-  .scorecard-sub{color:var(--cyan);font-family:'DM Mono',monospace;font-size:11px;margin-top:3px}
-  .body{padding:24px 28px 48px}
-  .legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--surface);border-radius:6px;border-left:3px solid var(--cyan)}
-  .leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);font-weight:500}
-  .leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-  .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:28px}
-  .metric-card{background:#000;border-radius:6px;padding:14px 16px;border-bottom:3px solid var(--cyan)}
-  .metric-label{font-size:10px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
-  .metric-val{font-size:22px;font-weight:700;color:#fff;font-family:'Barlow Condensed',sans-serif;line-height:1.1}
-  .metric-sub{font-size:10px;margin-top:4px;font-weight:600}
-  .section-label{font-size:11px;font-weight:700;color:var(--text2);letter-spacing:.12em;text-transform:uppercase;margin:24px 0 10px;padding-left:10px;border-left:3px solid var(--cyan)}
-  .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:6px;margin-bottom:28px}
-  table{width:100%;border-collapse:collapse;font-size:12.5px}
-  thead{background:#000}
-  thead th{font-size:10px;font-weight:700;color:var(--cyan);text-align:left;padding:10px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border)}
-  thead th.r{text-align:right}
-  tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
-  tbody tr:last-child{border-bottom:none}
-  tbody tr:nth-child(even){background:var(--card2)}
-  tbody tr:hover{background:rgba(0,174,239,.05)}
-  td{padding:9px 10px;vertical-align:middle;color:var(--text);font-weight:600}
-  td.r{text-align:right}
-  td.dim{color:var(--text2);font-weight:400}
-  .name-cell{display:flex;align-items:center;gap:9px}
-  .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;border:1.5px solid var(--cyan);background:#000;color:var(--cyan);font-family:'Barlow Condensed',sans-serif;letter-spacing:.03em}
-  .rep-name{font-weight:700;font-size:13px;color:var(--text)}
-  .rep-location{font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;margin-top:1px;font-weight:500}
-  .score-bar-wrap{display:flex;align-items:center;gap:7px;min-width:100px}
-  .score-bar-bg{flex:1;height:6px;background:var(--border2);border-radius:3px;overflow:hidden}
-  .score-bar-fill{height:100%;border-radius:3px;background:var(--cyan)}
-  .score-num{font-size:13px;font-weight:700;min-width:26px;text-align:right;color:#fff;font-family:'DM Mono',monospace}
-  .badge{display:inline-block;font-size:10px;padding:3px 8px;border-radius:4px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em}
-  .badge-gold{background:#000;color:var(--gold);border:1px solid var(--gold)}
-  .badge-silver{background:#000;color:#C0C0C0;border:1px solid #C0C0C0}
-  .badge-bronze{background:#000;color:#CD7F32;border:1px solid #CD7F32}
-  .tier-a{background:#000;color:var(--cyan);border:1px solid var(--cyan)}
-  .tier-b{background:var(--green-bg);color:#6ed69a;border:1px solid rgba(76,175,90,.3)}
-  .tier-c{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(240,160,48,.3)}
-  .tier-d{background:var(--red-bg);color:var(--red);border:1px solid rgba(224,82,82,.3)}
-  .calls-ok{color:var(--green);font-weight:700}
-  .calls-low{color:var(--red);font-weight:700}
-  .calls-na{color:var(--muted)}
-  .pill-met{background:#000;color:var(--cyan);font-size:9px;padding:1px 6px;border-radius:20px;font-weight:700;border:1px solid var(--cyan);margin-left:3px}
-  .pill-miss{background:var(--red-bg);color:var(--red);font-size:9px;padding:1px 6px;border-radius:20px;font-weight:700;border:1px solid rgba(224,82,82,.4);margin-left:3px}
-  .vs-above{color:var(--green);font-weight:700}
-  .vs-below{color:var(--red);font-weight:700}
-  .goal-bar-wrap{display:flex;align-items:center;gap:6px;min-width:90px}
-  .goal-bar-bg{flex:1;height:5px;background:var(--border2);border-radius:3px;overflow:hidden}
-  .goal-bar-good{height:100%;border-radius:3px;background:var(--green)}
-  .goal-bar-bad{height:100%;border-radius:3px;background:var(--red)}
-  .total-row{background:#0a0a0a!important;border-top:2px solid var(--cyan)!important}
-  .total-row td{color:#fff;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.04em}
-  .addon-section{background:var(--surface);border-radius:6px;border:1px solid var(--border);padding:16px;margin-bottom:28px}
-  .addon-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
-  .addon-title{font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.10em}
-  .goal-pill{font-size:10px;color:var(--cyan);font-family:'DM Mono',monospace;background:var(--cyan-dim);padding:3px 10px;border-radius:20px;border:1px solid var(--cyan-glow)}
-  .addon-hit{color:var(--green);font-weight:700;font-family:'DM Mono',monospace}
-  .addon-miss{color:var(--red);font-weight:700;font-family:'DM Mono',monospace}
-  .addon-none{color:var(--muted)}
-  .on-target{color:var(--green);font-weight:700}
-  .missed-dollars{color:var(--red);font-weight:700;font-family:'DM Mono',monospace}
-  .missed-spiff{color:var(--amber);font-weight:700;font-family:'DM Mono',monospace}
-  .opp-val{color:var(--amber);font-weight:700;font-family:'DM Mono',monospace}
-  .opp-zero{color:var(--muted)}
-  .footer{background:#000;border-top:1px solid var(--border);padding:16px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-  .footer-left{font-size:10.5px;color:var(--muted);line-height:1.7;font-family:'DM Mono',monospace}
-  .footer-right{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap}
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg, transparent, transparent 30px,
+      rgba(255,255,255,0.04) 30px, rgba(255,255,255,0.04) 31px
+    );
+    pointer-events: none;
+  }
+  .header-logo { position: relative; z-index: 1; margin-bottom: 20px; }
+  .header-logo img { height: 90px; width: auto; display: inline-block; filter: brightness(0) invert(1); }
+  .header-title { font-size: 1.15rem; font-weight: 700; color: #fff; letter-spacing: 1px; position: relative; z-index: 1; margin-bottom: 6px; }
+  .header-sub { font-size: 0.84rem; color: rgba(255,255,255,0.75); position: relative; z-index: 1; }
+
+  .body-wrap { flex: 1; padding: 44px 24px 60px; }
+  .container { max-width: 680px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #333;
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+
+  .card-group { display: flex; flex-direction: column; gap: 14px; margin-bottom: 44px; }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    align-items: stretch;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    overflow: hidden;
+    border: 0.5px solid #e8e8e8;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
+
+  .card-accent { width: 5px; flex-shrink: 0; }
+  .card-accent.blue  { background: #00AEEF; }
+  .card-accent.green { background: #2d5a2d; }
+  .card-accent.gold  { background: #B8860B; }
+
+  .card-inner { display: flex; align-items: center; gap: 18px; padding: 20px 22px; flex: 1; }
+
+  .card-icon-wrap {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+  }
+  .card-icon-wrap.blue  { background: #e6f6fd; }
+  .card-icon-wrap.green { background: #eaf2ea; }
+  .card-icon-wrap.gold  { background: #faf3e0; }
+
+  .card-body { flex: 1; }
+  .card-title { font-size: 1rem; font-weight: 800; color: #111; margin-bottom: 4px; }
+  .card-desc  { font-size: 0.81rem; color: #888; line-height: 1.55; }
+
+  .card-arrow { font-size: 1.1rem; color: #ccc; flex-shrink: 0; transition: color 0.15s, transform 0.15s; }
+  .card:hover .card-arrow { color: #00AEEF; transform: translateX(3px); }
+
+  .footer {
+    background: #00AEEF;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 18px;
+    font-size: 0.75rem;
+  }
+  .footer strong { color: #fff; }
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <div class="brand">COL INSIDE SALES</div>
-  <div class="top-right">
-    <div class="scorecard-title">CSR Performance Dashboard &mdash; Week 22</div>
-    <div class="scorecard-sub" id="subtitle"></div>
-    <div class="scorecard-sub" id="run-date" style="color:var(--muted);margin-top:2px"></div>
+
+<div class="header">
+  <div class="header-logo">
+    <img src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png" alt="Collision Auto Parts" />
+  </div>
+  <div class="header-title">Sales Resource Hub</div>
+  <div class="header-sub">Internal program guides &amp; references for the sales team</div>
+</div>
+
+<div class="body-wrap">
+  <div class="container">
+
+    <div class="section-label">Dashboards</div>
+    <div class="card-group">
+
+      <a class="card" href="COL - Week 22 Day 3 CSR Dashboard (Tue-Thu 5-26 5-28).html">
+        <div class="card-accent blue"></div>
+        <div class="card-inner">
+          <div class="card-icon-wrap blue">📊</div>
+          <div class="card-body">
+            <div class="card-title">Daily CSR Dashboard</div>
+            <div class="card-desc">Inside sales call stats, rep rankings, add-on performance, and performance to plan. Updated weekly.</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="section-label">Sales Programs</div>
+    <div class="card-group">
+
+      <a class="card" href="COL - The Bounty Sales One-Pager.html">
+        <div class="card-accent green"></div>
+        <div class="card-inner">
+          <div class="card-icon-wrap green">🏹</div>
+          <div class="card-body">
+            <div class="card-title">The Bounty Program</div>
+            <div class="card-desc">Dormant account reactivation contest — prizes, rules, outcome codes, and how to log calls. May–December 2026.</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+      </a>
+
+      <a class="card" href="COL - Old Gold Sales One-Pager.html">
+        <div class="card-accent gold"></div>
+        <div class="card-inner">
+          <div class="card-icon-wrap gold">🏅</div>
+          <div class="card-body">
+            <div class="card-title">Old Gold Program</div>
+            <div class="card-desc">Slow-moving inventory hot buy program — tiered discounts on aged D &amp; F category parts. How to spot, sell, and log OG items.</div>
+          </div>
+          <div class="card-arrow">›</div>
+        </div>
+      </a>
+
+    </div>
+
   </div>
 </div>
-<div class="body">
-  <div class="legend">
-    <div class="leg-item"><div class="leg-dot" style="background:var(--cyan)"></div>Dollars sold (30 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Margin % (25 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#0F9E6E"></div>Conversion rate (25 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>UPT (15 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--muted)"></div>Calls &ge;80/day (5 pts)</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--border2);border:1px solid #555"></div>Target: $5,300/rep/day &middot; 3 days = $15,900/rep</div>
-  </div>
 
-  <!-- CALL QUEUE SUMMARY -->
-  <div class="section-label">Call Queue Performance &mdash; 3-Day Summary (Tue 5/26 &ndash; Thu 5/28, Mon Holiday)</div>
-  <div style="font-size:11px;color:var(--text2);margin:-4px 0 8px 13px;line-height:1.5;font-style:italic">
-    Calls route first to regional queues (MoWest, NorCal, SoCal). Unanswered calls overflow after ~45 sec to the Global Overflow Queue (7800). The <span style="color:var(--cyan);font-weight:700;font-style:normal">NET INBOUND</span> row reflects true abandonment after both tiers. NorCal improved each day: 65.6% &rarr; 85.0% &rarr; 90.7%. SoCal recovered from 74.2% &rarr; 87.7% &rarr; 84.9%. MoWest strong throughout.
-  </div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Queue</th>
-          <th class="r">Received</th>
-          <th class="r">Answered</th>
-          <th class="r">Abandoned</th>
-          <th class="r">Aband. %</th>
-          <th class="r">Service Rate</th>
-        </tr>
-      </thead>
-      <tbody id="queue-tbody"></tbody>
-    </table>
-  </div>
-
-  <!-- RANKINGS TABLE -->
-  <div class="section-label">Rankings</div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th style="width:36px">#</th>
-          <th>Rep</th>
-          <th>Region</th>
-          <th class="r">Score</th>
-          <th class="r">$ Sold</th>
-          <th class="r">vs Target</th>
-          <th class="r">% of Target</th>
-          <th class="r">Margin</th>
-          <th class="r">Conv.</th>
-          <th class="r">UPT</th>
-          <th class="r">Disc %</th>
-          <th class="r">Calls</th>
-          <th class="r">Est. Missed Rev.</th>
-          <th class="r">Tier</th>
-          <th class="r">Add-On</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-  </div>
-
-  <!-- ADD-ON PERFORMANCE -->
-  <div class="addon-section">
-    <div class="addon-header">
-      <span class="addon-title">Add-On Performance &mdash; Gloves, Towels &amp; Coupons</span>
-      <span class="goal-pill">Goal: 5% of orders &middot; $14/unit avg &middot; $1 spiff/unit</span>
-    </div>
-    <div class="table-wrap" style="margin-bottom:0;border:none">
-      <table style="font-size:12px">
-        <thead>
-          <tr>
-            <th>Rep</th>
-            <th>Region</th>
-            <th class="r">Orders</th>
-            <th class="r">Gloves</th>
-            <th class="r">Towels</th>
-            <th class="r">Coupons</th>
-            <th class="r">Actual Units</th>
-            <th class="r">Add-On Rate</th>
-            <th class="r">Goal Units</th>
-            <th class="r">$ Missed</th>
-            <th class="r">Spiff Missed</th>
-          </tr>
-        </thead>
-        <tbody id="addon-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- PERFORMANCE TO PLAN (moved to bottom) -->
-  <div class="section-label">Performance to Plan</div>
-  <div id="summary-grid" class="summary-grid"></div>
-
-</div>
 <div class="footer">
-  <div class="footer-left">
-    Exclusions: ApolonioA &middot; CynthiaP &middot; JoseA (outside sales) &middot; DylanB &middot; AndyL &middot; TerenceR (field / zero call activity)<br>
-    Watch list: ManuelSe (70.9% discount rate &mdash; persistent across all 3 days, needs immediate review) &middot; IsaacG (41.8% discount rate) &middot; ChristianH (36 calls over 3 days, well below 240-call threshold)<br>
-    Add-on standouts: MarioGO (12 gloves) &middot; ArturoS (8 towels) &middot; FrankieL (3 gloves) &middot; KeinaJ (1 glove) &middot; ManuelSe (1 towel) &middot; JacquelineS (4 coupons) &middot; ZulemaA (1 coupon)<br>
-    Scoring: percentile-based &middot; Dollars 30pt &middot; Margin 25pt &middot; Conv 25pt &middot; UPT 15pt &middot; Calls&ge;240/3d 5pt &middot; Tier: A&ge;80% &middot; B&ge;60% &middot; C&ge;40% &middot; D&lt;40%<br>
-    Est. Missed Rev: rep&apos;s conv rate &times; ASP &times; UPT applied to calls short of the 240-call threshold (80/day &times; 3 days) &middot; Snapshot: Tue&ndash;Thu May 26&ndash;28, 2026 (Day 3 of 4 &mdash; Mon 5/25 Memorial Day holiday)
-  </div>
-  <div class="footer-right" id="run-date2"></div>
+  <strong>COL — Collision Auto Parts</strong> &nbsp;·&nbsp; Internal Use Only &nbsp;·&nbsp; Questions? See Blake.
 </div>
-<script>
-const WEEK_LABEL='Week 22, 2026 · Tue–Thu May 26–28 (Day 3 of 4, Mon holiday)';
-const DAYS=3, DAILY_TARGET=5300, AVG_PRICE=14, SPIFF=1, GOAL_RATE=0.05, CALL_MIN=80;
 
-// 3-day combined totals (5/26 + 5/27 + 5/28)
-const queueDataTotal=[
-  {name:'6190 MoWest Sales', rec:376,  ans:346, un:30,  type:'regional'},
-  {name:'7100 NorCal Sales',  rec:1433, ans:1139, un:294, type:'regional'},
-  {name:'6650 SoCal Sales',  rec:1441, ans:1180, un:261, type:'regional'},
-  {name:'7800 Global Overflow Queue', rec:553, ans:528, un:25, type:'overflow'},
-];
-
-function svcColor(r){if(r>=.93)return'var(--green)';if(r>=.85)return'var(--amber)';return'var(--red)';}
-function unsColor(r){if(r<=.07)return'var(--green)';if(r<=.15)return'var(--amber)';return'var(--red)';}
-
-function renderQueueTable(tbodyId, queueData){
-  const tb=document.getElementById(tbodyId);
-  const regional=queueData.filter(q=>q.type==='regional');
-  const overflow=queueData.filter(q=>q.type==='overflow')[0];
-  let rR=0,rA=0,rU=0;
-  regional.forEach(q=>{
-    rR+=q.rec;rA+=q.ans;rU+=q.un;
-    const svc=q.ans/q.rec, uns=q.un/q.rec;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`
-      <td style="font-weight:700;color:var(--text)">${q.name}</td>
-      <td class="r" style="font-family:'DM Mono',monospace">${q.rec.toLocaleString()}</td>
-      <td class="r" style="font-family:'DM Mono',monospace">${q.ans.toLocaleString()}</td>
-      <td class="r" style="font-family:'DM Mono',monospace">${q.un.toLocaleString()}</td>
-      <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(uns)}">${(uns*100).toFixed(1)}%</td>
-      <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(svc)}">${(svc*100).toFixed(1)}%</td>`;
-    tb.appendChild(tr);
-  });
-  const sub=document.createElement('tr');
-  sub.style.background='#0d0d0d';
-  sub.style.borderTop='1px dashed var(--border2)';
-  const subSvc=rA/rR, subUns=rU/rR;
-  sub.innerHTML=`
-    <td style="font-weight:700;color:var(--text2);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em">Regional 1st-Touch</td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text2);font-weight:700">${rR.toLocaleString()}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text2);font-weight:700">${rA.toLocaleString()}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text2);font-weight:700">${rU.toLocaleString()}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(subUns)}">${(subUns*100).toFixed(1)}%</td>
-    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(subSvc)}">${(subSvc*100).toFixed(1)}%</td>`;
-  tb.appendChild(sub);
-  const q=overflow;
-  const ovr=document.createElement('tr');
-  ovr.style.background='rgba(0,174,239,0.03)';
-  ovr.innerHTML=`
-    <td style="font-weight:700;color:var(--cyan)">${q.name} <span style="font-size:9px;color:var(--text2);font-weight:500;font-family:'DM Mono',monospace;letter-spacing:.04em;text-transform:uppercase;margin-left:4px">(overflow recovery)</span></td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.rec.toLocaleString()}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.ans.toLocaleString()}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;color:var(--text)">${q.un.toLocaleString()}</td>
-    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${unsColor(q.un/q.rec)}">${((q.un/q.rec)*100).toFixed(1)}%</td>
-    <td class="r" style="font-family:'DM Mono',monospace;font-weight:700;color:${svcColor(q.ans/q.rec)}">${((q.ans/q.rec)*100).toFixed(1)}%</td>`;
-  tb.appendChild(ovr);
-  const inbound=rR;
-  const netAns=rA+q.ans;
-  const netAband=inbound-netAns;
-  const netSvc=netAns/inbound, netUns=netAband/inbound;
-  const tot=document.createElement('tr');
-  tot.className='total-row';
-  tot.innerHTML=`
-    <td>NET INBOUND <span style="font-size:9px;color:var(--text2);font-weight:500;font-family:'DM Mono',monospace;letter-spacing:.04em;margin-left:4px">(true performance)</span></td>
-    <td class="r">${inbound.toLocaleString()}</td>
-    <td class="r">${netAns.toLocaleString()}</td>
-    <td class="r">${netAband.toLocaleString()}</td>
-    <td class="r">${(netUns*100).toFixed(1)}%</td>
-    <td class="r">${(netSvc*100).toFixed(1)}%</td>`;
-  tb.appendChild(tot);
-}
-renderQueueTable('queue-tbody', queueDataTotal);
-
-const NAMES={
-  MatthewO:'Matthew Oleal',IsaacG:'Isaac Gonzales',ArturoS:'Arturo Serrano',
-  ChristianH:'Christian Henington',MarioGO:'Mario Gonzales',ZulemaA:'Zulema Anaya',
-  FrankieL:'Frankie Lucero',PaulinaN:'Paulina Navarro',DavidO:'David Ontiveros',
-  ManuelSe:'Manuel Serrano',OmarR:'Omar Reyes',CynthiaP:'Cynthia Puffelis',
-  KeinaJ:'Keina Johnson',JacquelineS:'Jacqueline Sanchez',JoannaZ:'Joanna Zoreque',
-  LuisP:'Luis Pedraza',IvanB:'Ivan B',ApolonioA:'Apolonio A',AndyL:'Andy L',JoseA:'Jose A',
-  TerenceR:'Terence R',DylanB:'Dylan B'
-};
-const EXCLUDED=['ApolonioA','TerenceR','CynthiaP','DylanB','JoseA','AndyL'];
-
-const rawData=[
-  {name:'ArturoS',     loc:'San Diego',         calls:253, qty:228, dollars:15846.97,  margin:54.99, conv:57.86,  upt:1.64, asp:74.94,   disc:3098.39, discPct:17.62, gloves:0,  towels:8, coupons:0},
-  {name:'ChristianH',  loc:'Eco',               calls:36,  qty:45,  dollars:2925.13,   margin:59.93, conv:70.83,  upt:1.89, asp:102.24,  disc:203.14,  discPct:6.10,  gloves:0,  towels:0, coupons:0},
-  {name:'CynthiaP',    loc:'Outside Sales',     calls:0,   qty:169, dollars:8202.20,   margin:49.15, conv:80.60,  upt:3.98, asp:54.53,   disc:2638.37, discPct:30.86, gloves:0,  towels:0, coupons:0},
-  {name:'DavidO',      loc:'San Diego',         calls:276, qty:100, dollars:7719.61,   margin:55.67, conv:42.61,  upt:1.58, asp:77.08,   disc:693.11,  discPct:8.85,  gloves:0,  towels:1, coupons:0},
-  {name:'FrankieL',    loc:'Albuquerque',       calls:193, qty:136, dollars:15704.07,  margin:67.29, conv:57.89,  upt:1.77, asp:115.37,  disc:2240.96, discPct:15.28, gloves:3,  towels:0, coupons:0},
-  {name:'IsaacG',      loc:'Albuquerque',       calls:195, qty:164, dollars:15675.11,  margin:59.38, conv:47.89,  upt:1.46, asp:115.69,  disc:4250.81, discPct:41.79, gloves:0,  towels:0, coupons:0},
-  {name:'IvanB',       loc:'Santa Fe Springs',  calls:331, qty:285, dollars:24061.80,  margin:60.88, conv:57.82,  upt:1.57, asp:87.38,   disc:1508.91, discPct:11.83, gloves:0,  towels:0, coupons:0},
-  {name:'JacquelineS', loc:'Santa Fe Springs',  calls:304, qty:174, dollars:12161.28,  margin:52.42, conv:50.43,  upt:1.68, asp:73.51,   disc:1608.61, discPct:15.40, gloves:0,  towels:0, coupons:4},
-  {name:'JoannaZ',     loc:'San Diego',         calls:124, qty:82,  dollars:4715.64,   margin:52.78, conv:36.78,  upt:2.27, asp:55.07,   disc:190.05,  discPct:10.15, gloves:0,  towels:0, coupons:0},
-  {name:'KeinaJ',      loc:'Sacramento',        calls:151, qty:97,  dollars:10248.27,  margin:58.61, conv:60.98,  upt:1.63, asp:105.65,  disc:714.44,  discPct:7.15,  gloves:1,  towels:0, coupons:0},
-  {name:'LuisP',       loc:'Hayward',           calls:223, qty:147, dollars:14850.60,  margin:60.32, conv:73.13,  upt:1.68, asp:109.04,  disc:947.01,  discPct:9.91,  gloves:0,  towels:0, coupons:0},
-  {name:'ManuelSe',    loc:'Albuquerque',       calls:201, qty:182, dollars:14677.72,  margin:56.98, conv:50.34,  upt:1.85, asp:78.38,   disc:6947.36, discPct:70.88, gloves:0,  towels:1, coupons:0},
-  {name:'MarioGO',     loc:'Hayward',           calls:229, qty:152, dollars:13504.48,  margin:56.64, conv:50.88,  upt:1.51, asp:109.13,  disc:243.40,  discPct:3.45,  gloves:12, towels:0, coupons:0},
-  {name:'MatthewO',    loc:'Eco',               calls:440, qty:364, dollars:31262.80,  margin:57.87, conv:68.32,  upt:1.70, asp:87.05,   disc:3015.50, discPct:13.38, gloves:1,  towels:0, coupons:0},
-  {name:'OmarR',       loc:'Santa Fe Springs',  calls:323, qty:244, dollars:20359.35,  margin:50.89, conv:48.58,  upt:1.54, asp:88.63,   disc:1081.23, discPct:8.18,  gloves:0,  towels:0, coupons:0},
-  {name:'PaulinaN',    loc:'Hayward',           calls:190, qty:148, dollars:14405.11,  margin:64.30, conv:54.19,  upt:1.65, asp:98.32,   disc:615.67,  discPct:4.61,  gloves:0,  towels:0, coupons:0},
-  {name:'TerenceR',    loc:'Field',             calls:0,   qty:14,  dollars:627.52,    margin:72.32, conv:0,      upt:2.29, asp:48.11,   disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
-  {name:'ZulemaA',     loc:'Hayward',           calls:159, qty:130, dollars:10771.09,  margin:49.99, conv:53.70,  upt:1.33, asp:114.21,  disc:308.05,  discPct:5.71,  gloves:0,  towels:0, coupons:1},
-  {name:'AndyL',       loc:'Field',             calls:0,   qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,       disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
-  {name:'ApolonioA',   loc:'Outside Sales',     calls:0,   qty:61,  dollars:3671.75,   margin:55.05, conv:97.14,  upt:1.05, asp:58.62,   disc:2607.42, discPct:69.50, gloves:0,  towels:0, coupons:0},
-  {name:'DylanB',      loc:'Field',             calls:0,   qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,       disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
-  {name:'JoseA',       loc:'Outside Sales',     calls:0,   qty:0,   dollars:0,         margin:0,     conv:0,      upt:0,    asp:0,       disc:0,       discPct:0,     gloves:0,  towels:0, coupons:0},
-];
-
-const periodTarget=DAILY_TARGET*DAYS;
-const callTarget=CALL_MIN*DAYS;
-
-document.getElementById('subtitle').textContent=WEEK_LABEL+' · Target: $'+periodTarget.toLocaleString()+'/rep';
-document.getElementById('run-date').textContent='Generated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
-document.getElementById('run-date2').textContent='Generated '+new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
-
-const active=rawData.filter(r=>!EXCLUDED.includes(r.name)&&r.calls>0&&r.conv>0);
-const teamAvgConv=active.reduce((s,r)=>s+r.conv,0)/active.length/100;
-const teamAvgASP=active.reduce((s,r)=>s+r.asp,0)/active.length;
-const teamAvgUPT=active.reduce((s,r)=>s+r.upt,0)/active.length;
-
-function pctScore(val,vals,max){const s=[...vals].sort((a,b)=>a-b);return Math.round((s.filter(v=>v<=val).length/s.length)*max);}
-const dV=active.map(r=>r.dollars),mV=active.map(r=>r.margin),cV=active.map(r=>r.conv),uV=active.map(r=>r.upt);
-
-const scored=active.map(r=>{
-  const actualUnits=r.gloves+r.towels+r.coupons;
-  const goalUnits=Math.ceil(r.qty*GOAL_RATE);
-  const shortfall=Math.max(0,goalUnits-actualUnits);
-  const addOnRate=r.qty>0?(actualUnits/r.qty)*100:0;
-  const total=pctScore(r.dollars,dV,30)+pctScore(r.margin,mV,25)+pctScore(r.conv,cV,25)+pctScore(r.upt,uV,15)+(r.calls>=callTarget?5:0);
-  const vsTarget=r.dollars-periodTarget;
-  const pctOfTarget=Math.min((r.dollars/periodTarget)*100,150);
-  let estMissedRev=0;
-  if(r.calls<callTarget){
-    const callsShort=callTarget-r.calls;
-    const repConv=r.conv>0?r.conv/100:teamAvgConv;
-    const repASP=r.asp>0?r.asp:teamAvgASP;
-    const repUPT=r.upt>0?r.upt:teamAvgUPT;
-    estMissedRev=Math.round(callsShort*repConv)*repASP*repUPT;
-  }
-  return{...r,total,actualUnits,goalUnits,shortfall,dollarsMissed:shortfall*AVG_PRICE,spiffMissed:shortfall*SPIFF,addOnRate,vsTarget,pctOfTarget,estMissedRev};
-}).sort((a,b)=>b.total-a.total);
-
-const maxScore=Math.max(...scored.map(r=>r.total));
-const totalOppRev=scored.reduce((s,r)=>s+r.estMissedRev,0);
-
-function fullName(k){return NAMES[k]||k;}
-function initials(k){const n=fullName(k).trim().split(/\s+/);return(n[0][0]+(n[1]?n[1][0]:'')).toUpperCase();}
-function tierBadge(score,max){const p=score/max;if(p>=.80)return['A','tier-a'];if(p>=.60)return['B','tier-b'];if(p>=.40)return['C','tier-c'];return['D','tier-d'];}
-function fmt$(n){return'$'+Math.round(n).toLocaleString();}
-
-const tbody=document.getElementById('tbody');
-scored.forEach((r,i)=>{
-  const pct=Math.round((r.total/maxScore)*100);
-  const[tl,tc]=tierBadge(r.total,maxScore);
-  const rank=i===0?'<span class="badge badge-gold">1st</span>':i===1?'<span class="badge badge-silver">2nd</span>':i===2?'<span class="badge badge-bronze">3rd</span>':`<span style="color:var(--text2);font-weight:700;font-size:13px">${i+1}</span>`;
-  const callsD=r.calls===0?'<span class="calls-na">&mdash;</span>':r.calls>=callTarget?`<span class="calls-ok">${r.calls}<span class="pill-met">&#10003;</span></span>`:`<span class="calls-low">${r.calls}<span class="pill-miss">miss</span></span>`;
-  const aoD=r.addOnRate===0?'<span class="addon-none">&mdash;</span>':r.addOnRate>=5?`<span class="addon-hit">${r.addOnRate.toFixed(1)}%</span>`:`<span class="addon-miss">${r.addOnRate.toFixed(1)}%</span>`;
-  const vsTargetD=r.vsTarget>=0?`<span class="vs-above">+${fmt$(r.vsTarget)}</span>`:`<span class="vs-below">-${fmt$(Math.abs(r.vsTarget))}</span>`;
-  const barClass=r.pctOfTarget>=100?'goal-bar-good':'goal-bar-bad';
-  const pctColor=r.pctOfTarget>=100?'var(--green)':'var(--red)';
-  const pctD=`<div class="goal-bar-wrap"><div class="goal-bar-bg"><div class="${barClass}" style="width:${Math.min(r.pctOfTarget,100).toFixed(0)}%"></div></div><span style="font-size:11px;font-weight:700;color:${pctColor};min-width:38px;text-align:right;font-family:'DM Mono',monospace">${r.pctOfTarget.toFixed(0)}%</span></div>`;
-  const mCol=r.margin>=60?'var(--green)':r.margin>=52?'var(--text)':'var(--red)';
-  const cCol=r.conv>=60?'var(--green)':r.conv>=50?'var(--text)':'var(--red)';
-  const missedD=r.estMissedRev>0?`<span class="opp-val">${fmt$(r.estMissedRev)}</span>`:'<span class="opp-zero">&mdash;</span>';
-  const discDisplay=r.discPct<=0?'<span class="calls-na">&mdash;</span>':`<span style="font-family:'DM Mono',monospace;font-weight:700;color:${r.discPct<=10?'var(--green)':r.discPct<=20?'var(--text)':r.discPct<=30?'var(--amber)':'var(--red)'}">${r.discPct.toFixed(1)}%</span>`;
-  const tr=document.createElement('tr');
-  tr.innerHTML=`
-    <td>${rank}</td>
-    <td><div class="name-cell"><div class="avatar">${initials(r.name)}</div><div><div class="rep-name">${fullName(r.name)}</div><div class="rep-location">${r.loc}</div></div></div></td>
-    <td class="dim" style="font-size:11px;font-family:'DM Mono',monospace;white-space:nowrap">${r.loc}</td>
-    <td class="r"><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:${pct}%"></div></div><span class="score-num">${r.total}</span></div></td>
-    <td class="r" style="color:#fff;font-weight:700;font-family:'DM Mono',monospace">${fmt$(r.dollars)}</td>
-    <td class="r">${vsTargetD}</td>
-    <td class="r">${pctD}</td>
-    <td class="r" style="color:${mCol};font-weight:700;font-family:'DM Mono',monospace">${r.margin.toFixed(1)}%</td>
-    <td class="r" style="color:${cCol};font-weight:700;font-family:'DM Mono',monospace">${r.conv.toFixed(1)}%</td>
-    <td class="r" style="color:var(--text);font-weight:700;font-family:'DM Mono',monospace">${r.upt.toFixed(2)}</td>
-    <td class="r">${discDisplay}</td>
-    <td class="r">${callsD}</td>
-    <td class="r">${missedD}</td>
-    <td class="r"><span class="badge ${tc}">${tl}</span></td>
-    <td class="r">${aoD}</td>`;
-  tbody.appendChild(tr);
-});
-
-const aoSorted=[...scored].sort((a,b)=>b.addOnRate-a.addOnRate);
-const aoTbody=document.getElementById('addon-tbody');
-let tA=0,tG=0,tDM=0,tSM=0,tO=0;
-aoSorted.forEach(r=>{
-  tA+=r.actualUnits;tG+=r.goalUnits;tDM+=r.dollarsMissed;tSM+=r.spiffMissed;tO+=r.qty;
-  const ok=r.shortfall===0;
-  const tr=document.createElement('tr');
-  tr.innerHTML=`
-    <td style="font-weight:700;color:var(--text)">${fullName(r.name)}</td>
-    <td style="font-size:10px;color:var(--text2);font-family:'DM Mono',monospace;font-weight:500">${r.loc}</td>
-    <td class="r" style="font-family:'DM Mono',monospace">${r.qty}</td>
-    <td class="r" style="font-family:'DM Mono',monospace">${r.gloves||'<span class="addon-none">&mdash;</span>'}</td>
-    <td class="r" style="font-family:'DM Mono',monospace">${r.towels||'<span class="addon-none">&mdash;</span>'}</td>
-    <td class="r" style="font-family:'DM Mono',monospace">${r.coupons||'<span class="addon-none">&mdash;</span>'}</td>
-    <td class="r" style="font-family:'DM Mono',monospace">${r.actualUnits||'<span class="addon-none">&mdash;</span>'}</td>
-    <td class="r">${r.addOnRate>0?`<span class="${r.addOnRate>=5?'addon-hit':'addon-miss'}">${r.addOnRate.toFixed(1)}%</span>`:'<span class="addon-none">&mdash;</span>'}</td>
-    <td class="r" style="font-family:'DM Mono',monospace">${r.goalUnits}</td>
-    <td class="r">${ok?'<span class="on-target">&mdash;</span>':`<span class="missed-dollars">-$${r.dollarsMissed.toLocaleString()}</span>`}</td>
-    <td class="r">${ok?'<span class="on-target">&mdash;</span>':`<span class="missed-spiff">-$${r.spiffMissed.toLocaleString()}</span>`}</td>`;
-  aoTbody.appendChild(tr);
-});
-const totRow=document.createElement('tr');
-totRow.className='total-row';
-totRow.innerHTML=`<td>Team Total</td><td></td><td class="r">${tO}</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r">&mdash;</td><td class="r">${tA}</td><td class="r">${tO>0?((tA/tO)*100).toFixed(1)+'%':'&mdash;'}</td><td class="r">${tG}</td><td class="r"><span class="missed-dollars">-$${tDM.toLocaleString()}</span></td><td class="r"><span class="missed-spiff">-$${tSM.toLocaleString()}</span></td>`;
-aoTbody.appendChild(totRow);
-
-const totD=active.reduce((s,r)=>s+r.dollars,0);
-const teamTarget=periodTarget*active.length;
-const teamVsTarget=totD-teamTarget;
-const avgM=(active.reduce((s,r)=>s+r.margin,0)/active.length).toFixed(1);
-const avgC=(active.reduce((s,r)=>s+r.conv,0)/active.length).toFixed(1);
-const avgU=(active.reduce((s,r)=>s+r.upt,0)/active.length).toFixed(2);
-const metCalls=active.filter(r=>r.calls>=callTarget).length;
-const taoR=tO>0?((tA/tO)*100).toFixed(1):'0.0';
-const aboveTarget=scored.filter(r=>r.vsTarget>=0).length;
-
-document.getElementById('summary-grid').innerHTML=`
-  <div class="metric-card"><div class="metric-label">Total $ Sold</div><div class="metric-val">$${Math.round(totD).toLocaleString()}</div><div class="metric-sub" style="color:${teamVsTarget>=0?'var(--cyan)':'var(--red)'}">${teamVsTarget>=0?'+':'-'}$${Math.abs(Math.round(teamVsTarget)).toLocaleString()} vs team target</div></div>
-  <div class="metric-card"><div class="metric-label">Reps Above Target</div><div class="metric-val" style="color:${aboveTarget>=active.length/2?'var(--cyan)':'var(--red)'}">${aboveTarget} of ${active.length}</div><div class="metric-sub" style="color:var(--muted)">$${periodTarget.toLocaleString()} target/rep</div></div>
-  <div class="metric-card"><div class="metric-label">Avg Margin</div><div class="metric-val">${avgM}%</div></div>
-  <div class="metric-card"><div class="metric-label">Avg Conversion</div><div class="metric-val">${avgC}%</div></div>
-  <div class="metric-card"><div class="metric-label">Avg UPT</div><div class="metric-val">${avgU}</div></div>
-  <div class="metric-card"><div class="metric-label">Calls &ge;${callTarget} / ${DAYS}d</div><div class="metric-val" style="color:var(--cyan)">${metCalls} of ${active.length}</div></div>
-  <div class="metric-card"><div class="metric-label">Add-On Rate</div><div class="metric-val" style="color:${parseFloat(taoR)>=5?'var(--cyan)':'var(--red)'}">${taoR}%</div><div class="metric-sub" style="color:var(--muted)">goal: 5.0%</div></div>
-  <div class="metric-card"><div class="metric-label">Est. Rev Missed</div><div class="metric-val" style="color:var(--amber)">${fmt$(totalOppRev)}</div><div class="metric-sub" style="color:var(--muted)">call volume gap</div></div>`;
-</script>
 </body>
 </html>
