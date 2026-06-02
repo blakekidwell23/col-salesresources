@@ -3,160 +3,373 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL — Collision Auto Parts | Sales Resource Hub</title>
+<title>COL Auto Parts — Sales Resource Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f4; color: #222; min-height: 100vh; display: flex; flex-direction: column; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: #f0f4f8;
+  color: #1a2e4a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-  .header {
-    background: #00AEEF;
-    padding: 44px 40px 36px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      -45deg, transparent, transparent 30px,
-      rgba(255,255,255,0.04) 30px, rgba(255,255,255,0.04) 31px
-    );
-    pointer-events: none;
-  }
-  .header-logo { position: relative; z-index: 1; margin-bottom: 20px; }
-  .header-logo img { height: 90px; width: auto; display: inline-block; filter: brightness(0) invert(1); }
-  .header-title { font-size: 1.15rem; font-weight: 700; color: #fff; letter-spacing: 1px; position: relative; z-index: 1; margin-bottom: 6px; }
-  .header-sub { font-size: 0.84rem; color: rgba(255,255,255,0.75); position: relative; z-index: 1; }
+/* ── HEADER ── */
+.header {
+  background: #1a2e4a;
+  border-bottom: 4px solid #00AEEF;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 16px rgba(0,0,0,.25);
+}
+.header-left { display: flex; align-items: center; gap: 20px; }
+.header-logo { height: 52px; width: auto; display: block; filter: brightness(0) invert(1); }
+.header-divider { width: 1px; height: 40px; background: rgba(255,255,255,.2); flex-shrink: 0; }
+.header-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px; font-weight: 800; letter-spacing: .08em;
+  color: #00AEEF; line-height: 1;
+}
+.header-brand em { color: #fff; font-style: normal; }
+.header-right { text-align: right; }
+.header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; color: #fff;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.header-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: #00AEEF; margin-top: 4px; opacity: .85;
+}
 
-  .body-wrap { flex: 1; padding: 44px 24px 60px; }
-  .container { max-width: 680px; margin: 0 auto; }
+/* ── HERO STRIP ── */
+.hero {
+  background: linear-gradient(135deg, #1a2e4a 0%, #243a58 100%);
+  padding: 40px 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -60px; top: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(0,174,239,.08);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(0,174,239,.15);
+  border: 1px solid rgba(0,174,239,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 11px; font-weight: 700; color: #00AEEF;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .04em; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-badge::before {
+  content: ''; width: 7px; height: 7px;
+  border-radius: 50%; background: #00AEEF;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800; color: #fff;
+  letter-spacing: -.01em; line-height: 1.1;
+  margin-bottom: 10px;
+}
+.hero-title span { color: #00AEEF; }
+.hero-sub {
+  font-size: 14px; color: rgba(255,255,255,.6);
+  max-width: 500px; line-height: 1.6;
+}
 
-  .section-label {
-    font-size: 0.85rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #333;
-    margin-bottom: 14px;
-    padding-left: 2px;
-  }
+/* ── MAIN CONTENT ── */
+.main { flex: 1; padding: 40px 40px 60px; max-width: 960px; margin: 0 auto; width: 100%; }
 
-  .card-group { display: flex; flex-direction: column; gap: 14px; margin-bottom: 44px; }
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 800; color: #7a90aa;
+  letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-left: 10px; border-left: 3px solid #00AEEF;
+}
 
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 0;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    display: flex;
-    align-items: stretch;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.15s, box-shadow 0.15s;
-    overflow: hidden;
-    border: 0.5px solid #e8e8e8;
-  }
-  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.11); }
+/* ── FEATURED BUTTON (Dashboard) ── */
+.featured-btn {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 2px solid #dde3ec;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 36px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  cursor: pointer;
+}
+.featured-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.12);
+  border-color: #00AEEF;
+}
+.featured-stripe { width: 8px; flex-shrink: 0; background: #00AEEF; }
+.featured-icon-col {
+  background: #e8f7fd;
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 30px;
+  flex-shrink: 0;
+}
+.featured-icon { font-size: 3.2rem; line-height: 1; }
+.featured-body {
+  flex: 1; padding: 28px 24px 28px 22px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.featured-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; color: #00AEEF; margin-bottom: 6px;
+  font-family: 'DM Mono', monospace;
+}
+.featured-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px; font-weight: 800; color: #1a2e4a;
+  letter-spacing: -.01em; margin-bottom: 6px;
+}
+.featured-desc {
+  font-size: 13.5px; color: #7a90aa; line-height: 1.6; max-width: 520px;
+}
+.featured-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  background: #00AEEF; color: #fff;
+  font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: .05em; text-transform: uppercase;
+  width: fit-content; transition: background .15s;
+}
+.featured-btn:hover .featured-cta { background: #009ad6; }
+.featured-stats {
+  display: flex; flex-direction: column; gap: 12px;
+  align-items: flex-end; justify-content: center;
+  padding: 28px 28px 28px 12px; flex-shrink: 0;
+}
+.fstat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800; line-height: 1; letter-spacing: -.01em;
+}
+.fstat-val.green { color: #0d7a4a; }
+.fstat-val.red   { color: #c0392b; }
+.fstat-val.cyan  { color: #00AEEF; }
+.fstat-lbl { font-size: 9px; font-weight: 700; color: #aab; text-transform: uppercase; letter-spacing: .07em; margin-top: 2px; }
 
-  .card-accent { width: 5px; flex-shrink: 0; }
-  .card-accent.blue  { background: #00AEEF; }
-  .card-accent.green { background: #2d5a2d; }
-  .card-accent.gold  { background: #B8860B; }
+/* ── PROGRAM CARDS ── */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.prog-card {
+  display: flex; flex-direction: column;
+  background: #fff;
+  border: 2px solid #dde3ec;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  cursor: pointer;
+}
+.prog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(0,0,0,.12);
+}
+.prog-card.green:hover { border-color: #0d7a4a; }
+.prog-card.gold:hover  { border-color: #b45309; }
+.prog-card-top {
+  padding: 24px 24px 20px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.prog-icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; flex-shrink: 0;
+}
+.prog-icon.green { background: #e8f5ee; }
+.prog-icon.gold  { background: #fef7ec; }
+.prog-meta { flex: 1; }
+.prog-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 5px;
+  font-family: 'DM Mono', monospace;
+}
+.prog-tag.green { color: #0d7a4a; }
+.prog-tag.gold  { color: #b45309; }
+.prog-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800; color: #1a2e4a;
+  letter-spacing: -.01em; line-height: 1.2;
+}
+.prog-divider { height: 1px; background: #eef2f7; margin: 0; }
+.prog-body { padding: 16px 24px 20px; flex: 1; }
+.prog-desc { font-size: 13px; color: #7a90aa; line-height: 1.65; }
+.prog-footer {
+  padding: 14px 24px;
+  background: #f8fafc;
+  border-top: 1px solid #eef2f7;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.prog-open {
+  font-size: 12px; font-weight: 700; color: #445570;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: .05em; text-transform: uppercase;
+}
+.prog-arrow { font-size: 1.2rem; color: #c8d2e0; transition: color .15s, transform .15s; }
+.prog-card:hover .prog-arrow { transform: translateX(4px); }
+.prog-card.green:hover .prog-arrow { color: #0d7a4a; }
+.prog-card.gold:hover  .prog-arrow { color: #b45309; }
 
-  .card-inner { display: flex; align-items: center; gap: 18px; padding: 20px 22px; flex: 1; }
+/* ── FOOTER ── */
+.footer {
+  background: #1a2e4a;
+  border-top: 3px solid #00AEEF;
+  padding: 16px 40px;
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'DM Mono', monospace;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
 
-  .card-icon-wrap {
-    width: 44px; height: 44px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; flex-shrink: 0;
-  }
-  .card-icon-wrap.blue  { background: #e6f6fd; }
-  .card-icon-wrap.green { background: #eaf2ea; }
-  .card-icon-wrap.gold  { background: #faf3e0; }
-
-  .card-body { flex: 1; }
-  .card-title { font-size: 1rem; font-weight: 800; color: #111; margin-bottom: 4px; }
-  .card-desc  { font-size: 0.81rem; color: #888; line-height: 1.55; }
-
-  .card-arrow { font-size: 1.1rem; color: #ccc; flex-shrink: 0; transition: color 0.15s, transform 0.15s; }
-  .card:hover .card-arrow { color: #00AEEF; transform: translateX(3px); }
-
-  .footer {
-    background: #00AEEF;
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    padding: 18px;
-    font-size: 0.75rem;
-  }
-  .footer strong { color: #fff; }
+@media (max-width: 700px) {
+  .header { padding: 14px 20px; min-height: auto; }
+  .header-logo { height: 36px; }
+  .header-brand { font-size: 22px; }
+  .hero, .main { padding-left: 20px; padding-right: 20px; }
+  .featured-stats { display: none; }
+  .card-grid { grid-template-columns: 1fr; }
+  .footer { padding: 14px 20px; }
+}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <div class="header-logo">
-    <img src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png" alt="Collision Auto Parts" />
+  <div class="header-left">
+    <img class="header-logo"
+         src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png"
+         alt="Collision Auto Parts"
+         onerror="this.style.display='none'">
+    <div class="header-divider"></div>
+    <div class="header-brand">COL <em>AUTO PARTS</em></div>
   </div>
-  <div class="header-title">Sales Resource Hub</div>
-  <div class="header-sub">Internal program guides &amp; references for the sales team</div>
+  <div class="header-right">
+    <div class="header-title">Sales Resource Hub</div>
+    <div class="header-sub">Inside Sales &nbsp;·&nbsp; Dashboards &amp; Programs &nbsp;·&nbsp; Internal Only</div>
+  </div>
 </div>
 
-<div class="body-wrap">
-  <div class="container">
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Week 23 &nbsp;·&nbsp; June 2026</div>
+  <div class="hero-title">Your Daily Sales<br><span>Command Center</span></div>
+  <div class="hero-sub">Everything the inside sales team needs — live call stats, rep rankings, sales programs, and plan tracking. Updated every day.</div>
+</div>
 
-    <div class="section-label">Dashboards</div>
-    <div class="card-group">
+<!-- MAIN -->
+<div class="main">
 
-      <a class="card" href="COL - Week 23 CSR Dashboard (Mon-Fri 5-25 5-29).html">
-        <div class="card-accent blue"></div>
-        <div class="card-inner">
-          <div class="card-icon-wrap blue">📊</div>
-          <div class="card-body">
-            <div class="card-title">Daily CSR Dashboard</div>
-            <div class="card-desc">Inside sales call stats, rep rankings, add-on performance, and performance to plan. Updated weekly.</div>
-          </div>
-          <div class="card-arrow">›</div>
-        </div>
-      </a>
+  <div class="section-label" style="margin-top:0">Live Dashboard</div>
 
+  <a class="featured-btn" href="COL CSR Dashboard.html">
+    <div class="featured-stripe"></div>
+    <div class="featured-icon-col">
+      <div class="featured-icon">📊</div>
     </div>
-
-    <div class="section-label">Sales Programs</div>
-    <div class="card-group">
-
-      <a class="card" href="COL - The Bounty Sales One-Pager.html">
-        <div class="card-accent green"></div>
-        <div class="card-inner">
-          <div class="card-icon-wrap green">🏹</div>
-          <div class="card-body">
-            <div class="card-title">The Bounty Program</div>
-            <div class="card-desc">Dormant account reactivation contest — prizes, rules, outcome codes, and how to log calls. May–December 2026.</div>
-          </div>
-          <div class="card-arrow">›</div>
-        </div>
-      </a>
-
-      <a class="card" href="COL - Old Gold Sales One-Pager.html">
-        <div class="card-accent gold"></div>
-        <div class="card-inner">
-          <div class="card-icon-wrap gold">🏅</div>
-          <div class="card-body">
-            <div class="card-title">Old Gold Program</div>
-            <div class="card-desc">Slow-moving inventory hot buy program — tiered discounts on aged D &amp; F category parts. How to spot, sell, and log OG items.</div>
-          </div>
-          <div class="card-arrow">›</div>
-        </div>
-      </a>
-
+    <div class="featured-body">
+      <div class="featured-eyebrow">Updated Daily &nbsp;·&nbsp; Week 23</div>
+      <div class="featured-title">Daily CSR Dashboard</div>
+      <div class="featured-desc">
+        Today's call queue service levels, rep-by-rep performance rankings, scoring breakdown, add-on tracking, and sales-to-plan progress for June. New data every morning.
+      </div>
+      <div class="featured-cta">Open Dashboard &nbsp;›</div>
     </div>
+    <div class="featured-stats">
+      <div>
+        <div class="fstat-val" style="color:#c0392b">-19.4%</div>
+        <div class="fstat-lbl">June Sales to Plan</div>
+      </div>
+      <div>
+        <div class="fstat-val" style="color:#b45309">1,016</div>
+        <div class="fstat-lbl">Calls vs 1,104 avg</div>
+      </div>
+      <div>
+        <div class="fstat-val green" style="font-size:17px">MatthewO</div>
+        <div class="fstat-lbl">Top Rep · 79.4 pts</div>
+      </div>
+    </div>
+  </a>
+
+  <div class="section-label">Sales Programs</div>
+  <div class="card-grid">
+
+    <a class="prog-card green" href="COL - The Bounty Sales One-Pager.html">
+      <div class="prog-card-top">
+        <div class="prog-icon green">🏹</div>
+        <div class="prog-meta">
+          <div class="prog-tag green">Active · May – Dec 2026</div>
+          <div class="prog-title">The Bounty Program</div>
+        </div>
+      </div>
+      <div class="prog-divider"></div>
+      <div class="prog-body">
+        <div class="prog-desc">
+          Dormant account reactivation contest. Prizes, rules, outcome codes, and exactly how to log every call. Don't leave money on the table.
+        </div>
+      </div>
+      <div class="prog-footer">
+        <div class="prog-open">Open One-Pager</div>
+        <div class="prog-arrow">›</div>
+      </div>
+    </a>
+
+    <a class="prog-card gold" href="COL - Old Gold Sales One-Pager.html">
+      <div class="prog-card-top">
+        <div class="prog-icon gold">🏅</div>
+        <div class="prog-meta">
+          <div class="prog-tag gold">Ongoing</div>
+          <div class="prog-title">Old Gold Program</div>
+        </div>
+      </div>
+      <div class="prog-divider"></div>
+      <div class="prog-body">
+        <div class="prog-desc">
+          Slow-moving inventory hot buy program. Tiered discounts on aged D &amp; F category parts — how to spot them, sell them, and log Old Gold items correctly.
+        </div>
+      </div>
+      <div class="prog-footer">
+        <div class="prog-open">Open One-Pager</div>
+        <div class="prog-arrow">›</div>
+      </div>
+    </a>
 
   </div>
+
 </div>
 
 <div class="footer">
-  <strong>COL — Collision Auto Parts</strong> &nbsp;·&nbsp; Internal Use Only &nbsp;·&nbsp; Questions? See Blake.
+  <span>COL Auto Parts &nbsp;·&nbsp; Sales Resource Hub &nbsp;·&nbsp; Internal Use Only</span>
+  <span>Questions? See Blake.</span>
 </div>
 
 </body>
