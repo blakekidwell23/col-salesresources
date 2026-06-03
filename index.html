@@ -162,19 +162,6 @@ body {
   width: fit-content; transition: background .15s;
 }
 .featured-btn:hover .featured-cta { background: #009ad6; }
-.featured-stats {
-  display: flex; flex-direction: column; gap: 12px;
-  align-items: flex-end; justify-content: center;
-  padding: 28px 28px 28px 12px; flex-shrink: 0;
-}
-.fstat-val {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 22px; font-weight: 800; line-height: 1; letter-spacing: -.01em;
-}
-.fstat-val.green { color: #0d7a4a; }
-.fstat-val.red   { color: #c0392b; }
-.fstat-val.cyan  { color: #00AEEF; }
-.fstat-lbl { font-size: 9px; font-weight: 700; color: #aab; text-transform: uppercase; letter-spacing: .07em; margin-top: 2px; }
 
 /* ── PROGRAM CARDS ── */
 .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -255,8 +242,7 @@ body {
   .header-logo { height: 36px; }
   .header-brand { font-size: 22px; }
   .hero, .main { padding-left: 20px; padding-right: 20px; }
-  .featured-stats { display: none; }
-  .card-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
   .footer { padding: 14px 20px; }
 }
 </style>
@@ -304,19 +290,6 @@ body {
       </div>
       <div class="featured-cta">Open Dashboard &nbsp;›</div>
     </div>
-    <div class="featured-stats">
-      <div>
-        <div class="fstat-val" style="color:#c0392b">-19.4%</div>
-        <div class="fstat-lbl">June Sales to Plan</div>
-      </div>
-      <div>
-        <div class="fstat-val" style="color:#b45309">1,016</div>
-        <div class="fstat-lbl">Calls vs 1,104 avg</div>
-      </div>
-      <div>
-        <div class="fstat-val green" style="font-size:17px">MatthewO</div>
-        <div class="fstat-lbl">Top Rep · 79.4 pts</div>
-      </div>
     </div>
   </a>
 
