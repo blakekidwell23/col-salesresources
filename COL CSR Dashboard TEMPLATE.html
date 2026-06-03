@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COL — CSR Daily Dashboard | Tue Jun 2, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f0f4f8;--surface:#fff;--border:#dde3ec;--border2:#c8d2e0;
+  --navy:#1a2e4a;--navy2:#243a58;--cyan:#00AEEF;--cyan-bg:#e8f7fd;--cyan-bd:rgba(0,174,239,.25);
+  --text:#1a2e4a;--text2:#445570;--muted:#7a90aa;
+  --green:#0d7a4a;--green-bg:#e8f5ee;--green-bd:#a3d9bc;
+  --red:#c0392b;--red-bg:#fdf0ee;--red-bd:#f0a89e;
+  --amber:#b45309;--amber-bg:#fef7ec;--amber-bd:#f5c87a;
+  --gold:#b45309;--purple:#6d28d9;--pink:#be185d;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.top-bar{background:var(--navy);padding:0 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-bottom:4px solid var(--cyan);min-height:90px;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.25)}
+.top-bar-left{display:flex;align-items:center;gap:20px}
+.top-logo{height:52px;width:auto;display:block;filter:brightness(0) invert(1)}
+.brand{color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;letter-spacing:.08em;line-height:1}
+.brand em{color:#fff;font-style:normal}
+.brand-divider{width:1px;height:40px;background:rgba(255,255,255,.2);flex-shrink:0}
+.dash-title{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-align:right}
+.dash-sub{color:var(--cyan);font-family:'DM Mono',monospace;font-size:12px;margin-top:4px;text-align:right;opacity:.9}
+.tab-bar{background:#f0f4f8;border-bottom:2px solid var(--border);padding:12px 28px;display:flex;overflow-x:auto;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.tab{font-size:14px;font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:12px 24px;cursor:pointer;color:var(--text2);background:#fff;border:2px solid var(--border);border-radius:8px;white-space:nowrap;transition:all .15s;box-shadow:0 1px 4px rgba(0,0,0,.06);user-select:none}
+.tab:hover{color:var(--navy);border-color:var(--cyan);background:var(--cyan-bg)}
+.tab.active{color:#fff;background:var(--cyan);border-color:var(--cyan);box-shadow:0 2px 10px rgba(0,174,239,.35)}
+.section{display:none;padding:28px 28px 64px}.section.active{display:block}
+.sec-lbl{font-size:10.5px;font-weight:800;color:var(--navy2);letter-spacing:.12em;text-transform:uppercase;margin:28px 0 14px;padding-left:10px;border-left:3px solid var(--cyan)}
+.sec-lbl:first-child{margin-top:0}
+.metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.mc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px 16px;border-left:4px solid var(--cyan);box-shadow:0 1px 4px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:4px}
+.mc.green{border-left-color:var(--green)}.mc.red{border-left-color:var(--red)}.mc.amber{border-left-color:var(--amber)}
+.mc-lbl{font-size:11.5px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.06em}
+.mc-val{font-size:30px;font-weight:800;color:var(--navy);font-family:'Barlow Condensed',sans-serif;line-height:1.1;letter-spacing:-.01em}
+.mc-val.cyan{color:var(--cyan)}.mc-val.green{color:var(--green)}.mc-val.red{color:var(--red)}.mc-val.amber{color:var(--amber)}
+.mc-sub{font-size:11px;font-weight:600;color:var(--muted);margin-top:2px}
+.mc-sub.green{color:var(--green)}.mc-sub.red{color:var(--red)}.mc-sub.amber{color:var(--amber)}
+.alert-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+.ac{background:#fff;border-radius:8px;padding:16px 18px;border:1px solid var(--border);border-left:4px solid;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.ac.green{border-left-color:var(--green);background:var(--green-bg);border-color:var(--green-bd)}
+.ac.red{border-left-color:var(--red);background:var(--red-bg);border-color:var(--red-bd)}
+.ac.amber{border-left-color:var(--amber);background:var(--amber-bg);border-color:var(--amber-bd)}
+.ac.blue{border-left-color:var(--cyan);background:var(--cyan-bg);border-color:var(--cyan-bd)}
+.ac-title{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.ac.green .ac-title{color:var(--green)}.ac.red .ac-title{color:var(--red)}.ac.amber .ac-title{color:var(--amber)}.ac.blue .ac-title{color:#007ab8}
+.ac-item{font-size:12px;color:var(--text2);margin-bottom:5px;padding-left:12px;position:relative;line-height:1.55}
+.ac-item::before{content:'›';position:absolute;left:0;font-weight:700}
+.ac.green .ac-item::before{color:var(--green)}.ac.red .ac-item::before{color:var(--red)}.ac.amber .ac-item::before{color:var(--amber)}.ac.blue .ac-item::before{color:var(--cyan)}
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:8px;margin-bottom:22px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead{background:var(--navy)}
+thead th{font-size:10px;font-weight:700;color:#fff;text-align:left;padding:10px 12px;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
+thead th.r{text-align:right}thead th.c{text-align:center}
+tbody tr{border-bottom:1px solid var(--border)}tbody tr:last-child{border-bottom:none}tbody tr:nth-child(even){background:#f8fafc}tbody tr:hover{background:#eef4fb}
+td{padding:9px 12px;vertical-align:middle;color:var(--text);font-weight:500}
+td.r{text-align:right;font-variant-numeric:tabular-nums}td.c{text-align:center}
+td.name{font-weight:700;color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-size:14.5px;white-space:nowrap}
+tr.total-row td{background:#e8edf5!important;font-weight:700;color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-size:13px;border-top:2px solid var(--navy)}
+tr.week-sep td{background:var(--navy)!important;color:rgba(255,255,255,.5);font-size:9.5px;font-family:'DM Mono',monospace;letter-spacing:.08em;padding:5px 12px}
+.chip{display:inline-block;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 7px;border-radius:4px}
+.chi{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+.chm{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd)}
+.chl{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+.chn{background:#f1f5f9;color:var(--muted);border:1px solid var(--border)}
+.sbar{display:flex;align-items:center;gap:8px}
+.sbar-bg{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;min-width:50px}
+.sbar-fill{height:100%;border-radius:4px}
+.fg{background:var(--green)}.fa{background:var(--amber)}.fr{background:var(--red)}.fc{background:var(--cyan)}
+.sbar-val{font-size:11px;font-weight:700;font-family:'DM Mono',monospace;width:44px;text-align:right;flex-shrink:0}
+.rank{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:800;font-family:'Barlow Condensed',sans-serif}
+.rank.g{background:#FFD700;color:#000}.rank.s{background:#bbb;color:#333}.rank.b{background:#b87333;color:#fff}.rank.n{background:#e2e8f0;color:var(--muted);font-size:11px}
+.score-segs{display:flex;height:7px;border-radius:4px;overflow:hidden;gap:1px;width:110px}
+.tgt-bar{display:flex;align-items:center;gap:6px;margin-top:3px}
+.tgt-bg{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.tgt-pct{font-size:9px;font-weight:700;color:var(--muted);width:34px;text-align:right;flex-shrink:0}
+.addon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.mtd-box{background:var(--cyan-bg);border:1px solid var(--cyan-bd);border-radius:8px;padding:16px 20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:18px}
+.mtd-box input{background:#fff;border:1px solid var(--border2);border-radius:6px;color:var(--navy);padding:7px 12px;font-size:14px;font-family:'DM Mono',monospace;width:120px;outline:none}
+.mtd-box input:focus{border-color:var(--cyan)}
+.mtd-box button{background:var(--cyan);color:#fff;border:none;border-radius:6px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em}
+.notice{background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:12px 16px;font-size:11.5px;color:#856404;margin-bottom:16px;font-family:'DM Mono',monospace}
+.footer{background:var(--navy);border-top:3px solid var(--cyan);padding:12px 28px;font-size:10px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+@media(max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr)}.alert-grid,.addon-grid{grid-template-columns:1fr 1fr}.top-bar{position:static;padding:14px 16px;min-height:auto}.top-logo{height:36px}.brand{font-size:22px}.section{padding:18px 14px 48px}.tab-bar{padding:10px 14px;gap:8px}.tab{font-size:12px;padding:9px 14px}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <img class="top-logo" src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png" alt="Collision Auto Parts" onerror="this.style.display='none'">
+    <div class="brand-divider"></div>
+    <div class="brand">COL <em>AUTO PARTS</em></div>
+  </div>
+  <div>
+    <div class="dash-title">CSR Daily Dashboard</div>
+    <div class="dash-sub">Week 23 · Day 2 &nbsp;·&nbsp; Tuesday, June 2, 2026 &nbsp;·&nbsp; Internal Only</div>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <div class="tab active" onclick="showTab('summary',this)">Summary</div>
+  <div class="tab" onclick="showTab('plan',this)">Sales to Plan</div>
+  <div class="tab" onclick="showTab('queues',this)">Call Queues</div>
+  <div class="tab" onclick="showTab('reps',this)">Rep Performance</div>
+  <div class="tab" onclick="showTab('addons',this)">Add-Ons</div>
+</div>
+
+
+<!-- ══════════ SUMMARY ══════════ -->
+<div class="section active" id="tab-summary">
+
+  <!-- HEADLINE STRIP -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;border-left:4px solid var(--amber);box-shadow:0 1px 4px rgba(0,0,0,.05)">
+      <div style="font-size:11px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Week 23 Revenue</div>
+      <div style="font-size:28px;font-weight:800;color:var(--navy);font-family:'Barlow Condensed',sans-serif;line-height:1.1">$341,483</div>
+      <div style="font-size:11px;font-weight:600;color:var(--amber);margin-top:3px">-13.2% vs $393,418 week plan</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;border-left:4px solid var(--cyan);box-shadow:0 1px 4px rgba(0,0,0,.05)">
+      <div style="font-size:11px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Calls Answered (Week)</div>
+      <div style="font-size:28px;font-weight:800;color:var(--navy);font-family:'Barlow Condensed',sans-serif;line-height:1.1">2,295</div>
+      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-top:3px">7 of 14 phone reps hit ≥80 today</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;border-left:4px solid var(--green);box-shadow:0 1px 4px rgba(0,0,0,.05)">
+      <div style="font-size:11px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Team Gross Margin</div>
+      <div style="font-size:28px;font-weight:800;color:var(--green);font-family:'Barlow Condensed',sans-serif;line-height:1.1">56.7%</div>
+      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-top:3px">Team discount: 17.7% wtd avg</div>
+    </div>
+  </div>
+
+  <!-- WAREHOUSE SCORECARD -->
+  <div class="sec-lbl">📍 Warehouse — Sales to Plan (MTD Jun 1–2)</div>
+  <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin-bottom:22px;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+    <!-- sorted worst to best -->
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">Fresno</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red);font-weight:700">$13,888 / $24,961 &nbsp;—&nbsp; <strong>-44.4%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:55.6%;height:100%;background:var(--red);border-radius:6px"></div></div>
+    </div>
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">Santa Rosa</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red);font-weight:700">$18,335 / $24,364 &nbsp;—&nbsp; <strong>-24.7%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:75.3%;height:100%;background:var(--red);border-radius:6px"></div></div>
+    </div>
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">Hayward</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red);font-weight:700">$126,727 / $163,955 &nbsp;—&nbsp; <strong>-22.7%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:77.3%;height:100%;background:var(--red);border-radius:6px"></div></div>
+    </div>
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">Albuquerque</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red);font-weight:700">$31,760 / $39,175 &nbsp;—&nbsp; <strong>-18.9%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:81.1%;height:100%;background:var(--amber);border-radius:6px"></div></div>
+    </div>
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">San Diego</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);font-weight:700">$44,245 / $54,813 &nbsp;—&nbsp; <strong>-19.3%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:80.7%;height:100%;background:var(--amber);border-radius:6px"></div></div>
+    </div>
+    <div style="margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--navy)">Santa Fe Springs</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);font-weight:700">$71,933 / $81,573 &nbsp;—&nbsp; <strong>-11.8%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:88.2%;height:100%;background:var(--amber);border-radius:6px"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+        <span style="font-size:13px;font-weight:700;color:var(--green)">Sacramento ✓</span>
+        <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--green);font-weight:700">$34,595 / $29,537 &nbsp;—&nbsp; <strong>+17.1%</strong></span>
+      </div>
+      <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div style="width:100%;height:100%;background:var(--green);border-radius:6px"></div></div>
+    </div>
+  </div>
+
+  <!-- 80-CALL GOAL + COACHING FLAGS side by side -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px">
+
+    <!-- 80-CALL TRACKER -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+      <div style="font-size:10.5px;font-weight:800;color:var(--navy2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;padding-left:10px;border-left:3px solid var(--cyan)">📞 80-Call Goal — Today</div>
+      <div style="font-size:10.5px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Hit ✓</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">MatthewO &nbsp;143</span>
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">OmarR &nbsp;114</span>
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">IvanB &nbsp;109</span>
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">LuisP &nbsp;100</span>
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">MarioGO &nbsp;93</span>
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">PaulinaN &nbsp;88</span>
+        <span style="background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;font-family:'DM Mono',monospace">ZulemaA &nbsp;85</span>
+      </div>
+      <div style="font-size:10.5px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Missed ✗</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">DavidO</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--amber)">76 calls &nbsp;<span style="color:var(--red)">-4 short</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">ArturoS</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--amber)">71 calls &nbsp;<span style="color:var(--red)">-9 short</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">JoannaZ</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red)">64 calls &nbsp;<span style="color:var(--red)">-16 short</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">IsaacG</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red)">63 calls &nbsp;<span style="color:var(--red)">-17 short</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">ManuelSe</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red)">46 calls &nbsp;<span style="color:var(--red)">-34 short</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">FrankieL</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red)">45 calls &nbsp;<span style="color:var(--red)">-35 short</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">KeinaJ</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--red)">32 calls &nbsp;<span style="color:var(--red)">-48 short</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COACHING FLAGS -->
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.05)">
+      <div style="font-size:10.5px;font-weight:800;color:var(--navy2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;padding-left:10px;border-left:3px solid var(--cyan)">🎯 Coaching Flags — Today</div>
+
+      <div style="font-size:10.5px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Discount Concerns</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="background:var(--red-bg);border:1px solid var(--red-bd);border-radius:6px;padding:8px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">ManuelSe &nbsp;<span style="color:var(--red)">67.2% discount</span></div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px">2nd day in a row · $4,980 sold · 46 calls</div>
+        </div>
+        <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:6px;padding:8px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">IsaacG &nbsp;<span style="color:var(--amber)">39.1% discount</span></div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px">62.7% GM saves it · but leaving money on table</div>
+        </div>
+      </div>
+
+      <div style="font-size:10.5px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Low Conversion</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div style="background:var(--red-bg);border:1px solid var(--red-bd);border-radius:6px;padding:8px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">IsaacG &nbsp;<span style="color:var(--red)">29.4% conv</span></div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px">2nd day in a row · 63 calls · team avg 46.9%</div>
+        </div>
+        <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:6px;padding:8px 12px">
+          <div style="font-size:12px;font-weight:700;color:var(--navy)">MarioGO &nbsp;<span style="color:var(--amber)">44.2% conv</span></div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px">Hit 80-call goal (93) but conversion lagging</div>
+        </div>
+      </div>
+
+      <div style="font-size:10.5px;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🎫 MTD Add-On Leaders</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">OmarR</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text2)">5 coupons &nbsp;· &nbsp;<span style="color:var(--green);font-weight:700">$5 spiff</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">ManuelSe</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text2)">2 gloves &nbsp;·&nbsp; <span style="color:var(--green);font-weight:700">$2 spiff</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">CynthiaP</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text2)">2 coupons &nbsp;·&nbsp; <span style="color:var(--green);font-weight:700">$2 spiff</span></span>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;font-weight:700;color:var(--navy)">ArturoS · IsaacG · JacquelineS</span>
+          <span style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text2)">1 glove each</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP PERFORMERS + WINS -->
+  <div class="sec-lbl">🏆 Today's Highlights</div>
+  <div class="alert-grid">
+    <div class="ac green">
+      <div class="ac-title">Top Performers</div>
+      <div class="ac-item">MatthewO leads at 92.9 pts — $14,310 on 143 calls, 65.4% conversion, hit 80-call bonus.</div>
+      <div class="ac-item">ArturoS at 82.9 pts — $11,535 on 71 calls, 6.6% discount. Missed 80-bonus by 9 calls.</div>
+      <div class="ac-item">OmarR jumps to #3 at 79.1 pts — $11,037 on 114 calls. Big improvement over yesterday.</div>
+    </div>
+    <div class="ac green">
+      <div class="ac-title">📈 Wins vs Yesterday</div>
+      <div class="ac-item">Team discount improved 19.0% → 12.3% — much better price discipline across the board.</div>
+      <div class="ac-item">$/Call jumped from $67.90 → $86.85 — team converting at significantly higher value per call.</div>
+      <div class="ac-item">ZulemaA surges to $8,526 with 85 calls &amp; 80-call bonus — up from $2,070 on Monday.</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════ SALES TO PLAN ══════════ -->
+<div class="section" id="tab-plan">
+  <div class="sec-lbl">June MTD Summary — Through Jun 2 (2 of 20 Days)</div>
+  <div class="metric-grid">
+    <div class="mc amber"><div class="mc-lbl">MTD Plan</div><div class="mc-val">$393,418</div><div class="mc-sub">2-day plan target</div></div>
+    <div class="mc red"><div class="mc-lbl">MTD Actual</div><div class="mc-val red">$341,483</div><div class="mc-sub red">-$51,935 below plan</div></div>
+    <div class="mc amber"><div class="mc-lbl">MTD Variance %</div><div class="mc-val amber">-13.2%</div><div class="mc-sub amber">Improved from -19.4% Day 1</div></div>
+    <div class="mc"><div class="mc-lbl">Full Month Plan</div><div class="mc-val">$3,875,676</div><div class="mc-sub">20 business days</div></div>
+    <div class="mc"><div class="mc-lbl">Today vs Plan</div><div class="mc-val amber">-7.9%</div><div class="mc-sub amber">$195,579 vs $212,429</div></div>
+    <div class="mc green"><div class="mc-lbl">Improving</div><div class="mc-val green">+6.2pp</div><div class="mc-sub green">MTD gap closing vs Day 1</div></div>
+  </div>
+
+  <div class="sec-lbl">By Location — Today (Jun 2) &amp; MTD</div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th>Location</th><th class="r">Today Plan</th><th class="r">Today Actual</th><th class="r">Today Var $</th><th>Today %</th><th class="r">MTD Plan</th><th class="r">MTD Actual</th><th class="c">MTD %</th><th class="c">Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">Hayward</td><td class="r">$92,862</td><td class="r">$67,941</td><td class="r" style="color:var(--red)">-$24,921</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fr" style="width:73.2%"></div></div><div class="sbar-val" style="color:var(--red)">-26.8%</div></div></td><td class="r">$163,955</td><td class="r">$126,727</td><td class="c"><span class="chip chl">-22.7%</span></td><td class="c"><span class="chip chl">MISS</span></td></tr>
+        <tr><td class="name">Santa Fe Springs</td><td class="r">$46,168</td><td class="r">$52,751</td><td class="r" style="color:var(--green)">+$6,583</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fg" style="width:100%"></div></div><div class="sbar-val" style="color:var(--green)">+14.3%</div></div></td><td class="r">$81,573</td><td class="r">$71,933</td><td class="c"><span class="chip chl">-11.8%</span></td><td class="c"><span class="chip chi">TODAY ✓</span></td></tr>
+        <tr><td class="name">San Diego</td><td class="r">$24,283</td><td class="r">$25,260</td><td class="r" style="color:var(--green)">+$977</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fg" style="width:100%"></div></div><div class="sbar-val" style="color:var(--green)">+4.0%</div></div></td><td class="r">$54,813</td><td class="r">$44,245</td><td class="c"><span class="chip chl">-19.3%</span></td><td class="c"><span class="chip chi">TODAY ✓</span></td></tr>
+        <tr><td class="name">Sacramento</td><td class="r">$16,895</td><td class="r">$14,879</td><td class="r" style="color:var(--red)">-$2,016</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fa" style="width:88.1%"></div></div><div class="sbar-val" style="color:var(--amber)">-11.9%</div></div></td><td class="r">$29,537</td><td class="r">$34,595</td><td class="c"><span class="chip chi">+17.1%</span></td><td class="c"><span class="chip chi">MTD ✓</span></td></tr>
+        <tr><td class="name">Santa Rosa</td><td class="r">$13,058</td><td class="r">$12,327</td><td class="r" style="color:var(--red)">-$731</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fa" style="width:94.4%"></div></div><div class="sbar-val" style="color:var(--amber)">-5.6%</div></div></td><td class="r">$24,364</td><td class="r">$18,335</td><td class="c"><span class="chip chl">-24.7%</span></td><td class="c"><span class="chip chm">CLOSE</span></td></tr>
+        <tr><td class="name">Fresno</td><td class="r">$11,926</td><td class="r">$7,106</td><td class="r" style="color:var(--red)">-$4,820</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fr" style="width:59.6%"></div></div><div class="sbar-val" style="color:var(--red)">-40.4%</div></div></td><td class="r">$24,961</td><td class="r">$13,888</td><td class="c"><span class="chip chl">-44.4%</span></td><td class="c"><span class="chip chl">MISS</span></td></tr>
+        <tr><td class="name">Albuquerque</td><td class="r">$19,162</td><td class="r">$15,315</td><td class="r" style="color:var(--red)">-$3,847</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fr" style="width:79.9%"></div></div><div class="sbar-val" style="color:var(--red)">-20.1%</div></div></td><td class="r">$39,175</td><td class="r">$31,760</td><td class="c"><span class="chip chl">-18.9%</span></td><td class="c"><span class="chip chl">MISS</span></td></tr>
+        <tr class="total-row"><td>TOTAL COL</td><td class="r">$212,429</td><td class="r">$195,579</td><td class="r" style="color:var(--red)">-$16,850</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fa" style="width:92.1%"></div></div><div class="sbar-val" style="color:var(--amber)">-7.9%</div></div></td><td class="r">$393,418</td><td class="r">$341,483</td><td class="c"><span class="chip chm">-13.2%</span></td><td class="c"><span class="chip chm">-13.2%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-lbl">June Daily Calendar — Plan vs Actual</div>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Date</th><th class="r">Daily Plan</th><th class="r">Actual</th><th class="r">Variance $</th><th style="min-width:130px">Variance %</th><th class="c">Status</th></tr></thead>
+      <tbody>
+        <tr style="background:#eef4fb"><td class="name" style="color:var(--green)">Mon Jun 01 ✓</td><td class="r">$180,990</td><td class="r">$145,905</td><td class="r" style="color:var(--red)">-$35,085</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fr" style="width:80.6%"></div></div><div class="sbar-val" style="color:var(--red)">-19.4%</div></div></td><td class="c"><span class="chip chl">MISS</span></td></tr>
+        <tr style="background:#eef4fb"><td class="name" style="color:var(--cyan)">Tue Jun 02 ★</td><td class="r">$212,429</td><td class="r"><strong>$195,579</strong></td><td class="r" style="color:var(--red)">-$16,850</td><td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fa" style="width:92.1%"></div></div><div class="sbar-val" style="color:var(--amber)">-7.9%</div></div></td><td class="c"><span class="chip chm">-7.9%</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Wed Jun 03</td><td class="r">$213,937</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Thu Jun 04</td><td class="r">$176,855</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Fri Jun 05</td><td class="r">$165,215</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr class="week-sep"><td colspan="6">WEEK 2</td></tr>
+        <tr><td class="name" style="color:var(--muted)">Mon Jun 08</td><td class="r">$160,056</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Tue Jun 09</td><td class="r">$210,818</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Wed Jun 10</td><td class="r">$208,100</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Thu Jun 11</td><td class="r">$203,425</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Fri Jun 12</td><td class="r">$181,370</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr class="week-sep"><td colspan="6">WEEK 3</td></tr>
+        <tr><td class="name" style="color:var(--muted)">Mon Jun 15</td><td class="r">$135,174</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Tue Jun 16</td><td class="r">$224,834</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Wed Jun 17</td><td class="r">$221,727</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Thu Jun 18</td><td class="r">$206,922</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Fri Jun 19</td><td class="r">$187,910</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr class="week-sep"><td colspan="6">WEEK 4</td></tr>
+        <tr><td class="name" style="color:var(--muted)">Mon Jun 22</td><td class="r">$171,846</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Tue Jun 23</td><td class="r">$205,745</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Wed Jun 24</td><td class="r">$218,428</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Thu Jun 25</td><td class="r">$205,779</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr><td class="name" style="color:var(--muted)">Fri Jun 26</td><td class="r">$184,117</td><td class="r" style="color:var(--muted)">—</td><td class="r" style="color:var(--muted)">—</td><td style="color:var(--muted);font-size:10.5px;padding-left:12px">Pending</td><td class="c"><span class="chip chn">TBD</span></td></tr>
+        <tr class="total-row"><td>FULL MONTH</td><td class="r">$3,875,676</td><td class="r">$341,483</td><td class="r" style="color:var(--muted)">18 days TBD</td><td colspan="2" style="color:var(--muted);font-size:10.5px;padding-left:12px">10% of month complete</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ══════════ CALL QUEUES ══════════ -->
+<div class="section" id="tab-queues">
+
+  <div class="sec-lbl">Call Queue Performance — Week 23 (Jun 1–2 Combined)</div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th>Queue</th><th class="r">Received</th><th class="r">Answered</th><th class="r">Unanswered</th><th class="r">Unanswered %</th><th style="min-width:150px">Service Rate</th><th class="c">Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">6190 MoWest Sales</td>
+          <td class="r">249</td><td class="r">222</td><td class="r">27</td><td class="r">10.8%</td>
+          <td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fg" style="width:89.2%"></div></div><div class="sbar-val" style="color:var(--green)">89.2%</div></div></td>
+          <td class="c"><span class="chip chi">ON TARGET</span></td>
+        </tr>
+        <tr>
+          <td class="name">6650 SoCal Sales</td>
+          <td class="r">909</td><td class="r">689</td><td class="r" style="color:var(--red);font-weight:700">220</td><td class="r" style="color:var(--red)">24.2%</td>
+          <td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fr" style="width:75.8%"></div></div><div class="sbar-val" style="color:var(--red)">75.8%</div></div></td>
+          <td class="c"><span class="chip chl">NEEDS ATTN</span></td>
+        </tr>
+        <tr>
+          <td class="name">7100 NorCal Sales</td>
+          <td class="r">906</td><td class="r">800</td><td class="r">106</td><td class="r" style="color:var(--amber)">11.7%</td>
+          <td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fg" style="width:88.3%"></div></div><div class="sbar-val" style="color:var(--green)">88.3%</div></div></td>
+          <td class="c"><span class="chip chi">ON TARGET</span></td>
+        </tr>
+        <tr>
+          <td class="name">7800 Global Overflow</td>
+          <td class="r">319</td><td class="r">302</td><td class="r">17</td><td class="r" style="color:var(--green)">5.3%</td>
+          <td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fg" style="width:94.7%"></div></div><div class="sbar-val" style="color:var(--green)">94.7%</div></div></td>
+          <td class="c"><span class="chip chi">ON TARGET</span></td>
+        </tr>
+        <tr class="total-row">
+          <td>ALL QUEUES — WEEK 23</td>
+          <td class="r">2,383</td><td class="r">2,013</td><td class="r">370</td><td class="r">15.5%</td>
+          <td><div class="sbar"><div class="sbar-bg"><div class="sbar-fill fa" style="width:84.5%"></div></div><div class="sbar-val" style="color:var(--amber)">84.5%</div></div></td>
+          <td class="c"><span class="chip chm">84.5%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-lbl">Rep Call Detail — Tuesday Jun 2, 2026</div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr><th>Rep</th><th class="r">Calls Today</th><th class="r">Talk Time Today</th><th class="c">≥80 Calls?</th><th class="r">MTD Calls</th><th class="r">MTD Talk Time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">MatthewO</td><td class="r">143</td><td class="r">2:52:47</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">263</td><td class="r">5:48:53</td></tr>
+        <tr><td class="name">OmarR</td><td class="r">114</td><td class="r">2:26:16</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">231</td><td class="r">5:02:40</td></tr>
+        <tr><td class="name">IvanB</td><td class="r">109</td><td class="r">3:51:29</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">206</td><td class="r">7:39:05</td></tr>
+        <tr><td class="name">LuisP</td><td class="r">100</td><td class="r">2:22:50</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">213</td><td class="r">4:57:43</td></tr>
+        <tr><td class="name">MarioGO</td><td class="r">93</td><td class="r">3:00:10</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">175</td><td class="r">5:45:36</td></tr>
+        <tr><td class="name">PaulinaN</td><td class="r">88</td><td class="r">2:27:32</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">176</td><td class="r">4:41:16</td></tr>
+        <tr><td class="name">ZulemaA</td><td class="r">85</td><td class="r">3:08:41</td><td class="c"><span class="chip chi">✓ YES</span></td><td class="r">158</td><td class="r">6:31:25</td></tr>
+        <tr><td class="name">DavidO</td><td class="r">76</td><td class="r">2:33:59</td><td class="c"><span class="chip chl">✗ NO</span></td><td class="r">164</td><td class="r">5:45:37</td></tr>
+        <tr><td class="name">ArturoS</td><td class="r">71</td><td class="r">3:01:41</td><td class="c"><span class="chip chl">✗ NO</span></td><td class="r">169</td><td class="r">6:17:30</td></tr>
+        <tr><td class="name">JoannaZ</td><td class="r">64</td><td class="r">3:22:13<
