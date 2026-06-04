@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COL Auto Parts — 2026 Mid-Year Pulse Survey Results</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1a2e4a; --navy2:#243a58; --cyan:#00AEEF; --cyan-bg:#e8f7fd;
+  --green:#0d7a4a; --green-bg:#e8f5ee; --green-bd:#a3d9bc;
+  --amber:#b45309; --amber-bg:#fef7ec; --amber-bd:#f5c87a;
+  --red:#c0392b; --red-bg:#fdf0ee; --red-bd:#f0a89e;
+  --bg:#f0f4f8; --surface:#fff; --border:#dde3ec;
+  --text:#1a2e4a; --text2:#445570; --muted:#7a90aa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+
+/* ── HEADER ── */
+.header{background:var(--navy);padding:0 40px;display:flex;justify-content:space-between;align-items:center;min-height:90px;border-bottom:5px solid var(--cyan)}
+.logo-area{display:flex;align-items:center;gap:16px}
+.logo{height:50px;filter:brightness(0) invert(1)}
+.brand{color:var(--cyan);font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;letter-spacing:.08em}
+.brand em{color:#fff;font-style:normal}
+.divider{width:1px;height:38px;background:rgba(255,255,255,.2)}
+.header-right{text-align:right}
+.report-title{color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.report-sub{color:var(--cyan);font-family:'DM Mono',monospace;font-size:11.5px;margin-top:3px;opacity:.9}
+
+/* ── LAYOUT ── */
+.page{max-width:1100px;margin:0 auto;padding:36px 24px 80px}
+.section-label{font-size:10.5px;font-weight:800;color:var(--navy2);letter-spacing:.14em;text-transform:uppercase;margin:40px 0 16px;padding-left:12px;border-left:4px solid var(--cyan)}
+.section-label:first-child{margin-top:0}
+
+/* ── HERO STATS ── */
+.hero{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+.hero-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;border-left:5px solid var(--cyan);box-shadow:0 2px 8px rgba(0,0,0,.06);text-align:center}
+.hero-num{font-size:42px;font-weight:800;color:var(--navy);font-family:'Barlow Condensed',sans-serif;line-height:1;letter-spacing:-.02em}
+.hero-num.cyan{color:var(--cyan)}.hero-num.green{color:var(--green)}.hero-num.amber{color:var(--amber)}
+.hero-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:6px}
+
+/* ── TWO-COL ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+
+/* ── CARDS ── */
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.card-title{font-size:13px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--border)}
+
+/* ── DEPT SCORE GRID ── */
+.dept-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.dept-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 14px;box-shadow:0 1px 4px rgba(0,0,0,.05);text-align:center;position:relative;overflow:hidden}
+.dept-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px}
+.dept-card.score-high::before{background:var(--green)}
+.dept-card.score-mid::before{background:var(--amber)}
+.dept-card.score-low::before{background:var(--red)}
+.dept-name{font-size:13px;font-weight:800;color:var(--navy);font-family:'Barlow Condensed',sans-serif;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.dept-score{font-size:38px;font-weight:800;font-family:'Barlow Condensed',sans-serif;line-height:1;margin-bottom:2px}
+.dept-score.high{color:var(--green)}.dept-score.mid{color:var(--amber)}.dept-score.low{color:var(--red)}
+.dept-n{font-size:10.5px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:8px}
+.dept-bar-wrap{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:0 4px}
+.dept-bar{height:100%;border-radius:3px}
+
+/* ── TABLE ── */
+.tw{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin-bottom:28px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead{background:var(--navy)}
+thead th{font-size:10px;font-weight:700;color:#fff;padding:10px 12px;text-align:center;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
+thead th:first-child{text-align:left}
+tbody tr{border-bottom:1px solid var(--border)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:#f8fafc}
+tbody tr:hover{background:#eef4fb}
+td{padding:9px 12px;vertical-align:middle;text-align:center}
+td.dept-td{text-align:left;font-weight:700;color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-size:14px}
+.score-pill{display:inline-block;font-size:11.5px;font-weight:700;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:5px;min-width:36px}
+.sp-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+.sp-amber{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd)}
+.sp-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+.sp-na{background:#f1f5f9;color:var(--muted);border:1px solid var(--border)}
+tr.total-row td{background:#e8edf5!important;font-weight:700;color:var(--navy);border-top:2px solid var(--navy)}
+
+/* ── THEMES ── */
+.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.theme-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.theme-icon{font-size:28px;margin-bottom:10px}
+.theme-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.theme-body{font-size:12.5px;color:var(--text2);line-height:1.65}
+.theme-card.strength{border-left:4px solid var(--green)}
+.theme-card.opportunity{border-left:4px solid var(--amber)}
+.theme-card.critical{border-left:4px solid var(--red)}
+.theme-badge{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-bottom:8px}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-red{background:var(--red-bg);color:var(--red)}
+
+/* ── ACTION ITEMS ── */
+.action-list{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.action-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.action-num{flex-shrink:0;width:32px;height:32px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-family:'Barlow Condensed',sans-serif;font-size:16px}
+.action-content{}
+.action-title{font-weight:700;color:var(--navy);font-size:14px;margin-bottom:3px}
+.action-desc{font-size:12.5px;color:var(--text2);line-height:1.6}
+.action-dept{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--cyan-bg);color:var(--cyan);border:1px solid rgba(0,174,239,.3);padding:1px 7px;border-radius:4px;margin-top:6px;font-family:'DM Mono',monospace}
+
+/* ── FOOTNOTE ── */
+.footnote{font-size:10.5px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:-18px;margin-bottom:24px;padding-left:4px}
+
+/* ── FOOTER ── */
+.footer{background:var(--navy);border-top:4px solid var(--cyan);padding:14px 40px;font-size:10.5px;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+
+/* ── CALLOUT BOX ── */
+.callout{border-radius:10px;padding:18px 22px;margin-bottom:24px;border-left:5px solid}
+.callout.green{background:var(--green-bg);border-color:var(--green)}
+.callout.amber{background:var(--amber-bg);border-color:var(--amber)}
+.callout-title{font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.callout.green .callout-title{color:var(--green)}
+.callout.amber .callout-title{color:var(--amber)}
+.callout-body{font-size:12.5px;color:var(--text2);line-height:1.65}
+
+@media(max-width:800px){
+  .hero{grid-template-columns:repeat(2,1fr)}
+  .two-col,.three-col,.dept-grid,.theme-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-area">
+    <img class="logo" src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png" alt="COL Auto Parts" onerror="this.style.display='none'">
+    <div class="divider"></div>
+    <div class="brand">COL <em>AUTO PARTS</em></div>
+  </div>
+  <div class="header-right">
+    <div class="report-title">2026 Mid-Year Pulse Survey</div>
+    <div class="report-sub">Results &amp; Action Plan &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; Company-Wide</div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- HERO STATS -->
+  <div class="section-label">Survey at a Glance</div>
+  <div class="hero">
+    <div class="hero-card">
+      <div class="hero-num cyan">54</div>
+      <div class="hero-lbl">Total Responses</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-num">8</div>
+      <div class="hero-lbl">Departments</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-num amber">3.72</div>
+      <div class="hero-lbl">Avg Overall Score</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-num green">56%</div>
+      <div class="hero-lbl">Rated Morale Good or Excellent</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-title">📈 The Trend is Positive</div>
+    <div class="callout-body">Compared to our last survey, employees across most departments report meaningful improvements in leadership communication, operational organization, and overall company direction. The majority believe COL is moving in the right direction — and that momentum is something we want to build on together.</div>
+  </div>
+
+  <!-- COMPANY-WIDE SCORES -->
+  <div class="section-label">Company-Wide Question Scores</div>
+  <div class="two-col" style="margin-bottom:0">
+    <div class="card">
+      <div class="card-title">All 8 Questions — Average Score (out of 5)</div>
+      <canvas id="companyBarChart" height="260"></canvas>
+    </div>
+    <div class="card">
+      <div class="card-title">Team Morale — How Employees Rated Their Department</div>
+      <div style="max-width:320px;margin:0 auto">
+        <canvas id="moraleDonut" height="240"></canvas>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px" id="morale-legend"></div>
+    </div>
+  </div>
+  <div class="footnote" style="margin-top:8px">Scale: 1 = Strongly Disagree / Very Poor &nbsp;·&nbsp; 5 = Strongly Agree / Excellent</div>
+
+  <!-- DEPARTMENT SCORECARDS -->
+  <div class="section-label" style="margin-top:36px">Department Composite Scores</div>
+  <div class="footnote" style="margin-top:-10px;margin-bottom:12px">Composite = average of all 8 scored questions. Departments with fewer than 4 responses should be interpreted with caution due to small sample size.</div>
+  <div class="dept-grid" id="dept-cards"></div>
+
+  <!-- DEPT DETAIL TABLE -->
+  <div class="section-label">Score Breakdown by Department</div>
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:left;min-width:130px">Department</th>
+          <th>n</th>
+          <th>Role<br>Clarity</th>
+          <th>Leadership<br>Comms</th>
+          <th>Manager<br>Respect</th>
+          <th>Account-<br>ability</th>
+          <th>Company<br>Direction</th>
+          <th>Speak<br>Up</th>
+          <th>Morale</th>
+          <th>Trust in<br>Leadership</th>
+          <th>Composite</th>
+        </tr>
+      </thead>
+      <tbody id="dept-table-body"></tbody>
+    </table>
+  </div>
+  <div class="footnote">★ Engineering (n=1) and IT (n=2) scores reflect very small samples and may not be representative of the full team.</div>
+
+  <!-- RADAR CHART -->
+  <div class="section-label">Department Profile — Larger Teams (Sales, Shipping, Warehouse)</div>
+  <div class="card" style="margin-bottom:28px">
+    <div class="card-title">Score Comparison Across 8 Dimensions — Sales / Shipping / Warehouse</div>
+    <div style="max-width:560px;margin:0 auto">
+      <canvas id="radarChart" height="320"></canvas>
+    </div>
+  </div>
+
+  <!-- KEY THEMES -->
+  <div class="section-label">Key Themes from Written Feedback</div>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.7">
+    Employees shared candid, thoughtful feedback in open-ended responses. Below are the themes that surfaced across multiple departments — organized by what's working and where we can improve. Individual responses remain confidential.
+  </p>
+  <div class="theme-grid">
+
+    <div class="theme-card strength">
+      <div class="theme-badge badge-green">Strength</div>
+      <div class="theme-icon">📈</div>
+      <div class="theme-title">Positive Momentum</div>
+      <div class="theme-body">Many employees across departments noticed real improvements over the past 6 months — better organization, stronger communication from management, and a sense that the company is gaining traction. The growth with Crash and expanded inventory investment were specifically called out as wins.</div>
+    </div>
+
+    <div class="theme-card strength">
+      <div class="theme-badge badge-green">Strength</div>
+      <div class="theme-icon">🤝</div>
+      <div class="theme-title">Local Leadership Wins</div>
+      <div class="theme-body">Several teams shared that their direct managers and supervisors are doing a great job — patient, clear, and supportive. When employees feel respected and heard by their immediate manager, it shows up in their scores. Departments with strong local leadership consistently rated higher across the board.</div>
+    </div>
+
+    <div class="theme-card strength">
+      <div class="theme-badge badge-green">Strength</div>
+      <div class="theme-icon">🧭</div>
+      <div class="theme-title">Clarity of Role</div>
+      <div class="theme-body">Role clarity is our highest-scoring dimension company-wide (4.21/5). Most employees understand what's expected of them — a foundational element for performance and confidence. This is something we should continue to protect as roles evolve.</div>
+    </div>
+
+    <div class="theme-card opportunity">
+      <div class="theme-badge badge-amber">Opportunity</div>
+      <div class="theme-icon">💻</div>
+      <div class="theme-title">Technology &amp; Equipment</div>
+      <div class="theme-body">Outdated tablets, slow scanners, and unreliable software were the single most consistent theme across operational teams. Employees want tools that match the pace of work. Investing in reliable equipment is directly tied to safety, efficiency, and employee morale — this is a high-ROI fix.</div>
+    </div>
+
+    <div class="theme-card opportunity">
+      <div class="theme-badge badge-amber">Opportunity</div>
+      <div class="theme-icon">📅</div>
+      <div class="theme-title">Regular Team Touchpoints</div>
+      <div class="theme-body">Employees across multiple departments asked for more structured communication — recurring team meetings, goal-setting sessions, and honest feedback on performance. Many feel decisions happen above them without context. Even brief, consistent check-ins can dramatically improve trust and engagement.</div>
+    </div>
+
+    <div class="theme-card opportunity">
+      <div class="theme-badge badge-amber">Opportunity</div>
+      <div class="theme-icon">👥</div>
+      <div class="theme-title">Staffing &amp; Cross-Training</div>
+      <div class="theme-body">Several departments — especially Shipping and Sales — flagged that being short-staffed creates a ripple effect: routes get overloaded, service slips, and stress builds. Cross-training drivers and warehouse staff to cover each other in a pinch was a practical solution that employees themselves proposed.</div>
+    </div>
+
+    <div class="theme-card critical">
+      <div class="theme-badge badge-red">Needs Attention</div>
+      <div class="theme-icon">⚖️</div>
+      <div class="theme-title">Accountability &amp; Consistency</div>
+      <div class="theme-body">Accountability is our lowest company-wide score (3.38/5). Employees want to see rules and expectations applied consistently — across all roles and levels. When people feel the same standards don't apply to everyone, it erodes trust quickly. Clear, visible follow-through matters.</div>
+    </div>
+
+    <div class="theme-card critical">
+      <div class="theme-badge badge-red">Needs Attention</div>
+      <div class="theme-icon">💰</div>
+      <div class="theme-title">Compensation &amp; Recognition</div>
+      <div class="theme-body">Compensation and benefits were raised across multiple departments. Employees who feel they've grown in their roles want to see that reflected in their pay and career path. Transparent raise criteria, recognition programs, and a clear path forward go a long way — especially for long-tenured, high-performing team members.</div>
+    </div>
+
+    <div class="theme-card critical">
+      <div class="theme-badge badge-red">Needs Attention</div>
+      <div class="theme-icon">🔗</div>
+      <div class="theme-title">Cross-Department Collaboration</div>
+      <div class="theme-body">Teams often feel siloed from one another. Employees in operations, sales, and back-office roles all noted that better integration between departments would improve both their day-to-day experience and the customer experience. More shared visibility, processes, and communication between teams is a recurring ask.</div>
+    </div>
+
+  </div>
+
+  <!-- ACTION PLAN -->
+  <div class="section-label">What We're Doing About It</div>
+  <div class="callout amber">
+    <div class="callout-title">Our Commitment</div>
+    <div class="callout-body">Surveys only matter if they lead to action. Below are the commitments leadership is making based on what we heard. We'll check in on progress at our next all-hands and in the end-of-year survey.</div>
+  </div>
+  <div class="action-list">
+
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <div class="action-content">
+        <div class="action-title">Equipment &amp; Technology Audit</div>
+        <div class="action-desc">We will conduct a systematic review of tablets, scanners, and operational software by Q3 2026. Devices that fall below performance thresholds will be replaced. We'll prioritize larger warehouse locations first.</div>
+        <span class="action-dept">Warehouse · Shipping · All Locations</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <div class="action-content">
+        <div class="action-title">Monthly Team Meetings — Required for All Departments</div>
+        <div class="action-desc">Every manager will hold a minimum of one structured team meeting per month. Agendas will include performance updates, open Q&amp;A, and recognition. We'll provide a simple template to make this easy and consistent.</div>
+        <span class="action-dept">All Departments</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <div class="action-content">
+        <div class="action-title">Compensation Transparency Initiative</div>
+        <div class="action-desc">Leadership will develop and communicate clearer criteria for raises and promotions — what it takes to move up, how performance is measured, and what timelines look like. No more guessing.</div>
+        <span class="action-dept">Company-Wide</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">4</div>
+      <div class="action-content">
+        <div class="action-title">Staffing &amp; Cross-Training Plan</div>
+        <div class="action-desc">We'll identify critical coverage gaps and develop cross-training programs — starting with Shipping and Warehouse — so teams are resilient when people are out. We'll also review driver headcount at high-volume locations.</div>
+        <span class="action-dept">Shipping · Warehouse · Sales</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">5</div>
+      <div class="action-content">
+        <div class="action-title">Accountability Standards Review</div>
+        <div class="action-desc">HR and department heads will review how policies — especially attendance and performance — are being applied across locations and roles. The goal: ensure every employee experiences the same clear, fair standards regardless of their department or tenure.</div>
+        <span class="action-dept">All Departments · HR</span>
+      </div>
+    </div>
+
+    <div class="action-item">
+      <div class="action-num">6</div>
+      <div class="action-content">
+        <div class="action-title">Cross-Department Integration Pilot</div>
+        <div class="action-desc">We'll pilot a monthly cross-functional sync between Sales, Shipping, Warehouse, and AR to improve coordination and reduce friction at the handoff points. Better visibility between teams means fewer surprises for customers and employees alike.</div>
+        <span class="action-dept">Sales · Shipping · Warehouse · AR</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CLOSING -->
+  <div class="callout green" style="margin-top:12px">
+    <div class="callout-title">Thank You for Your Honesty</div>
+    <div class="callout-body">54 people took the time to share their experience — in both English and Spanish. That participation is something we don't take for granted. This survey works because people trust that their voices lead to real change. We're committed to earning that trust every day, and we'll revisit these results at the end of the year to measure our progress together.</div>
+  </div>
+
+</div><!-- /page -->
+
+<div class="footer">
+  <span>COL Auto Parts &nbsp;·&nbsp; 2026 Mid-Year Pulse Survey &nbsp;·&nbsp; Confidential — Internal Use Only</span>
+  <span>54 Responses &nbsp;·&nbsp; June 2026 &nbsp;·&nbsp; 8 Departments</span>
+</div>
+
+<script>
+// ── DATA ──
+const QUESTIONS = [
+  'Role Clarity',
+  'Leadership Communication',
+  'Manager Respect',
+  'Accountability',
+  'Company Direction',
+  'Speak Up Comfort',
+  'Morale',
+  'Trust in Leadership'
+];
+
+const OVERALL = [4.21, 3.52, 4.02, 3.38, 3.58, 3.60, 3.52, 3.46];
+
+const DEPT_DATA = {
+  'Purchasing':          {n:3,  scores:[4.67,4.67,4.67,4.67,5.00,4.67,4.00,5.00], composite:4.67},
+  'IT':                  {n:2,  scores:[5.00,4.00,4.50,4.50,4.50,4.00,4.00,4.50], composite:4.38},
+  'Shipping':            {n:10, scores:[4.70,4.00,4.40,3.50,4.20,4.00,4.10,3.80], composite:4.09},
+  'Sales':               {n:12, scores:[4.25,3.58,4.17,3.75,3.67,3.58,3.58,3.92], composite:3.81},
+  'Engineering':         {n:1,  scores:[5.00,3.00,5.00,3.00,3.00,4.00,4.00,3.00], composite:3.75},
+  'Warehouse':           {n:12, scores:[3.75,3.58,4.42,3.33,3.33,3.83,3.50,3.25], composite:3.62},
+  'Accounts Receivable': {n:8,  scores:[4.12,2.75,2.75,2.62,3.00,2.62,3.25,2.50], composite:2.95},
+  'Accounting':          {n:4,  scores:[3.50,2.50,3.00,2.25,2.25,2.75,1.75,2.25], composite:2.53},
+};
+
+const MORALE = {labels:['Excellent','Good','Average','Poor','Very Poor'], data:[10,19,15,4,4],
+  colors:['#0d7a4a','#2ecc71','#f59e0b','#e67e22','#c0392b']};
+
+function scoreClass(s){ return s>=4.0?'green':s>=3.0?'amber':'red'; }
+function scorePillClass(s){ return s>=4.0?'sp-green':s>=3.0?'sp-amber':'sp-red'; }
+
+// ── COMPANY-WIDE BAR CHART ──
+new Chart(document.getElementById('companyBarChart'), {
+  type:'bar',
+  data:{
+    labels: QUESTIONS,
+    datasets:[{
+      label:'Company Average',
+      data: OVERALL,
+      backgroundColor: OVERALL.map(v => v>=4?'rgba(13,122,74,.75)':v>=3?'rgba(180,83,9,.75)':'rgba(192,57,43,.75)'),
+      borderRadius:5,
+      barThickness:22,
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+ctx.raw.toFixed(2)+' / 5.00'}}},
+    scales:{
+      x:{min:0,max:5,ticks:{stepSize:1},grid:{color:'#eee'},title:{display:true,text:'Score (1–5)',font:{size:10}}},
+      y:{grid:{display:false},ticks:{font:{size:11.5},color:'#1a2e4a'}}
+    }
+  }
+});
+
+// ── MORALE DONUT ──
+new Chart(document.getElementById('moraleDonut'),{
+  type:'doughnut',
+  data:{labels:MORALE.labels,datasets:[{data:MORALE.data,backgroundColor:MORALE.colors,borderWidth:2,borderColor:'#fff',hoverOffset:6}]},
+  options:{
+    cutout:'62%',responsive:true,
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${ctx.raw} (${Math.round(ctx.raw/54*100)}%)`}}
+    }
+  }
+});
+// manual legend
+const leg = document.getElementById('morale-legend');
+MORALE.labels.forEach((l,i)=>{
+  leg.innerHTML+=`<span style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#445570">
+    <span style="width:10px;height:10px;border-radius:50%;background:${MORALE.colors[i]};flex-shrink:0"></span>${l} (${MORALE.data[i]})</span>`;
+});
+
+// ── DEPT SCORE CARDS ──
+const deptCardsEl = document.getElementById('dept-cards');
+Object.entries(DEPT_DATA).forEach(([name,d])=>{
+  const sc = scoreClass(d.composite);
+  const pct = (d.composite/5*100).toFixed(0);
+  const barColor = sc==='green'?'#0d7a4a':sc==='amber'?'#b45309':'#c0392b';
+  const star = (d.n <= 2) ? ' ★' : '';
+  deptCardsEl.innerHTML += `<div class="dept-card score-${sc}">
+    <div class="dept-name">${name}${star}</div>
+    <div class="dept-score ${sc}">${d.composite.toFixed(2)}</div>
+    <div class="dept-n">${d.n} response${d.n!==1?'s':''}</div>
+    <div class="dept-bar-wrap"><div class="dept-bar" style="width:${pct}%;background:${barColor}"></div></div>
+  </div>`;
+});
+
+// ── DEPT TABLE ──
+const tbody = document.getElementById('dept-table-body');
+const Q_LABELS = QUESTIONS;
+const depts = Object.keys(DEPT_DATA);
+depts.forEach(dept=>{
+  const d = DEPT_DATA[dept];
+  const star = (d.n <= 2) ? ' ★' : '';
+  let tds = d.scores.map(s => {
+    if(isNaN(s)) return `<td><span class="score-pill sp-na">—</span></td>`;
+    return `<td><span class="score-pill ${scorePillClass(s)}">${s.toFixed(2)}</span></td>`;
+  }).join('');
+  const csc = scorePillClass(d.composite);
+  tbody.innerHTML += `<tr>
+    <td class="dept-td">${dept}${star}</td>
+    <td style="font-size:11px;color:var(--muted)">${d.n}</td>
+    ${tds}
+    <td><span class="score-pill ${csc}" style="font-weight:800">${d.composite.toFixed(2)}</span></td>
+  </tr>`;
+});
+// overall row
+const overallTds = OVERALL.map(s=>`<td><span class="score-pill ${scorePillClass(s)}" style="font-weight:700">${s.toFixed(2)}</span></td>`).join('');
+const overallComposite = (OVERALL.reduce((a,b)=>a+b,0)/OVERALL.length).toFixed(2);
+tbody.innerHTML += `<tr class="total-row">
+  <td class="dept-td" style="font-size:13px">Company Total</td>
+  <td style="font-size:11px">52</td>
+  ${overallTds}
+  <td><span class="score-pill sp-amber" style="font-weight:800">${overallComposite}</span></td>
+</tr>`;
+
+// ── RADAR CHART ──
+new Chart(document.getElementById('radarChart'),{
+  type:'radar',
+  data:{
+    labels: QUESTIONS,
+    datasets:[
+      {label:'Sales',     data:DEPT_DATA['Sales'].scores,     borderColor:'#00AEEF',backgroundColor:'rgba(0,174,239,.12)',  pointBackgroundColor:'#00AEEF',borderWidth:2.5},
+      {label:'Shipping',  data:DEPT_DATA['Shipping'].scores,  borderColor:'#0d7a4a',backgroundColor:'rgba(13,122,74,.10)', pointBackgroundColor:'#0d7a4a',borderWidth:2.5},
+      {label:'Warehouse', data:DEPT_DATA['Warehouse'].scores, borderColor:'#b45309',backgroundColor:'rgba(180,83,9,.08)',   pointBackgroundColor:'#b45309',borderWidth:2.5},
+    ]
+  },
+  options:{
+    responsive:true,
+    scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{size:9}},pointLabels:{font:{size:10.5},color:'#243a58'},grid:{color:'#e2e8f0'}}},
+    plugins:{legend:{position:'bottom',labels:{font:{size:11.5},padding:16,color:'#445570'}}}
+  }
+});
+</script>
+</body>
+</html>
