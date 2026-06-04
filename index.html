@@ -226,6 +226,49 @@ body {
 .prog-card:hover .prog-arrow { transform: translateX(4px); }
 .prog-card.green:hover .prog-arrow { color: #0d7a4a; }
 .prog-card.gold:hover  .prog-arrow { color: #b45309; }
+.prog-card.purple:hover { border-color: #6d28d9; }
+.prog-card.purple:hover .prog-arrow { color: #6d28d9; }
+.prog-icon.purple { background: #f3f0ff; }
+.prog-tag.purple { color: #6d28d9; }
+
+/* ── SURVEY FEATURED CARD ── */
+.survey-btn {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  border: 2px solid #dde3ec;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  cursor: pointer;
+}
+.survey-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.12);
+  border-color: #6d28d9;
+}
+.survey-stripe { width: 8px; flex-shrink: 0; background: #6d28d9; }
+.survey-icon-col {
+  background: #f3f0ff;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px 26px;
+  flex-shrink: 0;
+}
+.survey-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  background: #6d28d9; color: #fff;
+  font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: .05em; text-transform: uppercase;
+  width: fit-content; transition: background .15s;
+}
+.survey-btn:hover .survey-cta { background: #5b21b6; }
 
 /* ── FOOTER ── */
 .footer {
@@ -337,6 +380,23 @@ body {
     </a>
 
   </div>
+
+  <div class="section-label" style="margin-top:40px">People &amp; Culture</div>
+
+  <a class="survey-btn" href="COL_2026_MidYear_Pulse_Survey_Report.html">
+    <div class="survey-stripe"></div>
+    <div class="survey-icon-col">
+      <div class="featured-icon">📋</div>
+    </div>
+    <div class="featured-body">
+      <div class="featured-eyebrow" style="color:#6d28d9">June 2026 &nbsp;·&nbsp; 54 Responses &nbsp;·&nbsp; 8 Departments</div>
+      <div class="featured-title">Mid-Year Pulse Survey Results</div>
+      <div class="featured-desc">
+        Company-wide results from our 2026 mid-year employee pulse survey — department scores, morale ratings, key themes, and the action plan leadership is committing to. Updated after each survey cycle.
+      </div>
+      <div class="survey-cta">View Results &nbsp;›</div>
+    </div>
+  </a>
 
 </div>
 
