@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership Philosophy — Blake Kidwell | Collision Auto Parts</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #1a2e4a;
+  --navy2:   #243a58;
+  --navy3:   #0f1e30;
+  --cyan:    #00AEEF;
+  --cyan-bg: #e8f7fd;
+  --cyan-bd: rgba(0,174,239,.25);
+  --text:    #1a2e4a;
+  --text2:   #445570;
+  --muted:   #7a90aa;
+  --border:  #dde3ec;
+  --bg:      #f0f4f8;
+  --surface: #ffffff;
+  --green:   #0d7a4a;
+  --amber:   #b45309;
+  --gold:    #c8991a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ── HERO ─────────────────────────────────────────────────────────────────── */
+.hero {
+  background: var(--navy3);
+  background-image: linear-gradient(135deg, #0f1e30 0%, #1a2e4a 50%, #0d3060 100%);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(0,174,239,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -40px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(0,174,239,.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 48px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.hero-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-logo {
+  height: 44px;
+  filter: brightness(0) invert(1);
+}
+.hero-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,.2);
+}
+.hero-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: .08em;
+}
+.hero-brand em { color: #fff; font-style: normal; }
+.hero-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.hero-body {
+  padding: 56px 48px 64px;
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--cyan);
+}
+.hero-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 900;
+  color: #fff;
+  line-height: .95;
+  letter-spacing: -.01em;
+  margin-bottom: 12px;
+}
+.hero-name span {
+  color: var(--cyan);
+  display: block;
+}
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.hero-tagline {
+  font-size: 19px;
+  font-weight: 300;
+  color: rgba(255,255,255,.85);
+  max-width: 620px;
+  line-height: 1.55;
+  border-left: 3px solid var(--cyan);
+  padding-left: 20px;
+  font-style: italic;
+}
+.hero-tagline strong {
+  font-weight: 700;
+  color: #fff;
+  font-style: normal;
+}
+.hero-accent-bar {
+  height: 5px;
+  background: linear-gradient(90deg, var(--cyan) 0%, rgba(0,174,239,.3) 60%, transparent 100%);
+}
+
+/* ── LAYOUT ───────────────────────────────────────────────────────────────── */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px 80px;
+}
+.section {
+  padding-top: 56px;
+}
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--navy2);
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 20px;
+  line-height: 1;
+  letter-spacing: -.01em;
+}
+.section-heading .accent { color: var(--cyan); }
+
+/* ── STORY ────────────────────────────────────────────────────────────────── */
+.story-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 40px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  position: relative;
+  overflow: hidden;
+}
+.story-card::before {
+  content: '\201C';
+  position: absolute;
+  top: -10px;
+  left: 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 120px;
+  font-weight: 900;
+  color: var(--cyan);
+  opacity: .10;
+  line-height: 1;
+  pointer-events: none;
+}
+.story-card p {
+  color: var(--text2);
+  font-size: 15.5px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.story-card p:last-child { margin-bottom: 0; }
+.story-card p strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+/* ── MENTOR RULES ─────────────────────────────────────────────────────────── */
+.rules-banner {
+  background: var(--navy);
+  border-radius: 14px;
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 4px 24px rgba(10,25,48,.25);
+  position: relative;
+  overflow: hidden;
+}
+.rules-banner::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(0,174,239,.15) 0%, transparent 70%);
+}
+.rules-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  margin-bottom: 18px;
+  opacity: .9;
+}
+.rules-headline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 28px;
+  line-height: 1.3;
+  max-width: 520px;
+}
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+.rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.rule-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--cyan);
+  opacity: .35;
+  line-height: 1;
+  width: 36px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.rule-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: .01em;
+}
+.rule-text em {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .03em;
+  margin-top: 4px;
+}
+
+/* ── PRINCIPLES ───────────────────────────────────────────────────────────── */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 16px;
+}
+.principle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow .2s, transform .2s;
+}
+.principle:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,.10);
+  transform: translateY(-2px);
+}
+.principle::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--p-color, var(--cyan));
+  border-radius: 0 0 12px 12px;
+}
+.p-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: block;
+}
+.p-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  margin-bottom: 6px;
+}
+.p-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.p-title span { color: var(--p-color, var(--cyan)); }
+.p-body {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+/* ── PROMISE ──────────────────────────────────────────────────────────────── */
+.promise-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.promise-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 30px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.05);
+}
+.promise-card.from-me {
+  border-top: 4px solid var(--cyan);
+}
+.promise-card.from-you {
+  border-top: 4px solid var(--navy);
+}
+.promise-card-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  margin-bottom: 18px;
+}
+.from-me .promise-card-label { color: var(--cyan); }
+.from-you .promise-card-label { color: var(--navy); }
+.promise-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.promise-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.55;
+}
+.promise-item:last-child { margin-bottom: 0; }
+.promise-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.from-me .promise-dot { background: var(--cyan); }
+.from-you .promise-dot { background: var(--navy); }
+.promise-item strong { color: var(--navy); font-weight: 700; }
+
+/* ── CLOSING ──────────────────────────────────────────────────────────────── */
+.closing {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 100%);
+  border-radius: 14px;
+  padding: 44px 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(10,25,48,.2);
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(0,174,239,.2) 0%, transparent 70%);
+}
+.closing-text {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,.88);
+  line-height: 1.75;
+  max-width: 680px;
+  margin-bottom: 36px;
+  position: relative;
+  z-index: 1;
+}
+.closing-text strong {
+  font-weight: 700;
+  color: #fff;
+}
+.closing-text em {
+  color: var(--cyan);
+  font-style: normal;
+  font-weight: 600;
+}
+.signature-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+.sig-line {
+  width: 1px;
+  height: 52px;
+  background: rgba(255,255,255,.2);
+}
+.sig-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.sig-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+/* ── CAREER TIMELINE ──────────────────────────────────────────────────────── */
+.timeline-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.timeline-inner {
+  display: flex;
+  align-items: stretch;
+  min-width: max-content;
+  gap: 0;
+}
+.tl-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px 28px 18px 0;
+  position: relative;
+  min-width: 140px;
+}
+.tl-item:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cyan);
+  font-size: 14px;
+  font-weight: 700;
+}
+.tl-year {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 3px;
+}
+.tl-role {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.15;
+}
+.tl-company {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.tl-item.current .tl-role { color: var(--cyan); }
+.tl-item.current .tl-year { color: var(--navy2); }
+
+/* ── STAT BAR ─────────────────────────────────────────────────────────────── */
+.stat-bar {
+  background: var(--navy);
+  padding: 20px 48px;
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  border-bottom: 3px solid var(--cyan);
+}
+.stat-item {
+  flex: 1;
+  min-width: 140px;
+  padding: 4px 24px 4px 0;
+  border-right: 1px solid rgba(255,255,255,.1);
+  margin-right: 24px;
+}
+.stat-item:last-child { border-right: none; margin-right: 0; }
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--cyan);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  color: rgba(255,255,255,.45);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  line-height: 1.4;
+}
+
+/* ── DIVIDER ──────────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 48px 0 0;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--navy);
+  border-top: 3px solid var(--cyan);
+  padding: 14px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 64px;
+}
+.footer-left {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .06em;
+}
+.footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  color: rgba(255,255,255,.3);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .hero-top { padding: 16px 20px; }
+  .hero-body { padding: 36px 20px 44px; }
+  .page { padding: 0 16px 60px; }
+  .promise-grid { grid-template-columns: 1fr; }
+  .story-card, .rules-banner, .closing { padding: 24px 22px; }
+  .hero-name { font-size: 46px; }
+  .footer { padding: 12px 20px; }
+  .timeline-strip { padding: 0 16px; }
+  .stat-bar { padding: 16px 20px; }
+  .stat-item { min-width: 110px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="hero-logo-area">
+      <img class="hero-logo"
+           src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png"
+           alt="Collision Auto Parts"
+           onerror="this.style.display='none'">
+      <div class="hero-divider"></div>
+      <div class="hero-brand">COL <em>AUTO PARTS</em></div>
+    </div>
+    <div class="hero-label">Leadership Philosophy &nbsp;·&nbsp; 2026</div>
+  </div>
+
+  <div class="hero-body">
+    <div class="hero-eyebrow">Leadership Philosophy</div>
+    <div class="hero-name">
+      Blake
+      <span>Kidwell</span>
+    </div>
+    <div class="hero-title">Chief Executive Officer &nbsp;·&nbsp; Collision Auto Parts</div>
+    <div class="hero-tagline">
+      <strong>Be yourself. Don't make the same mistake twice. Work harder than everyone else.</strong>
+      Three rules I've carried since the beginning — and still lead by today.
+    </div>
+  </div>
+</div>
+<div class="hero-accent-bar"></div>
+
+<!-- ── CAREER TIMELINE ── -->
+<div class="timeline-strip">
+  <div class="timeline-inner">
+    <div class="tl-item">
+      <div class="tl-year">2009–2010</div>
+      <div class="tl-role">Field &amp; Inbound<br>Sales Rep</div>
+      <div class="tl-company">Auto Parts</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2010</div>
+      <div class="tl-role">Regional Sales<br>&amp; Acquisitions</div>
+      <div class="tl-company">1-800 Radiator</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2014</div>
+      <div class="tl-role">Director,<br>Sales Development</div>
+      <div class="tl-company">1-800 Radiator</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2016</div>
+      <div class="tl-role">Director,<br>Strategic Partnerships</div>
+      <div class="tl-company">1-800 Radiator</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2018</div>
+      <div class="tl-role">VP Sales<br>&amp; Marketing</div>
+      <div class="tl-company">1-800 Radiator</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2020</div>
+      <div class="tl-role">VP of Sales</div>
+      <div class="tl-company">Int'l Car Wash Group</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2021</div>
+      <div class="tl-role">VP of Sales</div>
+      <div class="tl-company">Driven Brands</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2024</div>
+      <div class="tl-role">Chief Commercial<br>Officer</div>
+      <div class="tl-company">Collision Auto Parts</div>
+    </div>
+    <div class="tl-item current">
+      <div class="tl-year">2025 – Now</div>
+      <div class="tl-role">Chief Executive<br>Officer</div>
+      <div class="tl-company">Collision Auto Parts</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── STAT BAR ── -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Years in<br>the Industry</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$300M</div>
+    <div class="stat-label">Top-line Sales<br>Team Contribution</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$42M</div>
+    <div class="stat-label">New Accounts<br>Brought In</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">45%</div>
+    <div class="stat-label">Membership Growth<br>across 250 Locations</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">250+</div>
+    <div class="stat-label">Locations<br>Led &amp; Scaled</div>
+  </div>
+</div>
+
+<!-- ── PAGE BODY ── -->
+<div class="page">
+
+  <!-- MY STORY -->
+  <div class="section">
+    <div class="section-label">Origin Story</div>
+    <div class="section-heading">Where I <span class="accent">Come From</span></div>
+    <div class="story-card">
+      <p>
+        I started in this business in <strong>2009 as a field and inbound sales rep</strong> — selling door to door and call to call. No title, no shortcut, just the work. The first thing I learned watching reps succeed or struggle had nothing to do with slick techniques or natural-born talent. What separated the great ones from the rest came down to <strong>how they connected with people, how they handled objections, and whether they had the confidence to keep going</strong> when it was hard.
+      </p>
+      <p>
+        So I did what I could with what I had: I started teaching. I helped the people around me learn the right responses, find their voice, and build the confidence they needed to compete. That instinct — <strong>to develop people, not just manage them</strong> — has never left me. I ran national field sales training camps. I built franchise owner leadership programs from scratch. I wasn't waiting to be a VP to act like someone who invested in others.
+      </p>
+      <p>
+        As I grew into new roles, I brought one thing that was always within my control: my effort. I would outwork anyone. At 1-800 Radiator, our team brought in <strong>over $42M in new accounts</strong> and delivered <strong>$300M in top-line sales</strong> over three years. At International Car Wash Group, I led a process overhaul that produced <strong>45% membership growth across 250 locations</strong>. None of that happened because I was the smartest person in the room. It happened because I was relentless about execution and I built teams that were too.
+      </p>
+      <p>
+        Along the way, I was lucky enough to have a mentor who saw something in me before I fully did. When I stepped into a role I hadn't done before, he kept it simple. He gave me three rules that I have carried with me every single day since.
+      </p>
+      <p>
+        The last thing I'll say about myself is this: <strong>I have a gift for simplicity.</strong> I can take a complicated situation, a messy problem, or a big idea — and find the version of it that people can understand and rally behind. That's not something I learned in school. It's something I built on the floor, in the field, and in rooms where I had to make sense of the chaos quickly.
+      </p>
+      <p>
+        I love this job. I love leading people toward their full potential. I love watching someone discover what they're capable of when someone believes in them and gives them the tools to grow. <strong>That is what gets me up every morning — and it is what drives every decision I make as your CEO.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- THE THREE RULES -->
+  <div class="section">
+    <div class="section-label">The Foundation</div>
+    <div class="section-heading">Three Rules I <span class="accent">Lead By</span></div>
+    <div class="rules-banner">
+      <div class="rules-eyebrow">From my mentor &mdash; carried ever since</div>
+      <div class="rules-headline">
+        When I stepped into a role I had no experience in, my mentor gave me three things.
+        They still run the way I lead today.
+      </div>
+      <div class="rules-list">
+        <div class="rule">
+          <div class="rule-num">1</div>
+          <div class="rule-text">
+            Be Yourself.
+            <em>Authenticity builds trust faster than any title ever will. Don't perform. Lead from who you actually are.</em>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule-num">2</div>
+          <div class="rule-text">
+            Don't Make the Same Mistake Twice.
+            <em>Mistakes are tuition. Pay once, learn the lesson, and move forward smarter. Repeating them is a choice.</em>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule-num">3</div>
+          <div class="rule-text">
+            Work Harder Than Everyone Else.
+            <em>Effort is the one variable that is always in your control. No one can out-commit you if you decide they won't.</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CORE PRINCIPLES -->
+  <div class="section">
+    <div class="section-label">Leadership Principles</div>
+    <div class="section-heading">How I <span class="accent">Lead</span></div>
+
+    <div class="principles-grid">
+
+      <div class="principle" style="--p-color: #00AEEF;">
+        <span class="p-icon">🎯</span>
+        <div class="p-number">Principle 01</div>
+        <div class="p-title">Set Clear <span>Expectations.</span> Always.</div>
+        <div class="p-body">
+          People don't fail because they lack ability — they fail because no one told them exactly what winning looks like. My job is to remove ambiguity. Clear expectations are the foundation of everything: accountability, trust, performance, and growth. If you're not sure what I expect, ask. That's on both of us.
+        </div>
+      </div>
+
+      <div class="principle" style="--p-color: #0d7a4a;">
+        <span class="p-icon">🌱</span>
+        <div class="p-number">Principle 02</div>
+        <div class="p-title">Trust First. <span>Develop Always.</span></div>
+        <div class="p-body">
+          I had to learn — the hard way — to let go. Most people won't do things exactly the way I would. And that's okay. What I've found is that when you trust people, invest in their development, and give them room to learn, they often grow into something better than what you would have built alone. I believe in your potential, sometimes before you do.
+        </div>
+      </div>
+
+      <div class="principle" style="--p-color: #b45309;">
+        <span class="p-icon">⚖️</span>
+        <div class="p-number">Principle 03</div>
+        <div class="p-title">Hold the <span>Standard.</span></div>
+        <div class="p-body">
+          Accountability isn't punishment — it's respect. When I hold you to a high standard, it means I believe you're capable of meeting it. I don't lower the bar because something is hard. I help you get there. And I hold myself to the same standard I set for anyone else on this team. Always.
+        </div>
+      </div>
+
+      <div class="principle" style="--p-color: #6d28d9;">
+        <span class="p-icon">⚡</span>
+        <div class="p-number">Principle 04</div>
+        <div class="p-title">Execute <span>Relentlessly.</span></div>
+        <div class="p-body">
+          Strategy without execution is just talk. I was built on the floor and in the field — I know what discipline and follow-through actually look like in action. We identify the right priorities, we commit to them, and we don't let up. Urgency and consistency together are an unbeatable combination.
+        </div>
+      </div>
+
+      <div class="principle" style="--p-color: #00AEEF; grid-column: span 1;">
+        <span class="p-icon">💡</span>
+        <div class="p-number">Principle 05</div>
+        <div class="p-title">Make It <span>Simple.</span></div>
+        <div class="p-body">
+          Complexity is the enemy of momentum. My job as a leader is to take the complicated and make it clear — to find the version of an idea that every person on this team can understand and get behind. If you can't explain it simply, you don't understand it well enough yet. That goes for all of us.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- THE PROMISE -->
+  <div class="section">
+    <div class="section-label">The Operating Agreement</div>
+    <div class="section-heading">What We <span class="accent">Owe Each Other</span></div>
+    <div class="promise-grid">
+
+      <div class="promise-card from-me">
+        <div class="promise-card-label">What you can expect from me</div>
+        <div class="promise-title">My Promise to You</div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>I will challenge you.</strong> I'll push you past where you think your ceiling is — because I can usually see further than you can from where you're standing right now.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>I will develop you.</strong> Investing in the people on this team isn't an obligation — it's the most important work I do as a leader.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>I will celebrate you.</strong> Wins matter. Recognition matters. I will never be too busy to acknowledge great work done by great people.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>I will have your back.</strong> If you bring your best every day, I will go to the mat for you. That is not a conditional offer.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>I will be honest.</strong> Clear expectations, direct feedback, no surprises. I owe you the truth, even when it's uncomfortable.</div>
+        </div>
+      </div>
+
+      <div class="promise-card from-you">
+        <div class="promise-card-label">What I expect from you</div>
+        <div class="promise-title">My Ask of You</div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>Show up fully.</strong> Not partially. Not when it's convenient. Every day, every call, every customer interaction — bring your whole effort.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>Own your outcomes.</strong> No excuses, no blame. If something goes wrong, own it, learn from it, and come back stronger. That's the standard.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>Grow on purpose.</strong> Don't wait to be developed — lean into it. Ask questions. Take the feedback. Be someone who gets better on purpose.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>Be a teammate.</strong> How you treat the people next to you matters as much as how you perform. We win together or we don't win at all.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-dot"></div>
+          <div><strong>Bring your real self.</strong> I don't want a performance — I want you. Authenticity builds teams that last.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="section">
+    <div class="closing">
+      <div class="closing-text">
+        I didn't start as a CEO. I started on the floor, on the phones, making calls in a business I had to learn from the ground up. Everything I believe about leadership was earned through real experience — real wins, real mistakes, and real people who trusted me to lead them well.<br><br>
+        <em>That trust is not something I take lightly.</em><br><br>
+        We are on an incredible path. I believe in this company, I believe in this team, and I am genuinely excited about what we are building together. <strong>Let's go earn it.</strong>
+      </div>
+      <div class="signature-block">
+        <div class="sig-line"></div>
+        <div>
+          <div class="sig-name">Blake Kidwell</div>
+          <div class="sig-title">CEO &nbsp;·&nbsp; Collision Auto Parts &nbsp;·&nbsp; 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-left">Collision Auto Parts &nbsp;·&nbsp; Leadership Philosophy &nbsp;·&nbsp; Blake Kidwell, CEO</div>
+  <div class="footer-right">Internal Document &nbsp;·&nbsp; 2026</div>
+</div>
+
+</body>
+</html>
