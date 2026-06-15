@@ -9,17 +9,17 @@
 :root{--navy:#1F3864;--navy2:#2e5090;--cyan:#0091c2;--green:#1a7a38;--amber:#b56800;--red:#b91c1c;--purple:#6d28d9;--pink:#be185d;--border:#dde3ea;--text2:#444;--muted:#888;--bg:#f0f3f8}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:var(--bg);color:var(--navy);font-size:13px}
-.dash-header{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:flex-start;justify-content:space-between}
-.dash-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;letter-spacing:.04em}
-.dash-sub{font-size:11px;color:#a8c0de;margin-top:2px}
-.tab-nav{background:#16305a;display:flex;gap:2px;padding:0 16px;overflow-x:auto}
-.tab-btn{background:none;border:none;color:#7fa8cc;padding:10px 18px;font-size:12px;font-weight:700;cursor:pointer;border-bottom:3px solid transparent;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;transition:all .15s}
-.tab-btn:hover{color:#fff}
-.tab-btn.active{color:#fff;border-bottom-color:#4ca3d0}
+.dash-header{background:var(--navy);color:#fff;padding:18px 28px;display:flex;align-items:flex-start;justify-content:space-between}
+.dash-title{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;letter-spacing:.04em}
+.dash-sub{font-size:14px;color:#a8c0de;margin-top:4px}
+.tab-nav{background:#0d1f3c;display:flex;gap:8px;padding:10px 20px;flex-wrap:wrap;border-bottom:2px solid #0a1828}
+.tab-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:7px;color:#b8d4ea;padding:8px 16px;font-size:11.5px;font-weight:700;cursor:pointer;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;transition:all .15s}
+.tab-btn:hover{background:rgba(76,163,208,.22);color:#fff;border-color:#4ca3d0}
+.tab-btn.active{background:#0078a8;color:#fff;border-color:#00a0d8;box-shadow:0 0 12px rgba(0,160,216,.45),inset 0 1px 0 rgba(255,255,255,.15)}
 .content{padding:20px 24px}
 .section{display:none}
 .section.active{display:block}
-.sec-lbl{font-size:10.5px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;margin-top:4px}
+.sec-lbl{font-size:13px;font-weight:800;color:var(--navy2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;margin-top:6px}
 .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
 .addon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
 .mc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
@@ -358,13 +358,224 @@ tr.week-sep td{background:#d4e0f0!important;color:var(--navy2);font-size:10.5px;
 
 <!-- SALES TRENDS -->
 <div class="section" id="tab-trends">
-  <div class="sec-lbl">Sales Trends &mdash; Updated Weekly</div>
-  <p style="color:var(--muted);font-size:12px;padding:12px 0">Sales trend charts will be added during the weekly update.</p>
+<style>
+.tw{padding:16px 20px;font-size:13px;color:#1F3864}
+.tw h2{font-size:19px;font-weight:800;color:#1F3864;margin:0 0 10px;text-transform:uppercase;letter-spacing:.04em;border-bottom:3px solid #0091c2;padding-bottom:6px}
+.tw h3{font-size:14px;font-weight:800;color:#2e5090;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.tw .commentary{background:#e8f4fb;border-left:4px solid #0091c2;padding:12px 16px;border-radius:4px;margin-bottom:18px;font-size:13px;line-height:1.7;color:#1F3864}
+.tw .commentary strong{color:#0091c2}
+.tw .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tw .kpi{background:#fff;border:1px solid #dde3ea;border-radius:8px;padding:10px 14px;flex:1;min-width:130px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tw .kpi-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:3px}
+.tw .kpi-val{font-size:22px;font-weight:800;color:#1F3864;line-height:1.1}
+.tw .kpi-sub{font-size:11px;font-weight:600;margin-top:3px}
+.tw .pos{color:#15803d}.tw .neg{color:#b91c1c}
+.tw table{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:13px;background:#fff;border:1px solid #dde3ea;border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.tw thead tr{background:#1F3864;color:#fff}
+.tw th{padding:8px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;text-align:left}
+.tw th.r{text-align:right}
+.tw td{padding:7px 10px;border-bottom:1px solid #eef2f7;color:#1F3864;font-size:13px}
+.tw td.r{text-align:right}
+.tw td.lbl{font-weight:600;color:#1F3864}
+.tw tr:nth-child(even) td{background:#f7f9fc}
+.tw tr:hover td{background:#eef4fb}
+.tw tr.tot td{background:#dbe6f6!important;font-weight:700;color:#1F3864;border-top:2px solid #2e5090}
+.tw .wkval{font-weight:700;color:#0078a8}
+.tw .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px}
+@media(max-width:1000px){.tw .grid2{grid-template-columns:1fr}}
+.tw .card{background:#fff;border:1px solid #dde3ea;border-radius:8px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+</style>
+<div class="tw">
+<h2>Sales Trends — Week 23 (June 2–6)</h2>
+<div class="commentary">
+<strong>Headline:</strong> Week 23 delivered <strong>$821,455</strong> in sales — up <strong>+9.0% vs. last year</strong> and +3.5% vs. the YTD weekly average. Gross profit reached <strong>$453,203</strong> (+11.3% vs. LY) at a <strong>55.2% GM</strong>.<br><br>
+<strong>Key Highlights:</strong><br>
+• <strong>SoCal is the primary growth engine</strong> — up +38.6% vs. LY and +14.0% vs. YTD, driven by Santa Fe Springs (+46.5%) and San Diego (+52.5%). NorCal is flat to down (−3.9% vs. LY).<br>
+• <strong>MSO segment dominates</strong> — $376,931 this week, +66.9% vs. LY, now representing 46% of total revenue (up from ~30% a year ago).<br>
+• <strong>PartsTrader is the fastest-growing channel</strong> — +135% vs. LY, while phone volume has declined −15.9% as ordering shifts digital.<br>
+• <strong>Return rate hit a record low of 12.2%</strong> — down from 15.3% last year (−3.1pp), a meaningful quality improvement.<br>
+• <strong>UPT and avg order value both improving</strong> — customers are buying more per order (UPT 1.483 vs. 1.433 LY; AOV $122 vs. $111 LY).
+</div>
+<div class="kpis">
+<div class="kpi"><div class="kpi-lbl">Weekly Sales</div><div class="kpi-val">$821.5K</div><div class="kpi-sub pos">+9.0% vs LY</div></div>
+<div class="kpi"><div class="kpi-lbl">Gross Profit</div><div class="kpi-val">$453.2K</div><div class="kpi-sub pos">+11.3% vs LY</div></div>
+<div class="kpi"><div class="kpi-lbl">GM %</div><div class="kpi-val">55.2%</div><div class="kpi-sub pos">+2.1pp vs LY</div></div>
+<div class="kpi"><div class="kpi-lbl">Return Rate</div><div class="kpi-val">12.2%</div><div class="kpi-sub pos">−3.1pp vs LY</div></div>
+<div class="kpi"><div class="kpi-lbl">UPT</div><div class="kpi-val">1.483</div><div class="kpi-sub pos">+3.6% vs LY</div></div>
+<div class="kpi"><div class="kpi-lbl">Orders</div><div class="kpi-val">6,718</div><div class="kpi-sub pos">+6.6% vs 4wk avg</div></div>
+</div>
+<h3>Overall Performance Metrics</h3>
+<table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">12wk Avg</th><th class="r">4wk Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">Qty</td><td class="r">9,704</td><td class="r">9,590</td><td class="r">9,720</td><td class="r">9,155</td><td class="r wkval">9,966</td><td class="r pos">+2.7%</td><td class="r pos">+3.9%</td><td class="r pos">+8.9%</td></tr>
+<tr><td class="lbl">Sales $</td><td class="r">$753.7K</td><td class="r">$794.0K</td><td class="r">$804.3K</td><td class="r">$753.1K</td><td class="r wkval">$821.5K</td><td class="r pos">+9.0%</td><td class="r pos">+3.5%</td><td class="r pos">+9.1%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">54.0%</td><td class="r">55.1%</td><td class="r">55.8%</td><td class="r">55.5%</td><td class="r wkval">55.2%</td><td class="r pos">+2.1pp</td><td class="r pos">+0.2pp</td><td class="r neg">-0.6pp</td></tr>
+<tr><td class="lbl">Gross Profit</td><td class="r">$407.3K</td><td class="r">$437.3K</td><td class="r">$448.5K</td><td class="r">$418.0K</td><td class="r wkval">$453.2K</td><td class="r pos">+11.3%</td><td class="r pos">+3.6%</td><td class="r pos">+8.4%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">78</td><td class="r">83</td><td class="r">83</td><td class="r">82</td><td class="r wkval">82</td><td class="r pos">+6.1%</td><td class="r neg">-0.4%</td><td class="r pos">+0.2%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">6,774</td><td class="r">6,703</td><td class="r">6,687</td><td class="r">6,303</td><td class="r wkval">6,718</td><td class="r neg">-0.8%</td><td class="r pos">+0.2%</td><td class="r pos">+6.6%</td></tr>
+<tr><td class="lbl">Return Rate</td><td class="r">15.3%</td><td class="r">14.0%</td><td class="r">14.0%</td><td class="r">13.7%</td><td class="r wkval">12.2%</td><td class="r pos">-3.1pp</td><td class="r pos">-1.8pp</td><td class="r pos">-1.5pp</td></tr>
+<tr><td class="lbl">UPT</td><td class="r">1.433</td><td class="r">1.431</td><td class="r">1.454</td><td class="r">1.452</td><td class="r wkval">1.483</td><td class="r pos">+3.6%</td><td class="r pos">+3.7%</td><td class="r pos">+2.1%</td></tr>
+<tr><td class="lbl">Avg Order $</td><td class="r">111</td><td class="r">118</td><td class="r">120</td><td class="r">119</td><td class="r wkval">122</td><td class="r pos">+9.9%</td><td class="r pos">+3.2%</td><td class="r pos">+2.3%</td></tr>
+</tbody></table>
+<div class="grid2">
+<div><h3>Sales by Location</h3><table><thead><tr><th>Location</th><th class="r">Last Year</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">Hayward</td><td class="r">$294.6K</td><td class="r wkval">$289.2K</td><td class="r neg">-1.8%</td><td class="r neg">-2.5%</td><td class="r pos">+3.6%</td></tr>
+<tr><td class="lbl">Santa Fe Springs</td><td class="r">$136.1K</td><td class="r wkval">$199.5K</td><td class="r pos">+46.5%</td><td class="r pos">+18.2%</td><td class="r pos">+19.0%</td></tr>
+<tr><td class="lbl">San Diego</td><td class="r">$74.7K</td><td class="r wkval">$113.9K</td><td class="r pos">+52.5%</td><td class="r pos">+7.1%</td><td class="r pos">+12.0%</td></tr>
+<tr><td class="lbl">Sacramento</td><td class="r">$73.9K</td><td class="r wkval">$62.3K</td><td class="r neg">-15.7%</td><td class="r neg">-6.1%</td><td class="r pos">+4.9%</td></tr>
+<tr><td class="lbl">Albuquerque</td><td class="r">$74.2K</td><td class="r wkval">$72.5K</td><td class="r neg">-2.3%</td><td class="r pos">+2.0%</td><td class="r pos">+7.2%</td></tr>
+<tr><td class="lbl">Rohnert Park</td><td class="r">$46.4K</td><td class="r wkval">$47.1K</td><td class="r pos">+1.6%</td><td class="r neg">-0.1%</td><td class="r pos">+2.2%</td></tr>
+<tr><td class="lbl">Fresno</td><td class="r">$38.6K</td><td class="r wkval">$37.0K</td><td class="r neg">-4.2%</td><td class="r neg">-2.3%</td><td class="r pos">+17.4%</td></tr>
+<tr class="tot"><td class="lbl">Total</td><td class="r">$753.7K</td><td class="r wkval">$821.5K</td><td class="r pos">+9.0%</td><td class="r pos">+3.5%</td><td class="r pos">+9.1%</td></tr>
+</tbody></table></div>
+<div><h3>Sales by Channel</h3><table><thead><tr><th>Channel</th><th class="r">Last Year</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">Phone</td><td class="r">$380.9K</td><td class="r wkval">$320.3K</td><td class="r neg">-15.9%</td><td class="r pos">+0.8%</td><td class="r pos">+9.3%</td></tr>
+<tr><td class="lbl">PartsTrader</td><td class="r">$120.7K</td><td class="r wkval">$283.9K</td><td class="r pos">+135.2%</td><td class="r pos">+5.1%</td><td class="r pos">+4.4%</td></tr>
+<tr><td class="lbl">OPSTrax</td><td class="r">$103.1K</td><td class="r wkval">$129.3K</td><td class="r pos">+25.4%</td><td class="r pos">+12.1%</td><td class="r pos">+17.0%</td></tr>
+<tr><td class="lbl">Online Sales</td><td class="r">$114.3K</td><td class="r wkval">$54.1K</td><td class="r neg">-52.6%</td><td class="r neg">-1.7%</td><td class="r pos">+8.4%</td></tr>
+<tr><td class="lbl">CCC True</td><td class="r">$34.8K</td><td class="r wkval">$33.9K</td><td class="r neg">-2.6%</td><td class="r neg">-5.0%</td><td class="r pos">+22.0%</td></tr>
+<tr class="tot"><td class="lbl">Total</td><td class="r">$753.7K</td><td class="r wkval">$821.5K</td><td class="r pos">+9.0%</td><td class="r pos">+3.5%</td><td class="r pos">+9.1%</td></tr>
+</tbody></table></div>
+</div>
+<div class="grid2">
+<div><h3>Sales by Segment</h3><table><thead><tr><th>Segment</th><th class="r">Last Year</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">MSO</td><td class="r">$225.7K</td><td class="r wkval">$376.9K</td><td class="r pos">+67.0%</td><td class="r pos">+12.6%</td><td class="r pos">+11.5%</td></tr>
+<tr><td class="lbl">Body Shop</td><td class="r">$250.6K</td><td class="r wkval">$263.3K</td><td class="r pos">+5.1%</td><td class="r neg">-2.3%</td><td class="r pos">+9.9%</td></tr>
+<tr><td class="lbl">Distributor</td><td class="r">$143.9K</td><td class="r wkval">$75.1K</td><td class="r neg">-47.8%</td><td class="r neg">-0.1%</td><td class="r pos">+5.3%</td></tr>
+<tr><td class="lbl">Repair</td><td class="r">$47.8K</td><td class="r wkval">$34.6K</td><td class="r neg">-27.6%</td><td class="r neg">-17.0%</td><td class="r neg">-11.5%</td></tr>
+<tr><td class="lbl">Retail</td><td class="r">$52.1K</td><td class="r wkval">$40.1K</td><td class="r neg">-23.0%</td><td class="r pos">+1.5%</td><td class="r pos">+13.0%</td></tr>
+<tr><td class="lbl">Car Dealer</td><td class="r">$25.6K</td><td class="r wkval">$22.7K</td><td class="r neg">-11.4%</td><td class="r neg">-8.0%</td><td class="r neg">-2.0%</td></tr>
+<tr class="tot"><td class="lbl">Total</td><td class="r">$753.7K</td><td class="r wkval">$821.5K</td><td class="r pos">+9.0%</td><td class="r pos">+3.5%</td><td class="r pos">+9.1%</td></tr>
+</tbody></table></div>
+<div><h3>Sales by Region</h3><table><thead><tr><th>Region</th><th class="r">Last Year</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">NorCal</td><td class="r">$453.4K</td><td class="r wkval">$435.5K</td><td class="r neg">-3.9%</td><td class="r neg">-2.8%</td><td class="r pos">+4.7%</td></tr>
+<tr><td class="lbl">SoCal</td><td class="r">$226.2K</td><td class="r wkval">$313.4K</td><td class="r pos">+38.6%</td><td class="r pos">+14.0%</td><td class="r pos">+16.3%</td></tr>
+<tr><td class="lbl">MWest</td><td class="r">$74.2K</td><td class="r wkval">$72.5K</td><td class="r neg">-2.3%</td><td class="r pos">+2.0%</td><td class="r pos">+7.2%</td></tr>
+</tbody></table></div>
+</div>
+<h3>Top MSO Customer Sales</h3>
+<table><thead><tr><th>MSO</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">Crash Champions</td><td class="r">$46.0K</td><td class="r">$110.6K</td><td class="r wkval">$126.5K</td><td class="r pos">+175.0%</td><td class="r pos">+14.4%</td><td class="r neg">-0.1%</td></tr>
+<tr><td class="lbl">Caliber Collision</td><td class="r">$95.1K</td><td class="r">$99.6K</td><td class="r wkval">$120.4K</td><td class="r pos">+26.6%</td><td class="r pos">+20.9%</td><td class="r pos">+24.9%</td></tr>
+<tr><td class="lbl">G & C Auto Body</td><td class="r">$21.2K</td><td class="r">$37.0K</td><td class="r wkval">$34.6K</td><td class="r pos">+63.5%</td><td class="r neg">-6.5%</td><td class="r pos">+4.4%</td></tr>
+<tr><td class="lbl">Fix Auto</td><td class="r">$17.0K</td><td class="r">$24.4K</td><td class="r wkval">$24.5K</td><td class="r pos">+43.9%</td><td class="r pos">+0.2%</td><td class="r pos">+19.6%</td></tr>
+<tr><td class="lbl">Gerber</td><td class="r">$6.3K</td><td class="r">$9.4K</td><td class="r wkval">$10.1K</td><td class="r pos">+60.6%</td><td class="r pos">+7.2%</td><td class="r neg">-4.8%</td></tr>
+<tr><td class="lbl">Chilton</td><td class="r">$3.1K</td><td class="r">$8.6K</td><td class="r wkval">$10.4K</td><td class="r pos">+232.0%</td><td class="r pos">+21.6%</td><td class="r pos">+37.8%</td></tr>
+<tr><td class="lbl">Kniesel's</td><td class="r">$8.1K</td><td class="r">$5.3K</td><td class="r wkval">$7.3K</td><td class="r neg">-9.4%</td><td class="r pos">+38.5%</td><td class="r pos">+34.6%</td></tr>
+<tr><td class="lbl">Husteads</td><td class="r">$3.4K</td><td class="r">$4.4K</td><td class="r wkval">$5.8K</td><td class="r pos">+69.0%</td><td class="r pos">+32.6%</td><td class="r pos">+9.6%</td></tr>
+<tr><td class="lbl">Procolor</td><td class="r">$4.5K</td><td class="r">$3.7K</td><td class="r wkval">$3.8K</td><td class="r neg">-15.6%</td><td class="r pos">+0.8%</td><td class="r pos">+45.7%</td></tr>
+<tr class="tot"><td class="lbl">Total</td><td class="r">$204.6K</td><td class="r">$303.0K</td><td class="r wkval">$343.3K</td><td class="r pos">+67.8%</td><td class="r pos">+13.3%</td><td class="r pos">+11.4%</td></tr>
+</tbody></table>
+</div>
 </div>
 <!-- MSO TRENDS -->
 <div class="section" id="tab-mso">
-  <div class="sec-lbl">MSO Trends &mdash; Updated Weekly</div>
-  <p style="color:var(--muted);font-size:12px;padding:12px 0">MSO trend charts will be added during the weekly update.</p>
+<style>
+.tw{padding:16px 20px;font-size:13px;color:#1F3864}
+.tw h2{font-size:19px;font-weight:800;color:#1F3864;margin:0 0 10px;text-transform:uppercase;letter-spacing:.04em;border-bottom:3px solid #0091c2;padding-bottom:6px}
+.tw h3{font-size:14px;font-weight:800;color:#2e5090;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.tw .commentary{background:#e8f4fb;border-left:4px solid #0091c2;padding:12px 16px;border-radius:4px;margin-bottom:18px;font-size:13px;line-height:1.7;color:#1F3864}
+.tw .commentary strong{color:#0091c2}
+.tw .kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.tw .kpi{background:#fff;border:1px solid #dde3ea;border-radius:8px;padding:10px 14px;flex:1;min-width:130px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tw .kpi-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:3px}
+.tw .kpi-val{font-size:22px;font-weight:800;color:#1F3864;line-height:1.1}
+.tw .kpi-sub{font-size:11px;font-weight:600;margin-top:3px}
+.tw .pos{color:#15803d}.tw .neg{color:#b91c1c}
+.tw table{width:100%;border-collapse:collapse;margin-bottom:18px;font-size:13px;background:#fff;border:1px solid #dde3ea;border-radius:6px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.tw thead tr{background:#1F3864;color:#fff}
+.tw th{padding:8px 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;text-align:left}
+.tw th.r{text-align:right}
+.tw td{padding:7px 10px;border-bottom:1px solid #eef2f7;color:#1F3864;font-size:13px}
+.tw td.r{text-align:right}
+.tw td.lbl{font-weight:600;color:#1F3864}
+.tw tr:nth-child(even) td{background:#f7f9fc}
+.tw tr:hover td{background:#eef4fb}
+.tw tr.tot td{background:#dbe6f6!important;font-weight:700;color:#1F3864;border-top:2px solid #2e5090}
+.tw .wkval{font-weight:700;color:#0078a8}
+.tw .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:4px}
+@media(max-width:1000px){.tw .grid2{grid-template-columns:1fr}}
+.tw .card{background:#fff;border:1px solid #dde3ea;border-radius:8px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+</style>
+<div class="tw">
+<h2>MSO Trends — Week 23 (June 2–6)</h2>
+<div class="commentary">
+<strong>Overview:</strong> MSO revenue reached <strong>$343,316</strong> in Week 23 — up <strong>+67.8% vs. last year</strong> and +13.3% vs. the YTD average. MSO now represents <strong>46% of total company revenue</strong>, up from ~30% a year ago.<br><br>
+<strong>Key Signals:</strong><br>
+• <strong>Crash Champions</strong> — $126,496, nearly 3× last year's same-week figure. Volume is tracking slightly below the 12wk avg now; watch for normalization after rapid ramp.<br>
+• <strong>Caliber Collision</strong> — Steady at +26.6% vs. LY. GM% (50.5%) is running slightly below 4wk trend — monitor for margin compression on large-account pricing.<br>
+• <strong>Chilton Auto Body</strong> — Biggest upside surprise: +232% vs. LY in sales, +200% in Qty, with GM% improving from 46% to 56%. Fast-ramping new relationship.<br>
+• <strong>Kniesel's</strong> — Rebounding strongly; $8,268 vs. YTD avg of $5,635 (+30%). Highest GM% of all tracked MSOs at 62.8%.<br>
+• <strong>Gerber</strong> — Qty growing fast (+128% vs. LY) but ASP has fallen to $64.85 (from $92 LY) — volume up, revenue per unit down. Mix/pricing dynamic to watch.<br>
+• <strong>G&amp;C Auto Body</strong> — Slightly below YTD average (−6.5%) but up a strong +63.5% vs. LY; GM% stable at 57.5%.
+</div>
+<h3>MSO Summary — Week 23</h3>
+<table><thead><tr><th>MSO</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody>
+<tr><td class="lbl">Crash Champions</td><td class="r">$46.0K</td><td class="r">$110.6K</td><td class="r wkval">$126.5K</td><td class="r pos">+175.0%</td><td class="r pos">+14.4%</td><td class="r neg">-0.1%</td></tr>
+<tr><td class="lbl">Caliber Collision</td><td class="r">$95.1K</td><td class="r">$99.6K</td><td class="r wkval">$120.4K</td><td class="r pos">+26.6%</td><td class="r pos">+20.9%</td><td class="r pos">+24.9%</td></tr>
+<tr><td class="lbl">G & C Auto Body</td><td class="r">$21.2K</td><td class="r">$37.0K</td><td class="r wkval">$34.6K</td><td class="r pos">+63.5%</td><td class="r neg">-6.5%</td><td class="r pos">+4.4%</td></tr>
+<tr><td class="lbl">Fix Auto</td><td class="r">$17.0K</td><td class="r">$24.4K</td><td class="r wkval">$24.5K</td><td class="r pos">+43.9%</td><td class="r pos">+0.2%</td><td class="r pos">+19.6%</td></tr>
+<tr><td class="lbl">Gerber</td><td class="r">$6.3K</td><td class="r">$9.4K</td><td class="r wkval">$10.1K</td><td class="r pos">+60.6%</td><td class="r pos">+7.2%</td><td class="r neg">-4.8%</td></tr>
+<tr><td class="lbl">Chilton</td><td class="r">$3.1K</td><td class="r">$8.6K</td><td class="r wkval">$10.4K</td><td class="r pos">+232.0%</td><td class="r pos">+21.6%</td><td class="r pos">+37.8%</td></tr>
+<tr><td class="lbl">Kniesel's</td><td class="r">$8.1K</td><td class="r">$5.3K</td><td class="r wkval">$7.3K</td><td class="r neg">-9.4%</td><td class="r pos">+38.5%</td><td class="r pos">+34.6%</td></tr>
+<tr><td class="lbl">Husteads</td><td class="r">$3.4K</td><td class="r">$4.4K</td><td class="r wkval">$5.8K</td><td class="r pos">+69.0%</td><td class="r pos">+32.6%</td><td class="r pos">+9.6%</td></tr>
+<tr><td class="lbl">Procolor</td><td class="r">$4.5K</td><td class="r">$3.7K</td><td class="r wkval">$3.8K</td><td class="r neg">-15.6%</td><td class="r pos">+0.8%</td><td class="r pos">+45.7%</td></tr>
+<tr class="tot"><td class="lbl">Total</td><td class="r">$204.6K</td><td class="r">$303.0K</td><td class="r wkval">$343.3K</td><td class="r pos">+67.8%</td><td class="r pos">+13.3%</td><td class="r pos">+11.4%</td></tr>
+</tbody></table>
+<div class="grid2">
+<div class="card"><h3 style="margin-top:0">Crash Champions</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">550</td><td class="r">1,358</td><td class="r wkval">1,473</td><td class="r pos">+167.8%</td><td class="r pos">+8.5%</td><td class="r neg">-0.3%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$46.0K</td><td class="r">$110.6K</td><td class="r wkval">$126.5K</td><td class="r pos">+175.0%</td><td class="r pos">+14.4%</td><td class="r neg">-0.1%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">58.3%</td><td class="r">47.4%</td><td class="r wkval">47.8%</td><td class="r neg">-18.0pp</td><td class="r pos">+0.9pp</td><td class="r pos">+0.2pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$26.8K</td><td class="r">$52.4K</td><td class="r wkval">$60.5K</td><td class="r pos">+125.6%</td><td class="r pos">+15.3%</td><td class="r pos">+0.1%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">378</td><td class="r">772</td><td class="r wkval">802</td><td class="r pos">+112.2%</td><td class="r pos">+3.9%</td><td class="r neg">-2.5%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">84</td><td class="r">81</td><td class="r wkval">86</td><td class="r pos">+2.7%</td><td class="r pos">+5.4%</td><td class="r pos">+0.2%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">122</td><td class="r">143</td><td class="r wkval">158</td><td class="r pos">+29.6%</td><td class="r pos">+10.0%</td><td class="r pos">+2.4%</td></tr></tbody></table></div>
+<div class="card"><h3 style="margin-top:0">Caliber Collision</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">960</td><td class="r">1,106</td><td class="r wkval">1,334</td><td class="r pos">+39.0%</td><td class="r pos">+2.9%</td><td class="r pos">+20.2%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$95.1K</td><td class="r">$99.7K</td><td class="r wkval">$120.4K</td><td class="r pos">+26.6%</td><td class="r pos">+2.5%</td><td class="r pos">+24.9%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">50.4%</td><td class="r">51.8%</td><td class="r wkval">50.5%</td><td class="r pos">+0.3pp</td><td class="r neg">-3.9pp</td><td class="r neg">-2.1pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$47.9K</td><td class="r">$51.6K</td><td class="r wkval">$60.8K</td><td class="r pos">+27.0%</td><td class="r neg">-1.5%</td><td class="r pos">+22.3%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">807</td><td class="r">851</td><td class="r wkval">964</td><td class="r pos">+19.5%</td><td class="r pos">+1.9%</td><td class="r pos">+13.4%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">99</td><td class="r">90</td><td class="r wkval">90</td><td class="r neg">-8.9%</td><td class="r neg">-0.4%</td><td class="r pos">+4.0%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">118</td><td class="r">117</td><td class="r wkval">125</td><td class="r pos">+6.0%</td><td class="r pos">+0.6%</td><td class="r pos">+10.2%</td></tr></tbody></table></div>
+</div><div class="grid2">
+<div class="card"><h3 style="margin-top:0">Fix Auto</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">193</td><td class="r">304</td><td class="r wkval">280</td><td class="r pos">+45.1%</td><td class="r pos">+7.2%</td><td class="r pos">+7.1%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$17.0K</td><td class="r">$24.4K</td><td class="r wkval">$24.5K</td><td class="r pos">+43.9%</td><td class="r pos">+0.3%</td><td class="r pos">+19.6%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">59.9%</td><td class="r">53.5%</td><td class="r wkval">54.5%</td><td class="r neg">-9.0pp</td><td class="r neg">-0.3pp</td><td class="r neg">-0.8pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$10.2K</td><td class="r">$13.1K</td><td class="r wkval">$13.3K</td><td class="r pos">+30.9%</td><td class="r pos">+17.8%</td><td class="r pos">+18.6%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">172</td><td class="r">224</td><td class="r wkval">215</td><td class="r pos">+25.0%</td><td class="r pos">+7.4%</td><td class="r pos">+8.7%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">88</td><td class="r">80</td><td class="r wkval">87</td><td class="r neg">-0.8%</td><td class="r pos">+10.2%</td><td class="r pos">+11.7%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">99</td><td class="r">109</td><td class="r wkval">114</td><td class="r pos">+15.1%</td><td class="r pos">+10.1%</td><td class="r pos">+10.0%</td></tr></tbody></table></div>
+<div class="card"><h3 style="margin-top:0">G & C Auto Body</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">226</td><td class="r">427</td><td class="r wkval">380</td><td class="r pos">+68.1%</td><td class="r neg">-11.0%</td><td class="r pos">+1.6%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$21.2K</td><td class="r">$37.0K</td><td class="r wkval">$34.6K</td><td class="r pos">+63.5%</td><td class="r neg">-6.5%</td><td class="r pos">+4.4%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">55.9%</td><td class="r">56.9%</td><td class="r wkval">57.5%</td><td class="r pos">+3.0pp</td><td class="r pos">+1.1pp</td><td class="r neg">-2.4pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$11.8K</td><td class="r">$21.0K</td><td class="r wkval">$19.9K</td><td class="r pos">+68.3%</td><td class="r neg">-5.4%</td><td class="r pos">+1.9%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">225</td><td class="r">344</td><td class="r wkval">324</td><td class="r pos">+44.0%</td><td class="r neg">-5.8%</td><td class="r pos">+2.9%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">94</td><td class="r">87</td><td class="r wkval">91</td><td class="r neg">-2.8%</td><td class="r pos">+5.1%</td><td class="r pos">+2.7%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">94</td><td class="r">108</td><td class="r wkval">107</td><td class="r pos">+13.5%</td><td class="r neg">-0.7%</td><td class="r pos">+1.5%</td></tr></tbody></table></div>
+</div><div class="grid2">
+<div class="card"><h3 style="margin-top:0">Kniesel's</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">121</td><td class="r">63</td><td class="r wkval">95</td><td class="r neg">-21.5%</td><td class="r pos">+42.1%</td><td class="r pos">+43.4%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$8.8K</td><td class="r">$5.6K</td><td class="r wkval">$8.3K</td><td class="r neg">-5.7%</td><td class="r pos">+30.4%</td><td class="r pos">+40.0%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">64.2%</td><td class="r">55.9%</td><td class="r wkval">62.8%</td><td class="r neg">-2.3pp</td><td class="r pos">+5.5pp</td><td class="r pos">+3.4pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$5.6K</td><td class="r">$3.1K</td><td class="r wkval">$5.2K</td><td class="r neg">-7.9%</td><td class="r pos">+37.5%</td><td class="r pos">+44.8%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">74</td><td class="r">55</td><td class="r wkval">73</td><td class="r neg">-1.4%</td><td class="r pos">+28.1%</td><td class="r pos">+27.5%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">72</td><td class="r">90</td><td class="r wkval">87</td><td class="r pos">+20.1%</td><td class="r neg">-8.2%</td><td class="r neg">-2.4%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">118</td><td class="r">103</td><td class="r wkval">113</td><td class="r neg">-4.4%</td><td class="r pos">+1.8%</td><td class="r pos">+9.8%</td></tr></tbody></table></div>
+<div class="card"><h3 style="margin-top:0">Gerber</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">68</td><td class="r">122</td><td class="r wkval">155</td><td class="r pos">+127.9%</td><td class="r pos">+27.4%</td><td class="r pos">+10.7%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$6.3K</td><td class="r">$9.4K</td><td class="r wkval">$10.1K</td><td class="r pos">+60.6%</td><td class="r pos">+7.2%</td><td class="r neg">-4.8%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">57.8%</td><td class="r">56.3%</td><td class="r wkval">57.9%</td><td class="r pos">+0.2pp</td><td class="r pos">+2.9pp</td><td class="r neg">-0.1pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$3.6K</td><td class="r">$5.3K</td><td class="r wkval">$5.8K</td><td class="r pos">+61.0%</td><td class="r pos">+10.2%</td><td class="r neg">-5.0%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">50</td><td class="r">95</td><td class="r wkval">110</td><td class="r pos">+120.0%</td><td class="r pos">+15.5%</td><td class="r pos">+2.6%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">92</td><td class="r">77</td><td class="r wkval">65</td><td class="r neg">-29.5%</td><td class="r neg">-15.9%</td><td class="r neg">-14.1%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">125</td><td class="r">99</td><td class="r wkval">91</td><td class="r neg">-27.0%</td><td class="r neg">-7.2%</td><td class="r neg">-7.2%</td></tr></tbody></table></div>
+</div><div class="grid2">
+<div class="card"><h3 style="margin-top:0">Chilton</h3><table><thead><tr><th>Metric</th><th class="r">Last Year</th><th class="r">YTD Avg</th><th class="r">Wk 23</th><th class="r">vs LY</th><th class="r">vs YTD</th><th class="r">vs 4wk</th></tr></thead><tbody><tr><td class="lbl">Qty</td><td class="r">43</td><td class="r">96</td><td class="r wkval">129</td><td class="r pos">+200.0%</td><td class="r pos">+34.3%</td><td class="r pos">+47.0%</td></tr>
+<tr><td class="lbl">Sales</td><td class="r">$3.1K</td><td class="r">$8.6K</td><td class="r wkval">$10.4K</td><td class="r pos">+232.0%</td><td class="r pos">+21.6%</td><td class="r pos">+37.8%</td></tr>
+<tr><td class="lbl">GM %</td><td class="r">46.1%</td><td class="r">54.6%</td><td class="r wkval">56.2%</td><td class="r pos">+22.0pp</td><td class="r pos">+2.9pp</td><td class="r neg">-1.8pp</td></tr>
+<tr><td class="lbl">GP $</td><td class="r">$1.4K</td><td class="r">$4.7K</td><td class="r wkval">$5.9K</td><td class="r pos">+304.9%</td><td class="r pos">+25.2%</td><td class="r pos">+35.3%</td></tr>
+<tr><td class="lbl">Orders</td><td class="r">35</td><td class="r">68</td><td class="r wkval">74</td><td class="r pos">+111.4%</td><td class="r pos">+8.3%</td><td class="r pos">+24.9%</td></tr>
+<tr><td class="lbl">ASP</td><td class="r">73</td><td class="r">89</td><td class="r wkval">81</td><td class="r pos">+10.7%</td><td class="r neg">-9.4%</td><td class="r neg">-6.3%</td></tr>
+<tr><td class="lbl">Avg Ticket</td><td class="r">90</td><td class="r">125</td><td class="r wkval">141</td><td class="r pos">+57.0%</td><td class="r pos">+12.3%</td><td class="r pos">+10.3%</td></tr></tbody></table></div>
+</div>
+</div>
 </div>
 <!-- END -->
 
