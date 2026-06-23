@@ -107,6 +107,12 @@ body {
 }
 
 /* ── FEATURED BUTTON (Dashboard) ── */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 36px;
+}
 .featured-btn {
   display: flex;
   align-items: stretch;
@@ -116,7 +122,6 @@ body {
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  margin-bottom: 36px;
   box-shadow: 0 2px 12px rgba(0,0,0,.07);
   transition: transform .15s, box-shadow .15s, border-color .15s;
   cursor: pointer;
@@ -126,16 +131,19 @@ body {
   box-shadow: 0 12px 36px rgba(0,0,0,.12);
   border-color: #00AEEF;
 }
+.featured-btn.gold-card:hover { border-color: #d97706; }
 .featured-stripe { width: 8px; flex-shrink: 0; background: #00AEEF; }
+.featured-stripe.gold { background: #d97706; }
 .featured-icon-col {
   background: #e8f7fd;
   display: flex; align-items: center; justify-content: center;
-  padding: 32px 30px;
+  padding: 24px 22px;
   flex-shrink: 0;
 }
-.featured-icon { font-size: 3.2rem; line-height: 1; }
+.featured-icon-col.gold { background: #fef7ec; }
+.featured-icon { font-size: 2.6rem; line-height: 1; }
 .featured-body {
-  flex: 1; padding: 28px 24px 28px 22px;
+  flex: 1; padding: 22px 20px 22px 18px;
   display: flex; flex-direction: column; justify-content: center;
 }
 .featured-eyebrow {
@@ -143,25 +151,31 @@ body {
   text-transform: uppercase; color: #00AEEF; margin-bottom: 6px;
   font-family: 'DM Mono', monospace;
 }
+.featured-eyebrow.gold { color: #d97706; }
 .featured-title {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 26px; font-weight: 800; color: #1a2e4a;
+  font-size: 24px; font-weight: 800; color: #1a2e4a;
   letter-spacing: -.01em; margin-bottom: 6px;
 }
 .featured-desc {
-  font-size: 13.5px; color: #7a90aa; line-height: 1.6; max-width: 520px;
+  font-size: 13px; color: #7a90aa; line-height: 1.6;
 }
 .featured-cta {
   display: inline-flex; align-items: center; gap: 8px;
-  margin-top: 16px;
+  margin-top: 14px;
   background: #00AEEF; color: #fff;
-  font-size: 13px; font-weight: 700;
-  padding: 10px 20px; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
+  padding: 9px 18px; border-radius: 8px;
   font-family: 'Barlow Condensed', sans-serif;
   letter-spacing: .05em; text-transform: uppercase;
   width: fit-content; transition: background .15s;
 }
+.featured-cta.gold { background: #d97706; }
 .featured-btn:hover .featured-cta { background: #009ad6; }
+.featured-btn.gold-card:hover .featured-cta.gold { background: #b45309; }
+@media (max-width: 700px) {
+  .featured-grid { grid-template-columns: 1fr; }
+}
 
 /* ── PROGRAM CARDS ── */
 .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -313,7 +327,7 @@ body {
   <div class="hero-badge">Inside Sales &nbsp;·&nbsp; COL Auto Parts</div>
   <div class="hero-title">Your Sales<br><span>Resource Hub</span></div>
   <div class="hero-sub">Everything the inside sales team needs — live call stats, rep rankings, sales programs, plan tracking, and leadership resources.</div>
-  <a href="Blake Kidwell - Leadership Philosophy.html" style="display:inline-flex;align-items:center;gap:12px;margin-top:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 20px;text-decoration:none;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">
+  <a href="Blake%20Kidwell%20-%20Leadership%20Philosophy.html" style="display:inline-flex;align-items:center;gap:12px;margin-top:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 20px;text-decoration:none;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;transition:background .15s;" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">
     <span style="font-size:1.3rem;">🧭</span>
     <span>
       <span style="display:block;font-size:10px;font-weight:700;color:#00AEEF;font-family:'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px;">Blake Kidwell, CEO</span>
@@ -326,23 +340,41 @@ body {
 <!-- MAIN -->
 <div class="main">
 
-  <div class="section-label" style="margin-top:0">Live Dashboard</div>
+  <div class="section-label" style="margin-top:0">Live Dashboards</div>
 
-  <a class="featured-btn" href="COL CSR Dashboard.html">
-    <div class="featured-stripe"></div>
-    <div class="featured-icon-col">
-      <div class="featured-icon">📊</div>
-    </div>
-    <div class="featured-body">
-      <div class="featured-eyebrow">Inside Sales &nbsp;·&nbsp; Live Performance</div>
-      <div class="featured-title">Daily CSR Dashboard</div>
-      <div class="featured-desc">
-        Call queue service levels, rep-by-rep performance rankings, scoring breakdown, add-on tracking, and sales-to-plan progress. Updated each week.
+  <div class="featured-grid">
+
+    <a class="featured-btn" href="COL CSR Dashboard.html">
+      <div class="featured-stripe"></div>
+      <div class="featured-icon-col">
+        <div class="featured-icon">📊</div>
       </div>
-      <div class="featured-cta">Open Dashboard &nbsp;›</div>
-    </div>
-    </div>
-  </a>
+      <div class="featured-body">
+        <div class="featured-eyebrow">Inside Sales &nbsp;·&nbsp; Live Performance</div>
+        <div class="featured-title">Daily CSR Dashboard</div>
+        <div class="featured-desc">
+          Call queue service levels, rep-by-rep performance rankings, scoring breakdown, add-on tracking, and sales-to-plan progress. Updated each week.
+        </div>
+        <div class="featured-cta">Open Dashboard &nbsp;›</div>
+      </div>
+    </a>
+
+    <a class="featured-btn gold-card" href="COL - Old Gold Report Card.html">
+      <div class="featured-stripe gold"></div>
+      <div class="featured-icon-col gold">
+        <div class="featured-icon">🏅</div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-eyebrow gold">Old Gold Program &nbsp;·&nbsp; Report Card</div>
+        <div class="featured-title">Old Gold Report Card</div>
+        <div class="featured-desc">
+          MTD revenue, margin, tier splits, and category breakdown for the Old Gold slow-moving inventory recovery program. Sourced live from Tri-Cloud ERP.
+        </div>
+        <div class="featured-cta gold">Open Report Card &nbsp;›</div>
+      </div>
+    </a>
+
+  </div>
 
   <div class="section-label">Sales Programs</div>
   <div class="card-grid">
