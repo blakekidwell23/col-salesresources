@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COL Auto Parts — Leadership Principles</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: #f0f4f8;
+  color: #1a2e4a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.header {
+  background: #1a2e4a;
+  border-bottom: 4px solid #00AEEF;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 16px rgba(0,0,0,.25);
+}
+.header-left { display: flex; align-items: center; gap: 20px; }
+.header-logo { height: 52px; width: auto; display: block; filter: brightness(0) invert(1); }
+.header-divider { width: 1px; height: 40px; background: rgba(255,255,255,.2); flex-shrink: 0; }
+.header-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px; font-weight: 800; letter-spacing: .08em;
+  color: #00AEEF; line-height: 1;
+}
+.header-brand em { color: #fff; font-style: normal; }
+.header-right { text-align: right; }
+.header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; color: #fff;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.header-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: #00AEEF; margin-top: 4px; opacity: .85;
+}
+.back-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: rgba(255,255,255,.6); text-decoration: none;
+  font-size: 12px; font-family: 'DM Mono', monospace;
+  transition: color .15s;
+  margin-top: 6px;
+}
+.back-link:hover { color: #00AEEF; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #1a2e4a 0%, #243a58 100%);
+  padding: 52px 40px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; left: -80px; bottom: -80px;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: rgba(0,174,239,.05);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; right: -60px; top: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(0,174,239,.07);
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 840px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(0,174,239,.15);
+  border: 1px solid rgba(0,174,239,.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 11px; font-weight: 700; color: #00AEEF;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 7px; height: 7px;
+  border-radius: 50%; background: #00AEEF;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800; color: #fff;
+  letter-spacing: -.01em; line-height: 1.05;
+  margin-bottom: 16px;
+}
+.hero-title span { color: #00AEEF; }
+.hero-sub {
+  font-size: 15px; color: rgba(255,255,255,.65);
+  max-width: 580px; line-height: 1.7; margin-bottom: 24px;
+}
+.hero-count {
+  display: inline-flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.count-item {
+  text-align: center;
+}
+.count-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px; font-weight: 800; color: #00AEEF;
+  line-height: 1;
+}
+.count-lbl {
+  font-size: 11px; color: rgba(255,255,255,.5);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+  margin-top: 3px;
+}
+.count-sep { width: 1px; height: 36px; background: rgba(255,255,255,.12); }
+
+/* ── MESSAGE FROM BLAKE ── */
+.message-strip {
+  background: #fff;
+  border-left: 5px solid #00AEEF;
+  border-radius: 0 12px 12px 0;
+  padding: 28px 32px;
+  margin: 36px 40px 0;
+  max-width: 880px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  position: relative;
+}
+.message-strip::before {
+  content: '\201C';
+  font-family: Georgia, serif;
+  font-size: 80px;
+  color: #e8f7fd;
+  position: absolute;
+  top: -4px; left: 20px;
+  line-height: 1;
+  pointer-events: none;
+}
+.message-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: #00AEEF;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 12px;
+}
+.message-body {
+  font-size: 14px; color: #445570; line-height: 1.75;
+  max-width: 720px; position: relative; z-index: 1;
+}
+.message-body p { margin-bottom: 12px; }
+.message-body p:last-child { margin-bottom: 0; }
+.message-sig {
+  margin-top: 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700; color: #1a2e4a;
+}
+.message-sig span { display: block; font-size: 12px; font-family: 'DM Mono', monospace; color: #7a90aa; font-weight: 400; margin-top: 2px; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 800; color: #7a90aa;
+  letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-left: 10px; border-left: 3px solid #00AEEF;
+}
+
+/* ── WHY STRIP ── */
+.why-strip {
+  background: linear-gradient(135deg, #1F3864 0%, #2e5090 100%);
+  border-radius: 14px;
+  padding: 32px 36px;
+  color: #fff;
+  margin-bottom: 36px;
+}
+.why-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800; letter-spacing: .02em;
+  margin-bottom: 16px; color: #fff;
+}
+.why-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.why-col { font-size: 13.5px; color: rgba(255,255,255,.75); line-height: 1.7; }
+.why-col strong { color: #00AEEF; font-weight: 700; display: block; margin-bottom: 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+.why-quote {
+  margin-top: 22px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.15);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: #00AEEF; font-style: italic;
+  text-align: center;
+}
+
+/* ── MAIN ── */
+.main { flex: 1; padding: 40px 40px 60px; max-width: 1040px; margin: 0 auto; width: 100%; }
+
+/* ── PRINCIPLES GRID ── */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── PRINCIPLE CARD ── */
+.p-card {
+  background: #fff;
+  border: 2px solid #dde3ec;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  user-select: none;
+}
+.p-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.11);
+  border-color: #00AEEF;
+}
+.p-card.open {
+  border-color: #00AEEF;
+  box-shadow: 0 8px 28px rgba(0,174,239,.15);
+}
+
+/* Card header (always visible) */
+.p-header {
+  padding: 20px 20px 18px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.p-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; background: #1F3864;
+  border-radius: 8px;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; letter-spacing: .02em;
+  transition: background .15s;
+}
+.p-card:hover .p-num, .p-card.open .p-num { background: #00AEEF; }
+.p-head-body { flex: 1; }
+.p-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 800; color: #1a2e4a;
+  letter-spacing: -.01em; line-height: 1.1;
+  margin-bottom: 5px;
+}
+.p-tagline {
+  font-size: 12px; color: #00AEEF;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500; line-height: 1.4;
+}
+
+/* Toggle indicator */
+.p-toggle {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #f0f4f8;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+  font-size: 14px; color: #aab8cc;
+  transition: background .15s, transform .25s, color .15s;
+}
+.p-card:hover .p-toggle { background: #e8f7fd; color: #00AEEF; }
+.p-card.open .p-toggle { background: #00AEEF; color: #fff; transform: rotate(45deg); }
+
+/* Expandable body */
+.p-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.p-card.open .p-body { max-height: 400px; }
+
+.p-divider { height: 1px; background: #eef2f7; margin: 0 20px; }
+.p-desc {
+  padding: 16px 20px 14px;
+  font-size: 13.5px; color: #445570; line-height: 1.7;
+}
+.p-dq {
+  margin: 0 20px 18px;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e8f7fd 100%);
+  border: 1px solid #bce3f7;
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+.p-dq-label {
+  font-size: 9.5px; font-weight: 800; letter-spacing: .12em;
+  text-transform: uppercase; color: #00AEEF;
+  font-family: 'DM Mono', monospace; margin-bottom: 5px;
+}
+.p-dq-text {
+  font-size: 13px; color: #1a2e4a; line-height: 1.55;
+  font-style: italic; font-weight: 500;
+}
+
+/* ── COMMITMENT STRIP ── */
+.commit-strip {
+  margin-top: 40px;
+  background: #1a2e4a;
+  border-radius: 14px;
+  padding: 32px 36px;
+  text-align: center;
+}
+.commit-strip blockquote {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700; color: #fff;
+  letter-spacing: .01em; line-height: 1.3;
+  font-style: italic; margin-bottom: 16px;
+}
+.commit-strip blockquote span { color: #00AEEF; }
+.commit-strip cite {
+  font-size: 12px; color: rgba(255,255,255,.45);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .06em; text-transform: uppercase;
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+.footer {
+  background: #1a2e4a;
+  border-top: 3px solid #00AEEF;
+  padding: 16px 40px;
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'DM Mono', monospace;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  margin-top: auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .principles-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .principles-grid { grid-template-columns: 1fr; }
+  .header { padding: 14px 20px; min-height: auto; }
+  .header-logo { height: 36px; }
+  .header-brand { font-size: 22px; }
+  .hero, .main { padding-left: 20px; padding-right: 20px; }
+  .message-strip { margin: 24px 20px 0; padding: 22px 20px; }
+  .footer { padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <img class="header-logo"
+         src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png"
+         alt="Collision Auto Parts"
+         onerror="this.style.display='none'">
+    <div class="header-divider"></div>
+    <div class="header-brand">COL <em>AUTO PARTS</em></div>
+  </div>
+  <div class="header-right">
+    <div class="header-title">Leadership Principles</div>
+    <div class="header-sub">Culture &nbsp;·&nbsp; Standards &nbsp;·&nbsp; Decision-Making Framework</div>
+    <a href="index.html" class="back-link">← Back to Resource Hub</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Collision Auto Parts &nbsp;·&nbsp; Leadership Framework</div>
+    <div class="hero-title">We Don't Build Culture<br><span>With Posters on a Wall.</span></div>
+    <div class="hero-sub">Culture is built by the decisions we make every day — the way we treat our people, serve our customers, and respond when things go wrong. These 12 principles are our decision-making framework.</div>
+    <div class="hero-count">
+      <div class="count-item">
+        <div class="count-num">12</div>
+        <div class="count-lbl">Principles</div>
+      </div>
+      <div class="count-sep"></div>
+      <div class="count-item">
+        <div class="count-num">1</div>
+        <div class="count-lbl">Per Week</div>
+      </div>
+      <div class="count-sep"></div>
+      <div class="count-item">
+        <div class="count-num">∞</div>
+        <div class="count-lbl">Impact</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MESSAGE FROM BLAKE -->
+<div class="message-strip">
+  <div class="message-eyebrow">A Message from Our CEO</div>
+  <div class="message-body">
+    <p>When I became CEO, I spent a lot of time thinking about the kind of company we want to build. Not just the revenue we want to achieve or the profit we want to earn — but the <strong>reputation we want to have</strong>.</p>
+    <p>I believe great companies are built by people who share a common set of beliefs and standards. People who know what is expected of them, understand what the company stands for, and can make good decisions without waiting for permission.</p>
+    <p>These principles are not rules. They are not slogans. They are <strong>decision-making tools</strong> — the behaviors, standards, and beliefs that define who we are and who we aspire to become. They will evolve over time. But they represent the type of leadership, accountability, service, teamwork, and integrity that will make Collision Auto Parts successful for decades to come.</p>
+    <p><em>Because culture is not built by what leaders say. Culture is built by what leaders consistently do.</em></p>
+  </div>
+  <div class="message-sig">
+    Blake Kidwell
+    <span>CEO, Collision Auto Parts</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- WHY WE CREATED THESE -->
+  <div class="why-strip">
+    <div class="why-title">Why These Principles Exist</div>
+    <div class="why-grid">
+      <div class="why-col">
+        <strong>What they are not</strong>
+        Rules to be enforced. Slogans to be posted. Policies to be filed away. These principles only matter if they change how we act.
+      </div>
+      <div class="why-col">
+        <strong>What they are</strong>
+        Decision-making tools. A common filter we all use when we face a choice about how to lead, serve, or respond. Every week, we discuss one together.
+      </div>
+    </div>
+    <div class="why-quote">"When in doubt, ask yourself: Which decision best reflects our principles?"</div>
+  </div>
+
+  <div class="section-label">The 12 Principles — Click any card to expand</div>
+
+  <div class="principles-grid" id="principlesGrid">
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">1</div>
+        <div class="p-head-body">
+          <div class="p-name">Protect the Trust</div>
+          <div class="p-tagline">Long-term trust beats short-term gain. Every time.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">We do not sacrifice our reputation with employees, customers, vendors, or one another for temporary results. Trust is the most valuable asset we have — and it's the hardest to rebuild once spent.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">Where are we building trust? Where are we spending it?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">2</div>
+        <div class="p-head-body">
+          <div class="p-name">Create Clarity</div>
+          <div class="p-tagline">We do not assume understanding. We create it.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Great leaders explain the what, the why, and what success looks like. Confusion is not a team problem — it's a leadership problem. When people are unclear, they stall, guess, or disengage.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What is one area where our team may be confused right now?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">3</div>
+        <div class="p-head-body">
+          <div class="p-name">Own the Outcome</div>
+          <div class="p-tagline">The scoreboard belongs to all of us.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">We don't blame circumstances, departments, vendors, systems, or customers. We own results. Accountability is not about blame — it's about being the person who drives the outcome regardless of the obstacles.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What result are we currently explaining instead of improving?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">4</div>
+        <div class="p-head-body">
+          <div class="p-name">Earn the Next Order</div>
+          <div class="p-tagline">Every customer decides every day whether we've earned their business.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Past success guarantees nothing. Every delivery, every quote, every phone call is an audition. The moment we assume loyalty, we start losing it. We earn the next order on every interaction.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">If our customers could grade us this week, what would they say?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">5</div>
+        <div class="p-head-body">
+          <div class="p-name">Solve Problems, Don't Study Them</div>
+          <div class="p-tagline">Speed matters. Action creates momentum.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">We don't admire problems. We identify them, own them, and fix them. Analysis without action is just procrastination with a presentation attached. A good decision made quickly beats a perfect decision made too late.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What problem have we been talking about too long?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">6</div>
+        <div class="p-head-body">
+          <div class="p-name">Win as One Team</div>
+          <div class="p-tagline">Departments don't win. Companies win.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Sales doesn't win. Operations doesn't win. Purchasing doesn't win. Collision Auto Parts wins — or we all lose together. When we optimize for our department at the expense of the company, we are choosing to lose slowly.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">Where are we optimizing for our department instead of the company?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">7</div>
+        <div class="p-head-body">
+          <div class="p-name">Raise the Standard</div>
+          <div class="p-tagline">What we tolerate becomes our standard.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Every exception eventually becomes a rule. When we look the other way on poor performance, bad behavior, or missed commitments, we are setting a new floor — not making an exception. We must have the courage to address problems quickly.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What have we started accepting that we shouldn't?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">8</div>
+        <div class="p-head-body">
+          <div class="p-name">Facts Over Feelings</div>
+          <div class="p-tagline">Seek truth, even when it's uncomfortable.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Data informs decisions. Opinions matter. Facts matter more. We seek truth even when it challenges our assumptions, our instincts, or our current strategy. The most expensive decisions are the ones made on hope rather than reality.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What belief are we holding that the data may not support?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">9</div>
+        <div class="p-head-body">
+          <div class="p-name">Get Better Every Week</div>
+          <div class="p-tagline">Small improvements create extraordinary results.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Nobody has to become 50% better overnight. Everyone should become 1% better every week. Compounded over a year, that's a different company — a different team. We are always in process, always improving, and we celebrate the progress as much as the result.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What did we improve this week?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">10</div>
+        <div class="p-head-body">
+          <div class="p-name">Leaders Go First</div>
+          <div class="p-tagline">The standard starts with us.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Leaders model the behavior they expect. If we want accountability, transparency, communication, or urgency — it starts with leadership. We cannot ask our teams to rise to a standard we are not willing to live ourselves.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What behavior am I asking others to demonstrate that I could model better?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">11</div>
+        <div class="p-head-body">
+          <div class="p-name">Be the Partner</div>
+          <div class="p-tagline">We succeed when our customers succeed.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">We are not just a parts supplier. We are a partner in our customers' success. The more their shops thrive, the more our business grows. When we lead with their success in mind, we build relationships that outlast any competitor on price.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">How can we make our customers' lives easier this week?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-card" onclick="toggle(this)">
+      <div class="p-header">
+        <div class="p-num">12</div>
+        <div class="p-head-body">
+          <div class="p-name">Finish Strong</div>
+          <div class="p-tagline">How we finish matters.</div>
+        </div>
+        <div class="p-toggle">+</div>
+      </div>
+      <div class="p-body">
+        <div class="p-divider"></div>
+        <div class="p-desc">Anybody can start something. Great teams finish. The last impression is the lasting impression — with customers, with teammates, with results. We don't coast into the weekend, the quarter, or the year. We close hard.</div>
+        <div class="p-dq">
+          <div class="p-dq-label">Discussion Question</div>
+          <div class="p-dq-text">What commitment needs to be completed before we start something new?</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMMITMENT -->
+  <div class="commit-strip">
+    <blockquote>"Build a company that employees are <span>proud to work for</span>, customers are <span>proud to buy from</span>, and partners are proud to support."</blockquote>
+    <cite>Blake Kidwell, CEO &nbsp;·&nbsp; Collision Auto Parts &nbsp;·&nbsp; 2026</cite>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>COL Auto Parts &nbsp;·&nbsp; Leadership Principles &nbsp;·&nbsp; Internal Use Only</span>
+  <span>Culture is built by what leaders consistently do.</span>
+</div>
+
+<script>
+function toggle(card) {
+  var wasOpen = card.classList.contains('open');
+  // Close all cards
+  document.querySelectorAll('.p-card.open').forEach(function(c) {
+    c.classList.remove('open');
+  });
+  // Open this one if it wasn't already open
+  if (!wasOpen) {
+    card.classList.add('open');
+    // Scroll card into view gently
+    setTimeout(function() {
+      var rect = card.getBoundingClientRect();
+      if (rect.bottom > window.innerHeight - 40) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 50);
+  }
+}
+</script>
+
+</body>
+</html>
