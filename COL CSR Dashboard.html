@@ -191,189 +191,49 @@ body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--nav
   </div>
 
   <!-- Monthly data table -->
-  <div class="tw" style="margin-bottom:0">
-  <table style="font-size:11.5px">
+  <div class="tw" style="margin-bottom:0;overflow-x:auto">
+  <table style="font-size:11px;min-width:980px">
     <thead>
       <tr>
-        <th style="min-width:120px">Metric</th>
-        <th class="c" style="background:#1e3a5f;color:#fff;min-width:38px">Jan</th>
-        <th class="c" style="background:#1e3a5f;color:#fff">Feb</th>
-        <th class="c" style="background:#1e3a5f;color:#fff">Mar</th>
-        <th class="c" style="background:#1e3a5f;color:#fff">Apr</th>
-        <th class="c" style="background:#1e3a5f;color:#fff">May</th>
-        <th class="c" style="background:#1e3a5f;color:#fff">Jun</th>
-        <th class="c" style="background:#0f2d4a;color:#fff;font-weight:800">YTD</th>
+        <th style="min-width:95px">Metric</th>
+        <th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Jan</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Feb</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Mar</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Apr</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">May</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Jun</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Jul</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Aug</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Sep</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Oct</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Nov</th><th class="c" style="background:#1e3a5f;color:#fff;font-size:10px;padding:5px 3px">Dec</th>
+        <th class="c" style="background:#0f2d4a;color:#fff;font-size:10px;padding:5px 3px">H1 Avg</th>
       </tr>
-      <tr style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace">
-        <td>Work Days</td>
-        <td class="c">21/22</td><td class="c">20/20</td><td class="c">22/21</td>
-        <td class="c">22/22</td><td class="c">20/21</td><td class="c">22/21</td>
-        <td class="c" style="font-weight:700">127/127</td>
+      <tr style="font-size:9px;color:var(--muted)">
+        <td style="font-size:9px;color:var(--muted)">Work Days</td>
+        <td class="c" style="font-size:9px;font-family:'DM Mono',monospace">26:21<br>25:22</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace">26:20<br>25:20</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace">26:22<br>25:21</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace">26:22<br>25:22</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace">26:20<br>25:21</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace">26:22<br>25:21</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)">25:22</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)">25:21</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)">25:21</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)">25:23</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)">25:18</td><td class="c" style="font-size:9px;font-family:'DM Mono',monospace;color:var(--muted)">25:22</td><td class="c" style="font-size:9px;background:#e8edf7;color:var(--muted);font-family:'DM Mono',monospace">H1 avg</td>
       </tr>
     </thead>
     <tbody>
-      <!-- SALES PER DAY -->
-      <tr style="background:#f8faff">
-        <td class="lbl" colspan="8" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128200; Sales Per Day</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--muted)">2025</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$159.8K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$141.4K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$158.3K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$167.8K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$136.7K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$148.8K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$152.4K</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--navy);font-weight:700">2026</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$154.6K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$152.9K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$162.8K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$161.4K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$163.0K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$145.2K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;color:var(--navy)">$156.6K</td>
-      </tr>
-      <tr id="ytd-sales-growth">
-        <td class="lbl" style="font-size:10px;color:var(--muted)">Growth</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;3.2%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+8.1%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+2.8%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;3.8%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+19.2%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;2.5%</td>
-        <td class="c" style="font-size:11px;font-weight:800;background:#d1fae5;color:#065f46">+2.8%</td>
-      </tr>
-      <!-- GP PER DAY -->
-      <tr style="background:#f8faff">
-        <td class="lbl" colspan="8" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128181; Gross Profit Per Day</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--muted)">2025</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$92.1K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$80.0K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$89.8K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$97.4K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$81.3K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px">$81.9K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$87.3K</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--navy);font-weight:700">2026</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$85.2K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$81.6K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$89.2K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$90.6K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$90.9K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700">$80.7K</td>
-        <td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;color:var(--amber)">$86.4K</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="font-size:10px;color:var(--muted)">Growth</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;7.5%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+2.0%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;0.6%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;7.0%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+11.8%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;1.5%</td>
-        <td class="c" style="font-size:11px;font-weight:800;background:#fee2e2;color:#991b1b">&#8722;1.0%</td>
-      </tr>
-      <!-- GM% -->
-      <tr style="background:#f8faff">
-        <td class="lbl" colspan="8" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#9650; Gross Margin %</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--muted)">2025</td>
-        <td class="c" style="font-size:11px">57.6%</td><td class="c" style="font-size:11px">56.6%</td>
-        <td class="c" style="font-size:11px">56.7%</td><td class="c" style="font-size:11px">58.1%</td>
-        <td class="c" style="font-size:11px">59.5%</td><td class="c" style="font-size:11px">55.1%</td>
-        <td class="c" style="font-size:11px;font-weight:700">57.3%</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--navy);font-weight:700">2026</td>
-        <td class="c" style="font-size:11px;font-weight:700">55.1%</td><td class="c" style="font-size:11px;font-weight:700">53.4%</td>
-        <td class="c" style="font-size:11px;font-weight:700">54.8%</td><td class="c" style="font-size:11px;font-weight:700">56.1%</td>
-        <td class="c" style="font-size:11px;font-weight:700">55.8%</td><td class="c" style="font-size:11px;font-weight:700">55.6%</td>
-        <td class="c" style="font-size:11px;font-weight:800;color:var(--amber)">55.2%</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="font-size:10px;color:var(--muted)">Delta (pp)</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;2.5</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;3.2</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;1.9</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;2.0</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;3.7</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+0.5</td>
-        <td class="c" style="font-size:11px;font-weight:800;background:#fee2e2;color:#991b1b">&#8722;2.1</td>
-      </tr>
-      <!-- ORDERS -->
-      <tr style="background:#f8faff">
-        <td class="lbl" colspan="8" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128466; Orders Per Day</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--muted)">2025</td>
-        <td class="c" style="font-size:11px">1,354</td><td class="c" style="font-size:11px">1,204</td>
-        <td class="c" style="font-size:11px">1,297</td><td class="c" style="font-size:11px">1,375</td>
-        <td class="c" style="font-size:11px">1,186</td><td class="c" style="font-size:11px">1,380</td>
-        <td class="c" style="font-size:11px;font-weight:700">1,303</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--navy);font-weight:700">2026</td>
-        <td class="c" style="font-size:11px;font-weight:700">1,350</td><td class="c" style="font-size:11px;font-weight:700">1,315</td>
-        <td class="c" style="font-size:11px;font-weight:700">1,367</td><td class="c" style="font-size:11px;font-weight:700">1,348</td>
-        <td class="c" style="font-size:11px;font-weight:700">1,363</td><td class="c" style="font-size:11px;font-weight:700">1,207</td>
-        <td class="c" style="font-size:11px;font-weight:800;color:var(--navy)">1,325</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="font-size:10px;color:var(--muted)">Growth</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;0.3%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+9.2%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+5.4%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;2.0%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+14.9%</td>
-        <td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">&#8722;12.5%</td>
-        <td class="c" style="font-size:11px;font-weight:800;background:#d1fae5;color:#065f46">+1.7%</td>
-      </tr>
-      <!-- UPT -->
-      <tr style="background:#f8faff">
-        <td class="lbl" colspan="8" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128230; UPT &amp; ASP</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--muted)">UPT 2025</td>
-        <td class="c" style="font-size:11px">1.34</td><td class="c" style="font-size:11px">1.36</td>
-        <td class="c" style="font-size:11px">1.46</td><td class="c" style="font-size:11px">1.50</td>
-        <td class="c" style="font-size:11px">1.32</td><td class="c" style="font-size:11px">1.39</td>
-        <td class="c" style="font-size:11px;font-weight:700">1.39</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--navy);font-weight:700">UPT 2026</td>
-        <td class="c" style="font-size:11px;font-weight:700">1.39</td><td class="c" style="font-size:11px;font-weight:700">1.39</td>
-        <td class="c" style="font-size:11px;font-weight:700">1.44</td><td class="c" style="font-size:11px;font-weight:700">1.44</td>
-        <td class="c" style="font-size:11px;font-weight:700">1.46</td><td class="c" style="font-size:11px;font-weight:700">1.45</td>
-        <td class="c" style="font-size:11px;font-weight:800;color:var(--green)">1.43</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--muted)">ASP 2025</td>
-        <td class="c" style="font-size:11px">$87.8</td><td class="c" style="font-size:11px">$86.5</td>
-        <td class="c" style="font-size:11px">$83.6</td><td class="c" style="font-size:11px">$81.5</td>
-        <td class="c" style="font-size:11px">$87.2</td><td class="c" style="font-size:11px">$77.3</td>
-        <td class="c" style="font-size:11px;font-weight:700">$84.0</td>
-      </tr>
-      <tr>
-        <td class="lbl" style="color:var(--navy);font-weight:700">ASP 2026</td>
-        <td class="c" style="font-size:11px;font-weight:700">$82.4</td><td class="c" style="font-size:11px;font-weight:700">$83.7</td>
-        <td class="c" style="font-size:11px;font-weight:700">$82.6</td><td class="c" style="font-size:11px;font-weight:700">$83.4</td>
-        <td class="c" style="font-size:11px;font-weight:700">$81.8</td><td class="c" style="font-size:11px;font-weight:700">$82.7</td>
-        <td class="c" style="font-size:11px;font-weight:800;color:var(--amber)">$82.8</td>
-      </tr>
+      <tr style="background:#f8faff"><td class="lbl" colspan="14" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128200; Sales Per Day</td></tr>
+      <tr><td class="lbl" style="color:var(--muted)">2025</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$159.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$141.4K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$158.3K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$167.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$136.7K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$148.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$168.0K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$146.7K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$154.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$146.1K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$148.4K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$140.3K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">$152.1K</td></tr>
+      <tr><td class="lbl" style="color:var(--navy);font-weight:700">2026</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$154.6K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$152.9K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$162.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$161.4K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$163.0K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$145.2K</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">$156.7K</td></tr>
+      <tr><td class="lbl" style="font-size:10px;color:var(--muted)">Growth</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-3.2%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+8.1%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+2.8%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-3.8%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+19.2%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-2.5%</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-size:11px;font-weight:800;background:#d1fae5;color:#065f46;background:#e8edf7">+2.8%</td></tr>
+      <tr style="background:#f8faff"><td class="lbl" colspan="14" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128181; Gross Profit Per Day</td></tr>
+      <tr><td class="lbl" style="color:var(--muted)">2025</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$92.1K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$80.0K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$89.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$97.4K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$81.3K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$81.9K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$91.8K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$84.7K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$88.0K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$84.2K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$85.9K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$79.5K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">$87.1K</td></tr>
+      <tr><td class="lbl" style="color:var(--navy);font-weight:700">2026</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$85.2K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$81.6K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$89.2K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$90.6K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$90.9K</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$80.7K</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--amber)">$86.4K</td></tr>
+      <tr><td class="lbl" style="font-size:10px;color:var(--muted)">Growth</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-7.5%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+2.0%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-0.6%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-7.0%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+11.8%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-1.5%</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-size:11px;font-weight:800;background:#fee2e2;color:#991b1b;background:#e8edf7">-1.0%</td></tr>
+      <tr style="background:#f8faff"><td class="lbl" colspan="14" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#9650; Gross Margin %</td></tr>
+      <tr><td class="lbl" style="color:var(--muted)">2025</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">57.6%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">56.6%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">56.7%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">58.1%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">59.5%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">55.1%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">54.7%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">57.7%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">56.8%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">57.6%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">57.9%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">56.6%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">57.3%</td></tr>
+      <tr><td class="lbl" style="color:var(--navy);font-weight:700">2026</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">55.1%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">53.4%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">54.8%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">56.1%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">55.8%</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">55.6%</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--amber)">55.1%</td></tr>
+      <tr><td class="lbl" style="font-size:10px;color:var(--muted)">Delta (pp)</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-2.5pp</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-3.2pp</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-1.9pp</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-2.0pp</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-3.7pp</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+0.5pp</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-size:11px;font-weight:800;background:#fee2e2;color:#991b1b;background:#e8edf7">-2.2pp</td></tr>
+      <tr style="background:#f8faff"><td class="lbl" colspan="14" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128466; Orders Per Day</td></tr>
+      <tr><td class="lbl" style="color:var(--muted)">2025</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,354</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,204</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,297</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,375</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,186</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,380</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,510</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,306</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,306</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,264</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,265</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1,215</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">1,299</td></tr>
+      <tr><td class="lbl" style="color:var(--navy);font-weight:700">2026</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1,350</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1,315</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1,367</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1,348</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1,363</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1,207</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">1,325</td></tr>
+      <tr><td class="lbl" style="font-size:10px;color:var(--muted)">Growth</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-0.3%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+9.2%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+5.4%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-2.0%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+14.9%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-12.5%</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-size:11px;font-weight:800;background:#d1fae5;color:#065f46;background:#e8edf7">+2.0%</td></tr>
+      <tr style="background:#f8faff"><td class="lbl" colspan="14" style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:4px 8px;font-weight:700;border-bottom:none">&#128230; UPT &amp; ASP</td></tr>
+      <tr><td class="lbl" style="color:var(--muted)">UPT 2025</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.34</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.36</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.46</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.50</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.32</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.39</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.46</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.41</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.41</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.38</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.40</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">1.38</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">1.40</td></tr>
+      <tr><td class="lbl" style="color:var(--navy);font-weight:700">UPT 2026</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1.39</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1.39</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1.44</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1.44</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1.46</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">1.45</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--green)">1.43</td></tr>
+      <tr><td class="lbl" style="font-size:10px;color:var(--muted)">UPT Growth</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+3.4%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+2.3%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-1.2%</td><td class="c" style="font-size:11px;font-weight:700;background:#fee2e2;color:#991b1b">-4.0%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+10.7%</td><td class="c" style="font-size:11px;font-weight:700;background:#d1fae5;color:#065f46">+4.3%</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-size:11px;font-weight:800;background:#d1fae5;color:#065f46;background:#e8edf7">+2.1%</td></tr>
+      <tr><td class="lbl" style="color:var(--muted)">ASP 2025</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$87.8</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$86.5</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$83.6</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$81.5</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$87.2</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$77.3</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$76.1</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$79.5</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$84.3</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$83.5</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$84.0</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;">$83.9</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--navy)">$84.0</td></tr>
+      <tr><td class="lbl" style="color:var(--navy);font-weight:700">ASP 2026</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$82.4</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$83.7</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$82.6</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$83.4</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$81.8</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;">$82.7</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="color:var(--muted);font-size:10px">—</td><td class="c" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:800;background:#e8edf7;color:var(--amber)">$82.8</td></tr>
     </tbody>
   </table>
   </div>
+
   <p style="font-size:10px;color:var(--muted);margin-top:6px;margin-bottom:18px;font-family:'DM Mono',monospace">
-    &#9888; GM% compression of &#8722;2.1pp YTD is the primary concern. Revenue growth (+2.8%) is being driven by volume, not margin.
-    May 2026 was the standout month (+19.2% sales, +11.8% GP vs. LY). June margin recovered to near-LY levels (+0.5pp).
+    &#9888; Charts run Jan-25 &rarr; May-26 (17 months, gray=2025 / blue=2026). Table shows full 2025 calendar year; 2026 H1 actuals only. &ldquo;H1 Avg&rdquo; column is an apples-to-apples Jan&ndash;Jun comparison.
+    GM% is down -2.2pp H1 vs LY — the primary margin concern. Revenue +2.8% H1 is volume-driven. May 2026 was the strongest month (+19.2% sales).
   </p>
 
   <div class="sec-lbl">Daily Revenue Trend &mdash; June 2026</div>
@@ -1150,15 +1010,15 @@ try{
 }catch(e){console.error('heatmap:',e);}
 
 // ── Sequential data Jan-25 → May-26 (Jun-26 dropped — incomplete) ───────────
-var seqLabels  = ['Jan-25','Feb-25','Mar-25','Apr-25','May-25','Jun-25','Jan-26','Feb-26','Mar-26','Apr-26','May-26'];
-var seqColors  = ['rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)'];
-var seqBorder  = ['rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(0,122,184,1)','rgba(0,122,184,1)','rgba(0,122,184,1)','rgba(0,122,184,1)','rgba(0,122,184,1)'];
-var seqSales   = [159.8,141.4,158.3,167.8,136.7,148.8,154.6,152.9,162.8,161.4,163.0];
-var seqGP      = [92.1,80.0,89.8,97.4,81.3,81.9,85.2,81.6,89.2,90.6,90.9];
-var seqGM      = [57.6,56.6,56.7,58.1,59.5,55.1,55.1,53.4,54.8,56.1,55.8];
-var seqOrders  = [1354,1204,1297,1375,1186,1380,1350,1315,1367,1348,1363];
-var seqUnits   = [1821,1635,1894,2059,1567,1924,1876,1826,1972,1937,1993];
-var seqUPT     = [1.34,1.36,1.46,1.50,1.32,1.39,1.39,1.39,1.44,1.44,1.46];
+var seqLabels  = ['Jan-25','Feb-25','Mar-25','Apr-25','May-25','Jun-25','Jul-25','Aug-25','Sep-25','Oct-25','Nov-25','Dec-25','Jan-26','Feb-26','Mar-26','Apr-26','May-26'];
+var seqColors  = ['rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(100,116,139,0.65)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)','rgba(0,122,184,0.85)'];
+var seqBorder  = ['rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(100,116,139,0.9)','rgba(0,122,184,1)','rgba(0,122,184,1)','rgba(0,122,184,1)','rgba(0,122,184,1)','rgba(0,122,184,1)'];
+var seqSales   = [159.8,141.4,158.3,167.8,136.7,148.8,168.0,146.7,154.8,146.1,148.4,140.3,154.6,152.9,162.8,161.4,163.0];
+var seqGP      = [92.1,80.0,89.8,97.4,81.3,81.9,91.8,84.7,88.0,84.2,85.9,79.5,85.2,81.6,89.2,90.6,90.9];
+var seqGM      = [57.6,56.6,56.7,58.1,59.5,55.1,54.7,57.7,56.8,57.6,57.9,56.6,55.1,53.4,54.8,56.1,55.8];
+var seqOrders  = [1354,1204,1297,1375,1186,1380,1510,1306,1306,1264,1265,1215,1350,1315,1367,1348,1363];
+var seqUnits   = [1821,1635,1894,2059,1567,1924,2208,1846,1837,1750,1766,1672,1876,1826,1972,1937,1993];
+var seqUPT     = [1.34,1.36,1.46,1.50,1.32,1.39,1.46,1.41,1.41,1.38,1.40,1.38,1.39,1.39,1.44,1.44,1.46];
 var seqWeekly  = seqSales.map(function(v){ return +(v*5).toFixed(1); });
 
 // Inline data-label plugin — no external CDN needed
@@ -1260,8 +1120,8 @@ function miniBarChart(id, data, fmtFn, yTickFn, yMin, yMax) {
 // ── Mini charts ──────────────────────────────────────────────────────────────
 try { miniBarChart('ytd-gp-chart',     seqGP,     function(v){return '$'+v+'K';},        function(v){return '$'+v+'K';},        72,  102); } catch(e){ console.error(e); }
 try { miniBarChart('ytd-gm-chart',     seqGM,     function(v){return v.toFixed(1)+'%';}, function(v){return v+'%';},            51,  62);  } catch(e){ console.error(e); }
-try { miniBarChart('ytd-orders-chart', seqOrders, function(v){return v.toLocaleString();},function(v){return v.toLocaleString();},1100,1450);} catch(e){ console.error(e); }
-try { miniBarChart('ytd-units-chart',  seqUnits,  function(v){return v.toLocaleString();},function(v){return v.toLocaleString();},1500,2150);} catch(e){ console.error(e); }
+try { miniBarChart('ytd-orders-chart', seqOrders, function(v){return v.toLocaleString();},function(v){return v.toLocaleString();},1100,1560);} catch(e){ console.error(e); }
+try { miniBarChart('ytd-units-chart',  seqUnits,  function(v){return v.toLocaleString();},function(v){return v.toLocaleString();},1500,2280);} catch(e){ console.error(e); }
 try { miniBarChart('ytd-upt-chart',    seqUPT,    function(v){return v.toFixed(2);},      function(v){return v.toFixed(2);},    1.25,1.60); } catch(e){ console.error(e); }
 try { miniBarChart('ytd-weekly-chart', seqWeekly, function(v){return '$'+v+'K';},         function(v){return '$'+v+'K';},       600, 860);  } catch(e){ console.error(e); }
 
