@@ -3,395 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>COL — Old Gold Report Card</title>
+<title>COL &mdash; Old Gold Report Card</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a2e4a;--navy2:#243a58;--cyan:#00AEEF;
+  --gold:#d97706;--gold-lt:#fef7ec;--gold-md:#f59e0b;--gold-dk:#92400e;
+  --green:#15803d;--red:#b91c1c;--amber:#d97706;
+  --text2:#445570;--muted:#7a90aa;--border:#dde3ec;--bg:#f0f4f8;--surface:#ffffff;
+}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
 
-:root {
-  --navy:   #1a2e4a;
-  --navy2:  #243a58;
-  --cyan:   #00AEEF;
-  --gold:   #d97706;
-  --gold-lt:#fef7ec;
-  --gold-md:#f59e0b;
-  --gold-dk:#92400e;
-  --green:  #15803d;
-  --red:    #b91c1c;
-  --amber:  #d97706;
-  --text2:  #445570;
-  --muted:  #7a90aa;
-  --border: #dde3ec;
-  --bg:     #f0f4f8;
-  --surface:#ffffff;
-}
+/* HEADER */
+.header{background:var(--navy);border-bottom:4px solid var(--cyan);padding:0 40px;display:flex;align-items:center;justify-content:space-between;min-height:80px;gap:20px;flex-wrap:wrap;box-shadow:0 2px 16px rgba(0,0,0,.25)}
+.header-left{display:flex;align-items:center;gap:20px}
+.header-logo{height:46px;width:auto;filter:brightness(0) invert(1)}
+.header-divider{width:1px;height:36px;background:rgba(255,255,255,.2);flex-shrink:0}
+.header-brand{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;letter-spacing:.08em;color:var(--cyan);line-height:1}
+.header-brand em{color:#fff;font-style:normal}
+.header-right{text-align:right}
+.header-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#fff;letter-spacing:.04em;text-transform:uppercase}
+.header-sub{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--cyan);margin-top:3px;opacity:.85}
 
-body {
-  font-family: 'Barlow', sans-serif;
-  background: var(--bg);
-  color: var(--navy);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  -webkit-font-smoothing: antialiased;
-}
+/* HERO */
+.hero{background:linear-gradient(135deg,#2d1f00 0%,#3d2a00 60%,#1a2e4a 100%);padding:32px 40px 28px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:rgba(217,119,6,.1);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(217,119,6,.2);border:1px solid rgba(217,119,6,.4);border-radius:100px;padding:4px 14px;font-size:10.5px;font-weight:700;color:#fbbf24;font-family:'DM Mono',monospace;letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(26px,4vw,38px);font-weight:800;color:#fff;letter-spacing:-.01em;line-height:1.1;margin-bottom:8px}
+.hero-title span{color:#fbbf24}
+.hero-meta{font-size:13px;color:rgba(255,255,255,.6);font-family:'DM Mono',monospace;line-height:1.6}
+.hero-meta strong{color:rgba(255,255,255,.85)}
 
-/* ── HEADER ── */
-.header {
-  background: var(--navy);
-  border-bottom: 4px solid var(--cyan);
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 80px;
-  gap: 20px;
-  flex-wrap: wrap;
-  box-shadow: 0 2px 16px rgba(0,0,0,.25);
-}
-.header-left  { display: flex; align-items: center; gap: 20px; }
-.header-logo  { height: 46px; width: auto; filter: brightness(0) invert(1); }
-.header-divider { width: 1px; height: 36px; background: rgba(255,255,255,.2); flex-shrink: 0; }
-.header-brand {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 28px; font-weight: 800; letter-spacing: .08em;
-  color: var(--cyan); line-height: 1;
-}
-.header-brand em { color: #fff; font-style: normal; }
-.header-right { text-align: right; }
-.header-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px; font-weight: 700; color: #fff;
-  letter-spacing: .04em; text-transform: uppercase;
-}
-.header-sub {
-  font-family: 'DM Mono', monospace;
-  font-size: 10.5px; color: var(--cyan); margin-top: 3px; opacity: .85;
-}
+/* MAIN */
+.main{flex:1;padding:36px 40px 60px;max-width:1100px;margin:0 auto;width:100%}
 
-/* ── HERO STRIP ── */
-.hero {
-  background: linear-gradient(135deg, #2d1f00 0%, #3d2a00 60%, #1a2e4a 100%);
-  padding: 32px 40px 28px;
-  position: relative; overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute; right: -40px; top: -40px;
-  width: 240px; height: 240px; border-radius: 50%;
-  background: rgba(217,119,6,.1); pointer-events: none;
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(217,119,6,.2);
-  border: 1px solid rgba(217,119,6,.4);
-  border-radius: 100px;
-  padding: 4px 14px;
-  font-size: 10.5px; font-weight: 700; color: #fbbf24;
-  font-family: 'DM Mono', monospace;
-  letter-spacing: .05em; text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.hero-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(26px, 4vw, 38px);
-  font-weight: 800; color: #fff;
-  letter-spacing: -.01em; line-height: 1.1;
-  margin-bottom: 8px;
-}
-.hero-title span { color: #fbbf24; }
-.hero-meta {
-  font-size: 13px; color: rgba(255,255,255,.6);
-  font-family: 'DM Mono', monospace; line-height: 1.6;
-}
-.hero-meta strong { color: rgba(255,255,255,.85); }
+/* SECTION LABEL */
+.sec-lbl{font-size:10.5px;font-weight:800;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;padding-left:10px;border-left:3px solid var(--gold)}
 
-/* ── MAIN ── */
-.main { flex: 1; padding: 36px 40px 60px; max-width: 1080px; margin: 0 auto; width: 100%; }
+/* SCORECARD */
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.scol h3{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-family:'DM Mono',monospace}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card .lbl{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.card .val{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--navy);line-height:1}
+.card.gold-card{background:var(--gold-lt);border-color:#fcd68a}
+.card.gold-card .lbl,.card.gold-card .val{color:var(--gold-dk)}
+.card.blue-card{background:#e8f4fd;border-color:#b3d9f2}
+.card.blue-card .lbl,.card.blue-card .val{color:#0c447c}
 
-/* ── SECTION LABEL ── */
-.sec-lbl {
-  font-size: 10.5px; font-weight: 800; color: var(--muted);
-  letter-spacing: .12em; text-transform: uppercase;
-  margin-bottom: 12px;
-  padding-left: 10px; border-left: 3px solid var(--gold);
-}
+/* TABLES */
+.tw{margin-bottom:24px}
+.tw table{width:100%;border-collapse:collapse;font-size:13px;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.tw thead tr{background:var(--navy)}
+.tw thead th{padding:9px 12px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;text-align:right;white-space:nowrap}
+.tw thead th:first-child{text-align:left}
+.tw tbody td{padding:8px 12px;border-top:1px solid #eef2f7;text-align:right;font-variant-numeric:tabular-nums;font-size:13px;color:var(--navy)}
+.tw tbody td:first-child{text-align:left;font-weight:600}
+.tw tbody tr:nth-child(even) td{background:#f7f9fc}
+.tw tbody tr:hover td{background:#eef4fb}
+.tw tbody tr.region-row td{font-weight:700}
+.tw tbody tr.total-row td{background:var(--gold-lt)!important;font-weight:800;color:var(--gold-dk);border-top:2px solid #fcd68a}
+.tw tbody tr.subtotal-row td{background:#f1ede0!important;font-weight:700;font-size:12.5px;color:var(--text2);border-top:1px solid #e5dfc8}
+.tw tbody tr.subtotal-row td:first-child{color:var(--muted);font-style:italic}
+.tw tbody tr.day-row td:first-child{font-weight:400;color:var(--muted);padding-left:24px}
+.tw tbody tr.day-row td{font-weight:400}
+.tw .pct{color:var(--muted)}
+.tw .tier1 td{border-left:4px solid #fde68a}
+.tw .tier2 td{border-left:4px solid #fbbf24}
+.tw .tier3 td{border-left:4px solid #d97706}
 
-/* ── METRIC CARDS ── */
-.card-row {
-  display: grid;
-  gap: 14px;
-  margin-bottom: 28px;
-}
-.card-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.card-row.cols-9 { grid-template-columns: repeat(3, 1fr); }
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+.section{margin-bottom:32px}
+.note{font-size:11px;color:var(--muted);margin:8px 2px 0;line-height:1.6;font-family:'DM Mono',monospace}
 
-.metric-group {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
-}
-.metric-group-title {
-  font-size: 10px; font-weight: 800; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 14px;
-  font-family: 'DM Mono', monospace;
-}
-.metric-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.metric-card {
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 12px 14px;
-}
-.metric-card.highlight {
-  background: #e8f4fd;
-  border-color: #b3d9f2;
-}
-.metric-card.gold-card {
-  background: var(--gold-lt);
-  border-color: #fcd68a;
-}
-.metric-lbl {
-  font-size: 10px; font-weight: 700; letter-spacing: .04em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 5px;
-}
-.metric-val {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 26px; font-weight: 800; color: var(--navy);
-  line-height: 1;
-}
-.metric-card.highlight .metric-lbl,
-.metric-card.highlight .metric-val { color: #0c447c; }
-.metric-card.gold-card .metric-lbl,
-.metric-card.gold-card .metric-val { color: var(--gold-dk); }
+/* FOOTER */
+.footer{background:var(--navy);border-top:3px solid var(--gold);padding:14px 40px;font-size:10.5px;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
-/* ── TABLES ── */
-.tw { margin-bottom: 28px; }
-.tw table {
-  width: 100%; border-collapse: collapse; font-size: 13px;
-  background: var(--surface);
-  border: 1px solid var(--border); border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
-}
-.tw thead tr { background: var(--navy); }
-.tw thead th {
-  padding: 9px 12px;
-  font-size: 11px; font-weight: 700; letter-spacing: .05em;
-  text-transform: uppercase; color: #fff;
-  text-align: right; white-space: nowrap;
-}
-.tw thead th:first-child { text-align: left; }
-.tw tbody td {
-  padding: 8px 12px; border-top: 1px solid #eef2f7;
-  text-align: right; font-variant-numeric: tabular-nums;
-  font-size: 13px; color: var(--navy);
-}
-.tw tbody td:first-child { text-align: left; font-weight: 600; }
-.tw tbody tr:nth-child(even) td { background: #f7f9fc; }
-.tw tbody tr:hover td { background: #eef4fb; }
-.tw tbody tr.region-row td { font-weight: 700; color: var(--navy2); }
-.tw tbody tr.region-row td:first-child { color: var(--navy); }
-.tw tbody tr.total-row td {
-  background: var(--gold-lt) !important;
-  font-weight: 800; color: var(--gold-dk);
-  border-top: 2px solid #fcd68a;
-}
-.tw tbody tr.subtotal-row td {
-  background: #f1ede0 !important;
-  font-weight: 700; font-size: 12.5px;
-  color: var(--text2);
-  border-top: 1px solid #e5dfc8;
-}
-.tw tbody tr.subtotal-row td:first-child { color: var(--muted); font-style: italic; }
-.tw tbody tr.day-row td:first-child { font-weight: 400; color: var(--muted); padding-left: 24px; }
-.tw tbody tr.day-row td { font-weight: 400; }
-.tw .pct { color: var(--muted); }
-.tw .tier1 td { border-left: 4px solid #fde68a; }
-.tw .tier2 td { border-left: 4px solid #fbbf24; }
-.tw .tier3 td { border-left: 4px solid #d97706; }
-
-/* ── NOTE ── */
-.note {
-  font-size: 11px; color: var(--muted); margin: 8px 2px 0;
-  line-height: 1.6; font-family: 'DM Mono', monospace;
-}
-
-/* ── GRID ── */
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
-
-/* ── SECTION WRAPPER ── */
-.section { margin-bottom: 32px; }
-
-/* ── BADGE ── */
-.internal-badge {
-  display: inline-flex; align-items: center;
-  background: #fef2f2; color: var(--red);
-  border: 1px solid #fecaca; border-radius: 7px;
-  padding: 5px 12px; font-size: 11px; font-weight: 700;
-  font-family: 'DM Mono', monospace; letter-spacing: .04em;
-  text-transform: uppercase;
-}
-
-/* ── FOOTER ── */
-.footer {
-  background: var(--navy);
-  border-top: 3px solid var(--gold);
-  padding: 14px 40px;
-  font-size: 10.5px; color: rgba(255,255,255,.4);
-  font-family: 'DM Mono', monospace;
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
-}
-
-@media (max-width: 780px) {
-  .header { padding: 14px 20px; min-height: auto; }
-  .header-logo { height: 34px; }
-  .header-brand { font-size: 20px; }
-  .hero, .main { padding-left: 20px; padding-right: 20px; }
-  .grid2 { grid-template-columns: 1fr; }
-  .metric-grid { grid-template-columns: 1fr 1fr; }
-  .card-row.cols-3 { grid-template-columns: 1fr; }
-  .footer { padding: 14px 20px; }
+@media(max-width:780px){
+  .header{padding:14px 20px;min-height:auto} .header-logo{height:34px} .header-brand{font-size:20px}
+  .hero,.main{padding-left:20px;padding-right:20px}
+  .grid2,.score{grid-template-columns:1fr} .cards{grid-template-columns:repeat(3,1fr)}
+  .footer{padding:14px 20px}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-left">
-    <img class="header-logo"
-         src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png"
-         alt="Collision Auto Parts"
-         onerror="this.style.display='none'">
+    <img class="header-logo" src="https://colauto.com/wp-content/uploads/2026/03/Collision-Auto-Parts_Web_Logo_Header-TM-White.png" alt="Collision Auto Parts" onerror="this.style.display='none'">
     <div class="header-divider"></div>
     <div class="header-brand">COL <em>AUTO PARTS</em></div>
   </div>
   <div class="header-right">
     <div class="header-title">Old Gold Report Card</div>
-    <div class="header-sub">Slow-Moving Inventory Recovery &nbsp;·&nbsp; Internal Use Only</div>
+    <div class="header-sub">Slow-Moving Inventory Recovery &nbsp;&middot;&nbsp; Internal Use Only</div>
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">🏅 Old Gold Program &nbsp;·&nbsp; MTD Jun 1–19, 2026</div>
+  <div class="hero-badge">&#127885; Old Gold Program &nbsp;&middot;&nbsp; MTD Jun 1&ndash;26, 2026</div>
   <div class="hero-title">Old Gold <span>Report Card</span></div>
   <div class="hero-meta">
-    <strong>Source: Tri-Cloud ERP (live pull as of Jun 19, 2026)</strong>
-    &nbsp;·&nbsp; OG flag: OGDisc&gt;0 (Jun 1–14) + OGTier (Jun 15–19)
-    &nbsp;·&nbsp; MTD = YTD (program started Jun 1)
-    &nbsp;·&nbsp; Revenue = Amount &nbsp;·&nbsp; GM vs AVGCost
+    <strong>Source: Tri-Cloud ERP (live pull as of Jun 26, 2026)</strong>
+    &nbsp;&middot;&nbsp; OG flag: OGDisc&gt;0 (Jun 1&ndash;14) + OGTier (Jun 15&ndash;26)
+    &nbsp;&middot;&nbsp; MTD = YTD (program started Jun 1)
+    &nbsp;&middot;&nbsp; Revenue = Amount &nbsp;&middot;&nbsp; GM vs AVGCost
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
-  <!-- ── SCORECARD ── -->
+  <!-- SCORECARD -->
   <div class="section">
     <div class="sec-lbl">Company Headline &mdash; Sales, Margin &amp; Units</div>
-    <div class="card-row cols-3">
-
-      <div class="metric-group">
-        <div class="metric-group-title">Month to Date</div>
-        <div class="metric-grid">
-          <div class="metric-card gold-card">
-            <div class="metric-lbl">Sales</div>
-            <div class="metric-val">$86.0K</div>
-          </div>
-          <div class="metric-card highlight">
-            <div class="metric-lbl">Margin $</div>
-            <div class="metric-val">$32.0K</div>
-          </div>
-          <div class="metric-card highlight">
-            <div class="metric-lbl">Margin %</div>
-            <div class="metric-val">37.2%</div>
-          </div>
+    <div class="score">
+      <div class="scol">
+        <h3>Month to Date</h3>
+        <div class="cards">
+          <div class="card gold-card"><div class="lbl">Sales</div><div class="val">$150.4K</div></div>
+          <div class="card blue-card"><div class="lbl">Margin $</div><div class="val">$57.6K</div></div>
+          <div class="card blue-card"><div class="lbl">Margin %</div><div class="val">38.3%</div></div>
         </div>
       </div>
-
-      <div class="metric-group">
-        <div class="metric-group-title">Year to Date</div>
-        <div class="metric-grid">
-          <div class="metric-card gold-card">
-            <div class="metric-lbl">Sales</div>
-            <div class="metric-val">$86.0K</div>
-          </div>
-          <div class="metric-card highlight">
-            <div class="metric-lbl">Margin $</div>
-            <div class="metric-val">$32.0K</div>
-          </div>
-          <div class="metric-card highlight">
-            <div class="metric-lbl">Margin %</div>
-            <div class="metric-val">37.2%</div>
-          </div>
+      <div class="scol">
+        <h3>Year to Date</h3>
+        <div class="cards">
+          <div class="card gold-card"><div class="lbl">Sales</div><div class="val">$150.4K</div></div>
+          <div class="card blue-card"><div class="lbl">Margin $</div><div class="val">$57.6K</div></div>
+          <div class="card blue-card"><div class="lbl">Margin %</div><div class="val">38.3%</div></div>
         </div>
       </div>
-
-      <div class="metric-group">
-        <div class="metric-group-title">Units (MTD / YTD)</div>
-        <div class="metric-grid">
-          <div class="metric-card">
-            <div class="metric-lbl">Units Sold</div>
-            <div class="metric-val">1,060</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-lbl">Avg Sale</div>
-            <div class="metric-val">$81</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-lbl">Avg GM $</div>
-            <div class="metric-val">$30</div>
-          </div>
+      <div class="scol">
+        <h3>Units (MTD / YTD)</h3>
+        <div class="cards">
+          <div class="card"><div class="lbl">Units Sold</div><div class="val">1,882</div></div>
+          <div class="card"><div class="lbl">Avg Sale</div><div class="val">$80</div></div>
+          <div class="card"><div class="lbl">Avg GM $</div><div class="val">$31</div></div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- ── DAILY CHART ── -->
+  <!-- DAILY CHART -->
   <div class="section">
-    <div class="sec-lbl">Daily Units &amp; Revenue &mdash; Jun 1&ndash;19, 2026</div>
+    <div class="sec-lbl">Daily Revenue &amp; Units &mdash; Jun 1&ndash;26, 2026</div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.05)">
-      <canvas id="dailyChart" height="110"></canvas>
-      <div style="display:flex;gap:20px;justify-content:center;margin-top:14px;font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">
-        <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:14px;background:#f59e0b;border-radius:3px"></span>Daily Revenue ($)</span>
-        <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:3px;background:#1a2e4a;border-radius:2px"></span>Units Sold</span>
-        <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:1px;height:14px;background:#b91c1c;border-radius:1px"></span>OGTier cutover (Jun 15)</span>
+      <div style="display:flex;gap:20px;justify-content:center;margin-bottom:14px;font-size:11px;font-family:'DM Mono',monospace;color:var(--muted)">
+        <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:14px;background:#d8b25e;border-radius:3px"></span>Daily Revenue ($)</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:16px;border-top:2px dashed #1a2e4a"></span>Units Sold</span>
+        <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:1.5px;height:14px;background:#b91c1c;border-radius:1px"></span>OGTier cutover (Jun 15)</span>
       </div>
+      <div style="position:relative;height:260px"><canvas id="dailyChart"></canvas></div>
     </div>
-    <p class="note" style="margin-top:8px">Days with zero OG sales (Jun 1, 6–7, 13–14) are omitted. The jump at Jun 15–16 marks the OGTier cutover — volume roughly 3× the OGDisc baseline.</p>
+    <p class="note">Days with no OG sales (Jun 1, 6&ndash;7, 13&ndash;14, 20&ndash;21) are omitted. Jun 15 marks the OGTier cutover &mdash; volume roughly 3&times; the OGDisc baseline. Revenue and units tie exactly to the $150,431 company base.</p>
   </div>
 
-  <!-- ── BY REGION ── -->
+  <!-- BY REGION -->
   <div class="section">
     <div class="sec-lbl">By Region &mdash; Revenue &middot; Margin $ &middot; Margin % &mdash; MTD and YTD</div>
     <div class="tw">
       <table>
-        <thead>
-          <tr>
-            <th>Region</th>
-            <th>Units</th>
-            <th>MTD Rev</th><th>MTD GM $</th><th>MTD GM %</th>
-            <th>YTD Rev</th><th>YTD GM $</th><th>YTD GM %</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th>Region</th><th>Units</th>
+          <th>MTD Rev</th><th>MTD GM $</th><th>MTD GM %</th>
+          <th>YTD Rev</th><th>YTD GM $</th><th>YTD GM %</th>
+        </tr></thead>
         <tbody>
-          <tr class="region-row"><td>NorCal</td><td>328</td><td>$28,517</td><td>$10,212</td><td class="pct">35.8%</td><td>$28,517</td><td>$10,212</td><td class="pct">35.8%</td></tr>
-          <tr class="region-row"><td>SoCal</td><td>632</td><td>$47,875</td><td>$19,152</td><td class="pct">40.0%</td><td>$47,875</td><td>$19,152</td><td class="pct">40.0%</td></tr>
-          <tr class="region-row"><td>MWest</td><td>100</td><td>$9,627</td><td>$2,670</td><td class="pct">27.7%</td><td>$9,627</td><td>$2,670</td><td class="pct">27.7%</td></tr>
-          <tr class="total-row"><td>Company Total</td><td>1,060</td><td>$86,019</td><td>$32,034</td><td>37.2%</td><td>$86,019</td><td>$32,034</td><td>37.2%</td></tr>
+          <tr class="region-row"><td>NorCal</td><td>579</td><td>$49,858</td><td>$17,931</td><td class="pct">36.0%</td><td>$49,858</td><td>$17,931</td><td class="pct">36.0%</td></tr>
+          <tr class="region-row"><td>SoCal</td><td>1,136</td><td>$85,374</td><td>$35,640</td><td class="pct">41.7%</td><td>$85,374</td><td>$35,640</td><td class="pct">41.7%</td></tr>
+          <tr class="region-row"><td>MWest</td><td>167</td><td>$15,199</td><td>$4,031</td><td class="pct">26.5%</td><td>$15,199</td><td>$4,031</td><td class="pct">26.5%</td></tr>
+          <tr class="total-row"><td>Company Total</td><td>1,882</td><td>$150,431</td><td>$57,602</td><td>38.3%</td><td>$150,431</td><td>$57,602</td><td>38.3%</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">Live Tri-Cloud pull, Jun 1–19. MTD = YTD this period because the program started Jun 1; they diverge at the July roll. Warehouse-level split not yet wired into the live feed.</p>
+    <p class="note">Live Tri-Cloud pull, Jun 1&ndash;26. MTD = YTD because the program started Jun 1; they diverge at the July roll.</p>
   </div>
 
-  <!-- ── DAILY DETAIL ── -->
+  <!-- DAILY DETAIL -->
   <div class="section">
     <div class="sec-lbl">Daily Detail with Weekly Subtotals &mdash; Company-Wide</div>
     <div class="tw">
@@ -400,205 +192,168 @@ body {
         <tbody id="daily"></tbody>
       </table>
     </div>
-    <p class="note">Live daily actuals, company-wide (NorCal + SoCal + MWest). Days with no OG sales (Jun 1, 6–7, 13–14) are omitted. Jun 15 is the OGTier cutover — volume jumps as the new flag takes over from OGDisc. Daily rows tie exactly to the $86,019 company base.</p>
+    <p class="note">Company-wide (NorCal + SoCal + MWest). Days with no OG sales omitted. Jun 15 is the OGTier cutover. Daily rows tie exactly to the $150,431 company base.</p>
   </div>
 
-  <!-- ── OG TIER ── -->
+  <!-- OG TIER -->
   <div class="section">
-    <div class="sec-lbl">By OG Tier &mdash; Jun 15&ndash;19 Only (OGTier-Flagged)</div>
+    <div class="sec-lbl">By OG Tier &mdash; Jun 15&ndash;26 Only (OGTier-Flagged)</div>
     <div class="tw">
       <table>
         <thead><tr><th>Tier</th><th>Units</th><th>Revenue</th><th>Margin $</th><th>Margin %</th></tr></thead>
         <tbody id="tiers"></tbody>
       </table>
     </div>
-    <p class="note">Tier split is only available for Jun 15–19, where the OGTier field is populated. Jun 1–14 OG sales were flagged via OGDisc, which carries no tier label — tier coverage starts at the Jun 15 cutover. Sums here cover the OGTier window only, not the full period.</p>
+    <p class="note">Tier split available Jun 15&ndash;26 only (OGTier field populated). Jun 1&ndash;14 tracked via OGDisc with no tier label. Sums cover the labeled window only, not the full period.</p>
   </div>
 
-  <!-- ── CUSTOMER + CATEGORY ── -->
+  <!-- CUSTOMER + CATEGORY -->
   <div class="grid2">
     <div>
       <div class="sec-lbl">By Customer Type &mdash; Who&rsquo;s Buying</div>
       <div class="tw">
         <table>
-          <thead><tr><th>Customer Type</th><th>Units</th><th>Revenue</th><th>GM %</th></tr></thead>
+          <thead><tr><th>Customer Type</th><th>Units</th><th>Revenue</th><th>% of OG</th><th>GM %</th></tr></thead>
           <tbody id="ctype"></tbody>
         </table>
       </div>
-      <p class="note">Via Invoice → Customer_Address → Customer (TypeOfCustomer). Body shops (DRP + Independent + Low vol) and MSO are the core buyers, as expected.</p>
     </div>
     <div>
       <div class="sec-lbl">By Product Category &mdash; Top 9 + Other</div>
       <div class="tw">
         <table>
-          <thead><tr><th>Category</th><th>Units</th><th>Revenue</th><th>GM %</th></tr></thead>
+          <thead><tr><th>Category</th><th>Units</th><th>Revenue</th><th>% of OG</th><th>GM %</th></tr></thead>
           <tbody id="cats"></tbody>
         </table>
       </div>
-      <p class="note">Via NewPartNo → Datacenter_Part_No (ItemCategory, read from SharedPartNo='Main' record). Categories are granular; long tail rolled into Other. No uncategorized parts.</p>
     </div>
   </div>
 
-</div><!-- /.main -->
+</div>
 
 <div class="footer">
-  <span>COL Auto Parts &nbsp;·&nbsp; Old Gold Report Card &nbsp;·&nbsp; Internal Use Only</span>
-  <span>LIVE Tri-Cloud pull &middot; Jun 1&ndash;19, 2026 (as of Jun 19) &middot; OG flag: OGDisc&gt;0 (Jun 1–14), OGTier (Jun 15–19)</span>
+  <span>COL Auto Parts &nbsp;&middot;&nbsp; Old Gold Report Card &nbsp;&middot;&nbsp; Internal Use Only</span>
+  <span>LIVE Tri-Cloud pull &middot; Jun 1&ndash;26, 2026 (as of Jun 26) &middot; OG flag: OGDisc&gt;0 (Jun 1&ndash;14), OGTier (Jun 15&ndash;26)</span>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
   function money(n){ return '$'+Math.round(n).toLocaleString(); }
+  function pct(gm,rev){ return rev>0?(gm/rev*100).toFixed(1)+'%':'&mdash;'; }
 
-  // ── DAILY CHART ──
+  var wk1=[['Tue Jun 2',29,3619.53,1430.32],['Wed Jun 3',57,4839.53,1343.03],['Thu Jun 4',48,4342.75,1643.03],['Fri Jun 5',41,3893.57,1246.00]];
+  var wk2=[['Mon Jun 8',34,3592.93,1008.03],['Tue Jun 9',53,3465.00,1404.69],['Wed Jun 10',49,4970.30,2216.98],['Thu Jun 11',59,4495.64,1653.37],['Fri Jun 12',48,4187.38,1725.92]];
+  var wk3=[['Mon Jun 15',60,5064.36,2084.97],['Tue Jun 16',152,12421.36,4912.24],['Wed Jun 17',159,12592.75,4652.34],['Thu Jun 18',135,9621.68,3548.37],['Fri Jun 19',164,11259.78,4310.99]];
+  var wk4=[['Mon Jun 22',115,8686.73,3420.55],['Tue Jun 23',164,12640.88,4697.45],['Wed Jun 24',197,15249.70,6090.16],['Thu Jun 25',161,12919.78,5406.04],['Fri Jun 26',157,12567.31,4807.51]];
+
+  // Daily detail table
+  function drow(cls,lbl,u,rev,gm){
+    return '<tr class="'+cls+'"><td>'+lbl+'</td><td>'+(u||'&mdash;')+'</td><td>'+(rev?money(rev):'&mdash;')+'</td><td>'+(gm?money(gm):'&mdash;')+'</td><td class="pct">'+pct(gm,rev)+'</td></tr>';
+  }
+  var dhtml='';
+  function emit(rows,lbl){
+    var su=0,sr=0,sg=0;
+    rows.forEach(function(r){ su+=r[1]; sr+=r[2]; sg+=r[3]; dhtml+=drow('day-row',r[0],r[1],r[2],r[3]); });
+    dhtml+=drow('subtotal-row',lbl,su,sr,sg);
+  }
+  emit(wk1,'Week of Jun 1 subtotal (Mon&ndash;Fri)');
+  emit(wk2,'Week of Jun 8 subtotal (Mon&ndash;Fri)');
+  emit(wk3,'Week of Jun 15 subtotal (Mon&ndash;Fri)');
+  emit(wk4,'Week of Jun 22 subtotal (Mon&ndash;Fri)');
+  dhtml+=drow('total-row','Period Total (Jun 1&ndash;26)',1882,150430.96,57601.99);
+  document.getElementById('daily').innerHTML=dhtml;
+
+  // Tier table
+  function trow(cls,t,u,rev,gm){
+    return '<tr class="'+cls+'"><td>'+t+'</td><td>'+u+'</td><td>'+money(rev)+'</td><td>'+money(gm)+'</td><td class="pct">'+(gm/rev*100).toFixed(1)+'%</td></tr>';
+  }
+  var th='';
+  th+=trow('tier1','OG1 &mdash; Light Discount',327,28400.54,13532.95);
+  th+=trow('tier2','OG2 &mdash; Mid Discount',432,25322.04,10825.68);
+  th+=trow('tier3','OG3 &mdash; Deep Discount',705,59301.75,19571.99);
+  th+=trow('total-row','All Tiers',1464,113024.33,43930.62);
+  document.getElementById('tiers').innerHTML=th;
+
+  // Customer type + category
+  var OG_BASE=150430.96;
+  function crow(cls,lbl,u,rev,gmPct){
+    var share=(rev/OG_BASE*100).toFixed(1)+'%';
+    var gmStr=gmPct==null?'&mdash;':gmPct.toFixed(1)+'%';
+    return '<tr class="'+cls+'"><td>'+lbl+'</td><td>'+u+'</td><td>'+money(rev)+'</td><td class="pct">'+share+'</td><td class="pct">'+gmStr+'</td></tr>';
+  }
+  var ctypes=[['MSO',843,64502,39.2],['Body Shop &mdash; DRP',491,40693,39.6],['Body Shop &mdash; Independent',120,11383,43.8],['Repair Shop',116,10765,30.0],['Retail',112,9579,36.2],['Car Dealer',90,5952,35.0],['Distributor',74,5042,32.7],['Body Shop &mdash; Low Vol',22,1543,32.0],['Junk Yard',9,665,42.9],['Other',5,307,11.2]];
+  var ctHtml='';
+  ctypes.forEach(function(c){ ctHtml+=crow('',c[0],c[1],c[2],c[3]); });
+  ctHtml+=crow('total-row','Total',1882,150431,38.3);
+  document.getElementById('ctype').innerHTML=ctHtml;
+
+  var cats=[['Bumper Cover',180,25904,45.4],['Head Lamp',111,21467,25.6],['Grille',130,13778,37.7],['Bumper Insert',186,7822,40.6],['Tail Lamp',85,7382,30.8],['Fender',45,5967,50.1],['Bumper',20,5964,40.5],['Hood',25,5817,28.7],['Radiator Support',51,5649,34.5],['Other (24 categories)',1049,50681,null]];
+  var catHtml='';
+  cats.forEach(function(c){ catHtml+=crow('',c[0],c[1],c[2],c[3]); });
+  catHtml+=crow('total-row','Total',1882,150431,null);
+  document.getElementById('cats').innerHTML=catHtml;
+
+  // Daily chart
   (function(){
-    var labels = ['Jun 2','Jun 3','Jun 4','Jun 5','Jun 8','Jun 9','Jun 10','Jun 11','Jun 12','Jun 15','Jun 16','Jun 17','Jun 18','Jun 19'];
-    var revenue = [3619.53,4839.53,4342.75,3893.57,3592.93,3465.00,4970.30,4495.64,4187.38,3184.01,12091.84,12592.75,9528.89,11215.05];
-    var units   = [29,57,48,41,34,53,49,59,48,38,148,159,134,163];
-    // Cutover annotation index (Jun 15 = index 9)
-    var cutoverPlugin = {
+    var allDays=[].concat(wk1,wk2,wk3,wk4);
+    var labels=allDays.map(function(r){ return r[0].replace(/^[A-Za-z]{3}\s+/,''); });
+    var revData=allDays.map(function(r){ return r[2]; });
+    var unitData=allDays.map(function(r){ return r[1]; });
+    var cutoverIdx=8;
+    var cutoverPlugin={
       id:'cutover',
       afterDraw:function(chart){
-        var ctx=chart.ctx, meta=chart.getDatasetMeta(0);
-        if(!meta.data[9]) return;
-        var x=meta.data[9].x;
-        ctx.save();
-        ctx.beginPath();
-        ctx.moveTo(x,chart.chartArea.top);
-        ctx.lineTo(x,chart.chartArea.bottom);
-        ctx.strokeStyle='rgba(185,28,28,0.45)';
-        ctx.lineWidth=1.5;
-        ctx.setLineDash([4,3]);
-        ctx.stroke();
-        ctx.restore();
+        if(!chart.getDatasetMeta(0).data[cutoverIdx]) return;
+        var ctx=chart.ctx, x=chart.getDatasetMeta(0).data[cutoverIdx].x;
+        ctx.save(); ctx.beginPath();
+        ctx.moveTo(x,chart.chartArea.top); ctx.lineTo(x,chart.chartArea.bottom);
+        ctx.strokeStyle='rgba(185,28,28,0.45)'; ctx.lineWidth=1.5;
+        ctx.setLineDash([4,3]); ctx.stroke(); ctx.restore();
       }
     };
     new Chart(document.getElementById('dailyChart'),{
-      type:'bar',
-      plugins:[cutoverPlugin],
+      type:'bar', plugins:[cutoverPlugin],
       data:{
         labels:labels,
         datasets:[
-          {
-            type:'bar',
-            label:'Revenue ($)',
-            data:revenue,
-            backgroundColor:function(ctx){
-              return ctx.dataIndex >= 9 ? 'rgba(217,119,6,0.85)' : 'rgba(251,191,36,0.75)';
-            },
-            borderColor:function(ctx){
-              return ctx.dataIndex >= 9 ? '#d97706' : '#f59e0b';
-            },
-            borderWidth:1,
-            borderRadius:4,
-            yAxisID:'yRev',
-            order:2
-          },
-          {
-            type:'line',
-            label:'Units',
-            data:units,
-            borderColor:'#1a2e4a',
-            backgroundColor:'rgba(26,46,74,0.08)',
-            borderWidth:2,
-            pointRadius:4,
-            pointBackgroundColor:'#1a2e4a',
-            tension:0.3,
-            yAxisID:'yUnits',
-            order:1
-          }
+          {type:'bar',label:'Revenue ($)',data:revData,order:2,yAxisID:'yRev',borderRadius:4,borderWidth:1,
+           backgroundColor:function(c){ return c.dataIndex>=cutoverIdx?'rgba(217,119,6,0.85)':'rgba(216,178,94,0.75)'; },
+           borderColor:function(c){ return c.dataIndex>=cutoverIdx?'#d97706':'#e9d199'; }},
+          {type:'line',label:'Units',data:unitData,order:1,yAxisID:'yUnits',
+           borderColor:'#1a2e4a',backgroundColor:'rgba(26,46,74,0.06)',
+           borderWidth:2,pointRadius:4,pointBackgroundColor:'#1a2e4a',
+           tension:0.3,fill:false,borderDash:[5,4]}
         ]
       },
       options:{
-        responsive:true,
+        responsive:true,maintainAspectRatio:false,
         interaction:{mode:'index',intersect:false},
         plugins:{
           legend:{display:false},
           tooltip:{
             backgroundColor:'rgba(26,46,74,0.92)',
             titleFont:{family:'Barlow Condensed',size:13,weight:'bold'},
-            bodyFont:{family:'DM Mono',size:11},
-            padding:10,
+            bodyFont:{family:'DM Mono',size:11},padding:10,
             callbacks:{
-              label:function(ctx){
-                if(ctx.dataset.yAxisID==='yRev') return '  Revenue: $'+Math.round(ctx.parsed.y).toLocaleString();
-                return '  Units: '+ctx.parsed.y;
+              label:function(c){
+                if(c.dataset.yAxisID==='yRev') return '  Revenue: $'+Math.round(c.parsed.y).toLocaleString();
+                return '  Units: '+c.parsed.y;
               }
             }
           }
         },
         scales:{
-          x:{
-            grid:{color:'rgba(0,0,0,.05)'},
-            ticks:{font:{family:'DM Mono',size:10},color:'#7a90aa'}
-          },
-          yRev:{
-            position:'left',
-            grid:{color:'rgba(0,0,0,.06)'},
-            ticks:{
-              font:{family:'DM Mono',size:10},color:'#d97706',
-              callback:function(v){ return '$'+Math.round(v/1000)+'K'; }
-            },
-            title:{display:true,text:'Revenue',color:'#d97706',font:{family:'Barlow Condensed',size:11,weight:'700'}}
-          },
-          yUnits:{
-            position:'right',
-            grid:{drawOnChartArea:false},
+          x:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{family:'DM Mono',size:10},color:'#7a90aa'}},
+          yRev:{position:'left',grid:{color:'rgba(0,0,0,.06)'},
+            ticks:{font:{family:'DM Mono',size:10},color:'#d97706',callback:function(v){ return '$'+Math.round(v/1000)+'K'; }},
+            title:{display:true,text:'Revenue',color:'#d97706',font:{family:'Barlow Condensed',size:11,weight:'700'}}},
+          yUnits:{position:'right',grid:{drawOnChartArea:false},
             ticks:{font:{family:'DM Mono',size:10},color:'#1a2e4a'},
-            title:{display:true,text:'Units',color:'#1a2e4a',font:{family:'Barlow Condensed',size:11,weight:'700'}}
-          }
+            title:{display:true,text:'Units',color:'#1a2e4a',font:{family:'Barlow Condensed',size:11,weight:'700'}}}
         }
       }
     });
   })();
-
-  // Daily detail rows
-  function row(cls,label,u,rev,gm){
-    var pct = rev>0 ? (gm/rev*100).toFixed(1)+'%' : '&mdash;';
-    return '<tr class="'+cls+'"><td>'+label+'</td><td>'+(u||'&mdash;')+'</td><td>'+(rev?money(rev):'&mdash;')+'</td><td>'+(gm?money(gm):'&mdash;')+'</td><td class="pct">'+pct+'</td></tr>';
-  }
-  var wk1=[['Tue Jun 2',29,3619.53,1430.32],['Wed Jun 3',57,4839.53,1343.03],['Thu Jun 4',48,4342.75,1643.03],['Fri Jun 5',41,3893.57,1246.00]];
-  var wk2=[['Mon Jun 8',34,3592.93,1008.03],['Tue Jun 9',53,3465.00,1404.69],['Wed Jun 10',49,4970.30,2216.98],['Thu Jun 11',59,4495.64,1653.37],['Fri Jun 12',48,4187.38,1725.92]];
-  var wk3=[['Mon Jun 15',38,3184.01,1143.64],['Tue Jun 16',148,12091.84,4756.20],['Wed Jun 17',159,12592.75,4652.34],['Thu Jun 18',134,9528.89,3510.69],['Fri Jun 19',163,11215.05,4299.62]];
-  var html='';
-  function emit(rows,label){
-    var su=0,sr=0,sg=0;
-    rows.forEach(function(r){ su+=r[1]; sr+=r[2]; sg+=r[3]; html+=row('day-row',r[0],r[1],r[2],r[3]); });
-    html+=row('subtotal-row',label,su,sr,sg);
-  }
-  emit(wk1,'Week of Jun 1 subtotal (Mon&ndash;Fri)');
-  emit(wk2,'Week of Jun 8 subtotal (Mon&ndash;Fri)');
-  emit(wk3,'Week of Jun 15 subtotal (Mon&ndash;Fri)');
-  html+=row('total-row','Period Total (Jun 1&ndash;19)',1060,86019.17,32033.86);
-  document.getElementById('daily').innerHTML=html;
-
-  // OG tier rows
-  function trow(cls,t,u,rev,gm){
-    return '<tr class="'+cls+'"><td>'+t+'</td><td>'+u+'</td><td>'+money(rev)+'</td><td>'+money(gm)+'</td><td class="pct">'+(gm/rev*100).toFixed(1)+'%</td></tr>';
-  }
-  var th='';
-  th+=trow('tier1','OG1 — Light Discount',152,13300.21,5926.45);
-  th+=trow('tier2','OG2 — Mid Discount',199,10633.88,4320.83);
-  th+=trow('tier3','OG3 — Deep Discount',291,24678.45,8115.21);
-  th+=trow('total-row','All Tiers',642,48612.54,18362.49);
-  document.getElementById('tiers').innerHTML=th;
-
-  // Customer type rows
-  function crow(cls,label,u,rev,pct){
-    return '<tr class="'+cls+'"><td>'+label+'</td><td>'+u+'</td><td>'+money(rev)+'</td><td class="pct">'+(pct==null?'&mdash;':pct.toFixed(1)+'%')+'</td></tr>';
-  }
-  var ctypes=[["MSO",418,30631,39.4],["Body Shop — DRP",255,22264,39.4],["Body Shop — Independent",74,7895,43.1],["Repair Shop",85,7722,24.6],["Retail",86,7475,34.4],["Car Dealer",66,4336,35.7],["Distributor",53,3755,32.3],["Body Shop — Low Vol",14,1195,28.6],["Junk Yard",5,493,41.4],["Other",3,233,7.4],["Body-C",1,20,25.3]];
-  var ctHtml='';
-  ctypes.forEach(function(c){ ctHtml+=crow('',c[0],c[1],c[2],c[3]); });
-  ctHtml+=crow('total-row','Total',1060,86019,37.2);
-  document.getElementById('ctype').innerHTML=ctHtml;
-
-  // Category rows
-  var cats=[["Bumper Cover",100,14733,44.1],["Head Lamp",69,13635,28.2],["Grille",71,7036,30.2],["Tail Lamp",50,4506,30.9],["Bumper Insert",106,4149,39.8],["Fender",31,3846,46.3],["Radiator Support",32,3388,28.1],["Hood",15,3124,37.3],["Fender Liner",78,3059,38.7],["Other (24 categories)",508,28544,null]];
-  var cHtml='';
-  cats.forEach(function(c){ cHtml+=crow('',c[0],c[1],c[2],c[3]); });
-  cHtml+=crow('total-row','Total',1060,86019,null);
-  document.getElementById('cats').innerHTML=cHtml;
 </script>
 </body>
 </html>
